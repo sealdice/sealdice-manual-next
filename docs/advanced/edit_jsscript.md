@@ -9,56 +9,30 @@ title: 编写 JavaScript 插件
 
 本节将介绍 JavaScript 脚本的编写，请善用侧边栏和搜索，按需阅读文档。
 
+我们假定你熟悉 JavaScript / TypeScript，编程语言的教学超出了本文档的目的，如果你还不熟悉它们，可以从互联网上寻找到很多优秀的教程。如：
+- [现代 JavaScript 教程](https://zh.javascript.info)
+- [JavaScript 教程 - 廖雪峰](https://www.liaoxuefeng.com/wiki/1022910821149312)
+- [JavaScript - 菜鸟教程](https://www.runoob.com/js/js-tutorial.html)
+
 :::
 
-编写扩展需要了解JavaScript，它非常好学，你如果已经学了[自定义回复](#自定义回复)里使用的[内置脚本语言](#内置脚本语言)，你会发现很多内容只是换了个写法而已。
+## 一些有帮助的资源
 
-由于网上优秀的JavaScript教程非常多（见下方），在这里就不赘述，而是重点讲一讲海豹提供的接口。
+VS Code 可以安装 [Sealdice Snippets](https://marketplace.visualstudio.com/items?itemName=yxChangingSelf.sealdice-snippets) 插件，提供了一些常见代码片段，帮助快速生成模板代码。
 
-- [JavaScript-菜鸟教程](https://www.runoob.com/js/js-tutorial.html)
-- [JavaScript教程-廖雪峰](https://www.liaoxuefeng.com/wiki/1022910821149312)
+如果你打算使用 TypeScript，海豹提供了相应的 [模板工程](https://github.com/sealdice/sealdice-js-ext-template)，注册扩展和指令的代码已经写好，可以直接编译出一个可直接装载的 JS 扩展文件。使用见 [使用 TS 模板](#使用-ts-模板)。
 
-- 扩展编写示例：https://github.com/sealdice/javascript/tree/main/examples
-- 已有扩展下载：https://github.com/sealdice/javascript/tree/main/scripts
+<!-- - 扩展编写示例：https://github.com/sealdice/javascript/tree/main/examples -->
 
-## 0.如何优雅地偷懒
+::: tip 使用 TypeScript
 
-放弃系统自带的记事本软件，拥抱[vscode](https://code.visualstudio.com/)吧，正如@于言诺 大佬在《海豹骰点核心SealDice 个人自定义回复编写经验》中所言：
+我们更推荐使用 TypeScript 来编写插件，编译到 ES6 后使用即可。不过先从 JavaScript 开始也是没有任何问题的。
 
-> 请所有阅读本文档的海豹自定义回复编写者注意，只要你的设备支持，你都不应该使用windows自带的txt或任何非代码编写器的软件编写自定义回复或牌堆。
->
-> 有那么多好用的代码编写器，如windows的vs,vscode,sublime text,安卓的MT管理器，请不要折磨自己用txt，至少这些软件还会告诉你世界上有个很好用的东西叫**报错**。
+:::
 
-vscode相比于记事本的优势：
+## 第一个 JS 扩展
 
-- 写错的地方会给你标出来，不用等到安装完才发现
-- 强大的编辑器功能，例如语法高亮、显示行号、灵活的多行光标、自动补全、悬停提示、批量重命名、正则查找替换、自动保存、版本控制等
-- 丰富的扩展
-- 更多这里写不下的功能
-
-如果嫌官网下载得太慢，还可以在群文件的“工具＆内置文件”中找到vscode的安装包。
-
-如果觉得英文界面用起来太困难，可以在vscode扩展商店中安装中文扩展。
-
-（顺便一提，和海豹合作的跑团replay视频制作软件[回声工坊](https://github.com/DanDDXuanX/TRPG-Replay-Generator)也主要使用vscode作为log编辑工具，拥有vscode扩展支持。使用vscode说不定以后也会有相应的辅助扩展来帮忙在写JS扩展时偷懒）
-
-（已经有了，名为[Sealdice Snippets](https://marketplace.visualstudio.com/items?itemName=yxChangingSelf.sealdice-snippets)，在vscode的扩展商店就能找到并直接安装，提供了一些常见代码片段，可以快速生成模板代码）
-
-## 1.创建一个 JS 扩展
-
-你可以选择使用JavaScript或者Typescript来作为你的编写语言。
-
-Typescript是JavaScript的超集，如果你不太懂这是啥，可以理解为是强化版的JavaScript（虽然这么说可能不太准确）。
-
-Typescript文件可以编译为JavaScript文件，安装的时候也是安装编译好的JS文件，但Typescript更优秀的特性可以帮助你在编写扩展的阶段更方便。
-
-**更推荐使用Typescript，不过你可以先从JavaScript开始。**
-
-如果你打算使用JavaScript，那么新建一个文本文件，将文件扩展名改为`.js`即可。
-
-如果你打算使用Typescript，可以使用[github上的扩展模板](https://github.com/sealdice/sealdice-js-ext-template)，注册扩展和指令的代码已经写好，可以直接编译出一个可直接装载的JS扩展文件。
-
-JS扩展的示例：
+我们从最简单的扩展开始，这个扩展只会在日志中打印一条 `Hello World!`。
 
 ```javascript
 // ==UserScript==
@@ -72,43 +46,30 @@ JS扩展的示例：
 // @homepageURL  https://github.com/sealdice/javascript
 // ==/UserScript==
 
-/*
-这里是海豹支持的js脚本范例
-海豹使用的js脚本引擎为goja.
-在几次更新后，goja支持了ES6的基本上全部特性，包括async/await，promise和generator.
-
-特别注意一点是js引擎的整型为32位，请小心溢出问题。
-
-推荐使用的语法风格为airbnb风格，内容较多这里不赘述，其有代表性的一些特征为：
-使用两空格缩进，{不换行，必须写分号，只用let不写var等。
-
-if (true) {
-  let a = 123;
-  console.log(a);
-}
-
-推荐有经验的用户使用typescript，但注意要编译打包后才能使用，target选es6应当可以工作。
-
-还有一个小提示：
-console打印出来的东西不光会在控制台中出现，在日志中也会显示。
-涉及网络请求或延迟执行的内容，有时候不会在控制台调试面板上显示出来，而在日志中能看到。
-
-以及重要提醒：
-不要灌铅！不要灌铅！不要灌铅！
-*/
-
-console.log('这是测试控制台');
-console.log('可以这样来查看变量详情：');
-console.log(Object.keys(seal));
-console.log('更多内容正在制作中...');
-console.log('注意: 测试版！API仍然可能发生重大变化！');
+console.log('Hello World!');
 ```
 
-## 2.留下作者信息
+::: note 海豹对 JavaScript 的支持
 
-每个JS扩展需要在开头以注释的形式留下如下信息以便大家使用：
+海豹使用 [goja](https://github.com/dop251/goja) 作为 js 脚本引擎。goja 目前支持了 ES6 基本上全部的特性，包括 `async/await`，`promise` 和 `generator`。
 
-```js
+需要注意引擎的整型为 32 位，请小心溢出问题。
+
+:::
+
+::: tip 打印日志
+
+console 打印出来的东西不仅会在控制台中出现，在日志中也会显示。
+
+涉及网络请求或延迟执行的内容，有时候不会在控制台调试面板上显示出来，而在日志中能看到。
+
+:::
+
+## 留下信息
+
+每个 JS 扩展需要在开头以固定格式注释的形式留下信息，以便使用和分享：
+
+```javascript
 // ==UserScript==
 // @name         脚本的名字
 // @author       木落
@@ -122,15 +83,15 @@ console.log('注意: 测试版！API仍然可能发生重大变化！');
 
 | 属性         | 含义                                                         |
 | ------------ | ------------------------------------------------------------ |
-| @name        | JS扩展的名称，会展示在插件列表页面                           |
+| @name        | JS 扩展的名称，会展示在插件列表页面                           |
 | @author      | 作者名                                                       |
-| @version     | 版本号，可以自己定义，但建议遵循[语义版本控制（Semantic Versioning）](https://semver.org/lang/zh-CN/) |
+| @version     | 版本号，可以自己定义，但建议遵循 [语义版本控制（Semantic Versioning）](https://semver.org/lang/zh-CN/) |
 | @description | 对扩展的功能的描述                                           |
-| @timestamp   | 最后更新时间，以秒为单位的unix时间戳，可以搜索一些[时间戳在线转换工具](https://developer.aliyun.com/skills/timestamp.html)来获取当前时间戳 |
-| @license     | 开源协议，示例中的Apache-2是一个比较自由的协议，允许任意使用和分发(包括商用) |
-| @homepageURL | 你的扩展的主页链接，有github仓库可以填仓库链接，没有则可以填海豹官方插件仓库链接 |
+| @timestamp   | 最后更新时间，以秒为单位的 unix 时间戳，新版本支持了直接使用时间字符串，如 `2023-10-30`。 |
+| @license     | 开源协议，示例中的 Apache-2 是一个比较自由的协议，允许任意使用和分发（包括商用），当然你也可以使用其它协议（MIT GPL 等） |
+| @homepageURL | 你的扩展的主页链接，有 GitHub 仓库可以填仓库链接，没有则可以填海豹官方插件仓库 |
 
-## 3.自定义扩展
+## 自定义扩展
 
 扩展机制可以看做是海豹的mod管理器，可以模块化开关海豹的任意一部分，如常用的开启dnd扩展，关闭coc扩展，关闭自动回复等等。
 
@@ -144,7 +105,7 @@ console.log('注意: 测试版！API仍然可能发生重大变化！');
 
 创建扩展之后，要注意**还需要注册扩展**，才能让扩展起效，不要漏掉哦！
 
-```js
+```javascript
 // 如何建立一个扩展
 
 // 首先检查是否已经存在
@@ -168,7 +129,7 @@ if (!seal.ext.find('test')) {
 
 第一步，创建新的自定义指令，设置好名字和帮助信息。
 
-```js
+```javascript
 const cmdSeal = seal.ext.newCmdItemInfo();
 cmdSeal.name = 'seal'; // 指令名字，可用中文
 cmdSeal.help = '召唤一只海豹，可用.seal <名字> 命名';
@@ -178,7 +139,7 @@ cmdSeal.help = '召唤一只海豹，可用.seal <名字> 命名';
 
 你需要编写指令对象的`solve`函数，而在使用该指令的时候，海豹核心会调用你写的这个函数。
 
-```js
+```javascript
 cmdSeal.solve = (ctx, msg, cmdArgs) => {
     //这里是你需要编写的内容
 };
@@ -200,7 +161,7 @@ cmdSeal.solve = (ctx, msg, cmdArgs) => {
 
 以下代码处理的是`.seal help`的情形：
 
-```js
+```javascript
 cmdSeal.solve = (ctx, msg, cmdArgs) => {
   // 获取第一个参数，例如 .seal A B C
   // 这里 cmdArgs.getArgN(1) 的结果即是A，传参为2的话结果是B
@@ -233,7 +194,7 @@ cmdSeal.solve = (ctx, msg, cmdArgs) => {
 
 在刚刚的位置填入核心代码，就可以完成了。
 
-```js
+```javascript
 cmdSeal.solve = (ctx, msg, cmdArgs) => {
   // 获取第一个参数，例如 .seal A B C
   // 这里 cmdArgs.getArgN(1) 的结果即是A，传参为2的话结果是B
@@ -259,20 +220,20 @@ cmdSeal.solve = (ctx, msg, cmdArgs) => {
 
 第三步，将命令注册到扩展中。
 
-```js
+```javascript
 ext.cmdMap['seal'] = cmdSeal;
 ```
 
 如果你想要给这个命令起一个别称，也就是增加一个触发词，可以这样写：
 
-```js
+```javascript
 ext.cmdMap['seal'] = cmdSeal;//注册.seal指令
 ext.cmdMap['海豹'] = cmdSeal;//注册.海豹指令，等效于.seal
 ```
 
 完整的代码如下：
 
-```js
+```javascript
 // ==UserScript==
 // @name         示例:编写一条自定义指令
 // @author       木落
@@ -341,7 +302,7 @@ export { }
 
 这里就先摆一个随机整数的生成函数吧：
 
-```js
+```javascript
 /**
  * 生成随机整数
  * @param min 最小值
@@ -375,7 +336,7 @@ function randomInt(min, max) {
 
 ### 示例代码：投喂插件
 
-```js
+```javascript
 // ==UserScript==
 // @name         示例:存储数据
 // @author       木落
@@ -440,7 +401,7 @@ ext.cmdMap['feed'] = cmdFeed;
 
 这是关于数据的增加、删除、查询等操作的实现示例（修改的话就是删除之后增加）
 
-```js
+```javascript
 // ==UserScript==
 // @name         群内安价收集
 // @author       憧憬少
@@ -601,7 +562,7 @@ ${optStr}`);
 
 关于取出数据来修改的函数，可以参考如下代码：
 
-```js
+```javascript
 const STORAGE_KEY = "anchor";//将你的key抽出来单独作为一个常量，方便开发阶段修改（使用了之后就不要修改了）
 //函数：添加选项
 function akAdd(ctx, msg, ext, option) {
@@ -627,7 +588,7 @@ function akAdd(ctx, msg, ext, option) {
 
 如下：  
 
-```js
+```javascript
 // ==UserScript==
 // @name         示例:编写暗骰指令
 // @author       流溪
@@ -675,7 +636,7 @@ ext.cmdMap['hide'] = cmdHide;
 
 ## 10.编写代骰指令
 
-```js
+```javascript
 // ==UserScript==
 // @name         示例:编写代骰指令
 // @author       木落
@@ -729,7 +690,7 @@ ext.cmdMap['catch'] = cmdCatch;
 
 主要使用[Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)进行网络请求，详细文档见链接。
 
-```js
+```javascript
 // 你可以使用async/await和generator来重写这段代码，欢迎pr
 // 访问网址
 fetch('https://api-music.imsyy.top/cloudsearch?keywords=稻香').then((resp) => {
@@ -745,13 +706,13 @@ fetch('https://api-music.imsyy.top/cloudsearch?keywords=稻香').then((resp) => 
 
 比如核心代码只有一行的[“随机猫猫图片”](https://github.com/sealdice/javascript/blob/main/scripts/%E5%A8%B1%E4%B9%90%E5%90%91/%E9%9A%8F%E6%9C%BA%E7%8C%AB%E7%8C%AB%E5%9B%BE%E7%89%87.js)扩展：
 
-```js
+```javascript
 seal.replyToSender(ctx, msg, `[CQ:image,file=https://thiscatdoesnotexist.com/,cache=0]`);
 ```
 
 核心代码同样只有一行的“随机二次元图片”扩展：
 
-```js
+```javascript
 seal.replyToSender(ctx, msg, `[CQ:image,file=https://api.oick.cn/random/api.php?type=${val},cache=0]`);
 ```
 
@@ -759,7 +720,7 @@ seal.replyToSender(ctx, msg, `[CQ:image,file=https://api.oick.cn/random/api.php?
 
 它的核心代码如下：
 
-```js
+```javascript
 const BID = ''; //填入你的骰娘的大脑的id
 const KEY = ''; //填入你的key
 /**
@@ -786,7 +747,7 @@ function chatWithBot(ctx,msg,message) {
 
 ## 12.自定义COC规则
 
-```js
+```javascript
 // ==UserScript==
 // @name         示例:自定义COC规则
 // @author       木落
@@ -939,88 +900,115 @@ if (!seal.ext.find('js-config-example')) {
 ![JS 配置项](./images/js-config-example.png)
 
 
-## 使用TS模板
+## 使用 TS 模板
 
-### clone或下载项目
+### clone 或下载项目
 
 推荐的流程：
 
-1. 在[模板项目仓库](https://github.com/sealdice/sealdice-js-ext-template)点击“Use this template”按钮，使用该模板在自己的github上创建一个扩展的仓库，并设置为自己的扩展的名字
-2. `git clone`到本地，进行开发
+1. 在 [模板项目仓库](https://github.com/sealdice/sealdice-js-ext-template) 点击 Use this template 按钮，使用该模板在自己的 GitHub 上创建一个扩展的仓库，并设置为自己的扩展的名字；
+2. `git clone` 到本地，进行开发。
 
-如果你没有github账号，也不会用git：
+如果你没有 GitHub 账号，也不会用 git：
 
-1. 在[模板项目仓库](https://github.com/sealdice/sealdice-js-ext-template)点击“Code”按钮，在出现的浮窗中选择“Download ZIP”，这样就会下载一个压缩包
-2. 解压后进行开发
+1. 在 [模板项目仓库](https://github.com/sealdice/sealdice-js-ext-template) 点击 Code 按钮，在出现的浮窗中选择 Download ZIP，这样就会下载一个压缩包；
+2. 解压后进行开发。
 
-### 编译项目
+### 使用和编译
 
-NPM是一种javascript的包管理工具，可以管理项目使用的依赖包。
+TS 插件代码需要编译为 js 文件才能被海豹核心加载。
 
-一开始，需要先将所需依赖包安装好，在命令行使用如下命令：
+开始使用模板工程时，需要先将所需依赖包安装好。在确认你所使用的包管理器后，在命令行使用如下命令：
+
+::: tabs#npm
+
+@tab npm
 
 ```bash
 npm install
 ```
 
-当你写好了代码，需要将ts文件转换为js文件以便上传到海豹骰时，在命令行使用如下命令：
+@tab pnpm
+
+```bash
+pnpm install
+```
+
+:::
+
+当你写好了代码，需要将 ts 文件转换为 js 文件以便上传到海豹骰时，在命令行使用如下命令：
+
+::: tabs#npm
+
+@tab npm
 
 ```bash
 npm run build
 ```
 
-编译成功的js文件在dist目录下，默认的名字是`sealdce-js-ext.js`。
+@tab pnpm
 
-### 填写个人信息
+```bash
+pnpm run build
+```
 
-当插件开发完成后(或者开始开发时)，你需要修改几处地方：
+:::
 
-- header.txt 这个文件是你插件的描述信息
-- tools/build-config.js 最开头一行"var filename = 'sealdce-js-ext.js';"，改成你中意的名字，注意不要与现有的重名
+
+编译成功的 js 文件在 `dist` 目录下，默认的名字是 `sealdce-js-ext.js`。
+
+### 补全信息
+
+当插件开发完成后（或者开始开发时），你还需要修改几处地方：
+
+- `header.txt`：这个文件是你插件的描述信息；
+- `tools/build-config.js`：最开头一行 `var filename = 'sealdce-js-ext.js';` 改成你中意的名字，注意不要与现有的重名。
 
 ### 目录结构
 
 只列出其中主要的一些文件
 
-- src
-  - `index.ts`：你的扩展的代码就写在这个文件里
-- tools
-  - `build-config`：一些编译的配置，影响`index.ts`编译成js文件的方式
-  - `build.js`：在命令`npm run build`执行时所运行的脚本，用于读取`build-config`并按照配置进行编译
-- types
-  - `seal.d.ts`：类型文件，海豹核心提供的扩展API
-- `header.txt`：扩展头信息，会在编译时自动加到目标文件头部
-- `package.json`：命令`npm install`时就在安装这个文件里面所指示的依赖包
-- `tsconfig.json`：typescript的配置
+- `src`
+  - `index.ts`：你的扩展的代码就写在这个文件里。
+- `tools`
+  - `build-config`：一些编译的配置，影响 `index.ts` 编译成 js 文件的方式；
+  - `build.js`：在命令 `npm run build` 执行时所运行的脚本，用于读取 `build-config` 并按照配置进行编译。
+- `types`
+  - `seal.d.ts`：类型文件，海豹核心提供的扩展 API。
+- `header.txt`：扩展头信息，会在编译时自动加到目标文件头部；
+- `package.json`：命令 `npm install` 时就在安装这个文件里面所指示的依赖包；
+- `tsconfig.json`：typescript 的配置。
 
 ## 补充：使用非指令关键词  
 
-你是否因为自定义回复能实现的功能有限而烦恼？你是否因为自定义回复的匹配方式不全而愤怒？你是否因为自定义回复只能调用图片api而感到焦头烂额？不要紧张，我的朋友，试试非指令关键词，这会非常有用。  
+> 你是否因为自定义回复能实现的功能有限而烦恼？你是否因为自定义回复的匹配方式不全而愤怒？你是否因为自定义回复只能调用图片 api 而感到焦头烂额？
+>
+> 不要紧张，我的朋友，试试非指令关键词，这会非常有用。
 
-通常情况下，我们使用`ext.onNotCommandReceived`作为非指令关键词的标志；这限定了只有在未收到命令且未达成自定义回复时，海豹才会触发此流程。  
+通常情况下，我们使用 `ext.onNotCommandReceived` 作为非指令关键词的标志；这限定了只有在未收到命令且未达成自定义回复时，海豹才会触发此流程。  
 
 一个完整的非指令关键词模板如下：  
 
 ```javascript
-//必要流程，注册扩展，注意即使是非指令关键词也是依附于扩展的  
+// 必要流程，注册扩展，注意即使是非指令关键词也是依附于扩展的  
 if (!seal.ext.find('xxx')){    
     ext = seal.ext.new('xxx','xxx','x.x.x');    
     seal.ext.register(ext); 
-    //这里其实是编写处理函数     
+    // 这里其实是编写处理函数     
     ext.onNotCommandReceived = (ctx, msg) => {    
         let message = msg.message;  
-        //这里请自己处理要如何达成message的匹配条件，js那么多的匹配方法，足够你玩出花来。  
+        // 这里请自己处理要如何达成message的匹配条件，js那么多的匹配方法，足够你玩出花来。  
         if(xxx){
-          //匹配到关键词了，要干什么？  
+          // 匹配到关键词了，要干什么？  
           xxx;
         }
     }
 }
 ```
 
-## JS扩展API
+## JS 扩展 API
 
-> 这里只是粗略的整理，具体请看[jsvm源码](https://github.com/sealdice/sealdice-core/blob/master/dice/dice_jsvm.go)。
+> 这里只是粗略的整理，具体请看 [jsvm源码](https://github.com/sealdice/sealdice-core/blob/master/dice/dice_jsvm.go)。
 
 按类别整理。
 
@@ -1079,7 +1067,7 @@ seal.btoa(string) //将string编码为base64并返回
 
 #### 1: replyGroup, replyPerson, replyToSender:
 
-```js
+```javascript
 //在私聊触发replyGroup不会回复
 seal.replyGroup(ctx, msg, 'something'); //触发者会收到"something"的回复
 seal.replyPerson(ctx, msg, 'something'); //触发者会收到"something"的私聊回复
@@ -1090,7 +1078,7 @@ seal.replyToSender(ctx, msg, 'something'); //触发者会收到"something"的回
 
 > 是否保留待议
 
-```js
+```javascript
 //注意这些似乎只能在WQ协议上实现;
 seal.memberBan(ctx, groupID, userID, dur) //将群为groupID，userid为userID的人封禁dur（单位未知）
 seal.memberKick(ctx, groupID, userID) ////将群为groupID，userid为userID的人踢出那个群
@@ -1098,7 +1086,7 @@ seal.memberKick(ctx, groupID, userID) ////将群为groupID，userid为userID的�
 
 #### 3: format, formatTmpl
 
-```js
+```javascript
 //注意format不会自动reply，而是return，所以请套一层reply
 seal.replyToSender(ctx, msg, seal.format(`{$t玩家}的人品为：{$t人品}`))
 //{$t人品}是一个rollvm变量，其值等于.jrrp出的数值
@@ -1110,7 +1098,7 @@ seal.replyToSender(ctx, msg, seal.formatTmpl(unknown))
 
 #### 4: getCtxProxyFirst, getCtxProxyAtPos
 
-```js
+```javascript
 cmd.solve = (ctx, msg, cmdArgs) => {
     let ctxFirst = seal.getCtxProxyFirst(ctx, cmdArgs)
     seal.replyToSender(ctx, msg, ctxFirst.player,name)
@@ -1129,8 +1117,8 @@ ext.cmdMap['test'] = cmd
 
 #### 5: vars
 
-```js
-//要看懂这里你可能需要学习一下初阶豹语
+```javascript
+// 要看懂这里你可能需要学习一下初阶豹语
 seal.vars.intSet(ctx, `$m今日打卡次数`, 8) //将触发者的该个人变量设置为8
 seal.vars.intGet(ctx, `$m今日打卡次数`) //返回 [8,true]
 seal.vars.strSet(ctx, `$g群友经典语录`, `我要 Git Blame 一下看看是谁写的`) //将群内的该群组变量设置为“我要 Git Blame 一下看看是谁写的”
@@ -1139,19 +1127,19 @@ seal.vars.strGet(ctx, `$g群友经典语录`) //返回 ["我要 Git Blame 一下
 
 #### 6: ext
 
-```js
+```javascript
 //用于注册扩展和定义指令的api，已有详细示例，不多赘述
 ```
 
 #### 7: coc
 
-```js
+```javascript
 //用于创建coc村规的api，已有详细示例，不多赘述
 ```
 
 #### 8: deck
 
-```js
+```javascript
 seal.deck.draw(ctx, `煤气灯`, false) //返回 放回抽取牌堆“煤气灯”的结果
 seal.deck.draw(ctx, `煤气灯`, true) //返回 不放回抽取牌堆“煤气灯”的结果
 seal.deck.reload() //重新加载牌堆
@@ -1159,7 +1147,7 @@ seal.deck.reload() //重新加载牌堆
 
 #### 9: 自定义trpg规则相关
 
-```js
+```javascript
 //这里实在不知道如何举例了
 seal.gameSystem.newTemplate(string) //从json解析新的游戏规则。  
 seal.gameSystem.newTemplateByYaml(string) //从yaml解析新的游戏规则。
@@ -1168,7 +1156,7 @@ seal.applyPlayerGroupCardByTemplate(ctx, tmpl) // 设定当前ctx玩家的自动
 
 #### 10: 其他
 
-```js
+```javascript
 seal.newMessage() //返回一个空白的Message对象, 结构与收到消息的msg相同
 seal.createTempCtx(endpoint, msg) // 制作一个ctx, 需要msg.MessageType和msg.Sender.UserId
 seal.atob(base64String) //返回被解码的base64编码  
@@ -1212,7 +1200,7 @@ loadPlayerGroupVars,notice
 
 #### `ctx.group` 的内容
 
-```js
+```javascript
 // 成员
 active
 groupId
@@ -1239,7 +1227,7 @@ playerGet
 
 #### `ctx.player` 的内容
 
-```js
+```javascript
 // 成员
 name
 userId
@@ -1251,7 +1239,7 @@ getValueNameByAlias
 
 #### `ctx.endPoint` 的内容
 
-```js
+```javascript
 // 成员
 baseInfo
 id
@@ -1273,7 +1261,7 @@ unmarshalYAML
 
 ### `msg` 的内容
 
-```js
+```javascript
 // 成员
 msg.time // int64 发送时间
 msg.messageType // string group群聊 private私聊
@@ -1291,7 +1279,7 @@ msg.platform // 平台
 
 ### `cmdArgs` 的内容
 
-```js
+```javascript
 // 成员
 .command // string
 .args // []string
