@@ -846,7 +846,35 @@ seal.coc.registerRule(rule);
 
 ## 13.注册插件配置项
 
-插件若要在 UI 中注册可供用户修改的配置项，需要在插件注册后调用`seal.ext.registerXXXConfig`函数注册配置项。
+插件若要在 UI 中注册可供用户修改的配置项，需要在插件注册后调用 `seal.ext.registerXXXConfig()` 函数注册配置项。
+
+`XXX` 为配置项的类型，目前支持 `string`、`int`、`float`、`bool`、`template`、`option` 六种类型。注意按照小驼峰命名法大写
+
+同样的，插件也可以使用 `seal.ext.getXXXConfig()` 函数获取配置项的值。
+
+你也可以直接使用 `seal.ext.getConfig()` 函数获取配置项的值，这个函数会返回一个 `ConfigItem` 对象，
+包含了配置项的类型、值、默认值等信息。
+
+ConfigItem 对象的类型定义如下，调用时请使用 `jsbind` 中的值作为 `key` 
+
+```go
+type ConfigItem struct {
+	Key          string      `json:"key" jsbind:"key"`
+	Type         string      `json:"type" jsbind:"type"`
+	DefaultValue interface{} `json:"defaultValue" jsbind:"defaultValue"`
+	Value        interface{} `json:"value,omitempty" jsbind:"value"`
+	Option       interface{} `json:"option,omitempty" jsbind:"option"`
+	Deprecated   bool        `json:"deprecated,omitempty" jsbind:"deprecated"`
+}
+```
+
+::: tip
+
+`seal.ext.registerConfig()` 函数也是可以使用的，你需要自己通过 `seal.ext.newConfigItem()` 来获取一个新的 `ConfigItem` 对象。
+在对你的 `ConfigItem` 对象进行修改后，再调用 `seal.ext.registerConfig()` 函数进行注册。
+
+:::
+
 
 ### 示例代码：注册配置项
 
@@ -908,7 +936,7 @@ if (!seal.ext.find('js-config-example')) {
 
 注册后的配置项会在UI中显示，可以在UI中修改配置项的值
 
-![Js 配置项](./images/js-config-example.png)
+![JS 配置项](./images/js-config-example.png)
 
 
 ## 使用TS模板
@@ -1105,8 +1133,8 @@ ext.cmdMap['test'] = cmd
 //要看懂这里你可能需要学习一下初阶豹语
 seal.vars.intSet(ctx, `$m今日打卡次数`, 8) //将触发者的该个人变量设置为8
 seal.vars.intGet(ctx, `$m今日打卡次数`) //返回 [8,true]
-seal.vars.strSet(ctx, `$g群友发癫语录`, `一条也没有，快来发癫吧`) //将群内的该群组变量设置为“一条也没有，快来发癫吧！”
-seal.vars.strGet(ctx, `$g群友发癫语录`) //返回 ["一条也没有，快来发癫吧",true]
+seal.vars.strSet(ctx, `$g群友经典语录`, `我要 Git Blame 一下看看是谁写的`) //将群内的该群组变量设置为“我要 Git Blame 一下看看是谁写的”
+seal.vars.strGet(ctx, `$g群友经典语录`) //返回 ["我要 Git Blame 一下看看是谁写的",true]
 ```
 
 #### 6: ext
