@@ -85,7 +85,7 @@ const getUsername = (message: ChatMessage) => {
     return message.username
   }
   if (message.send) {
-    return '玩家'
+    return '木落'
   } else {
     return '海豹核心'
   }

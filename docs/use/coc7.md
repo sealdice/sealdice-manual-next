@@ -69,9 +69,9 @@ title: 克苏鲁的呼唤 7 版
 
 <ChatBox :messages="[
 {content: '.st &手枪伤害=1d6+1', send: true},
-{content: '<玩家>的coc7属性录入完成，本次录入了1条数据'},
+{content: '<木落>的coc7属性录入完成，本次录入了1条数据'},
 {content: '.r 手枪伤害', send: true},
-{content: '<玩家>掷出了 手枪伤害=[手枪伤害=5[1d6=5] + 1]=6'}
+{content: '<木落>掷出了 手枪伤害=[手枪伤害=5[1d6=5] + 1]=6'}
 ]"/>
 
 :::
@@ -89,10 +89,12 @@ title: 克苏鲁的呼唤 7 版
 ::: note 示例
 
 <ChatBox :messages="[
-{content: '.st 侦查80 @玩家2', send: true},
-{content: '由<玩家>代骰:\n<玩家2>的coc7属性录入完成，本次录入了1条数据'},
-{content: '.st hp-1 @玩家2', send: true},
-{content: '由<玩家>代骰:\n<玩家2>的属性变化:\n生命值: 10 ➯ 9 (扣除-1=-1)'}
+{content: '.st 侦查80 @Szz', send: true},
+{content: '由<木落>代骰:\n<Szz>的coc7属性录入完成，本次录入了1条数据'},
+{content: '.st hp-1 @Szz', send: true},
+{content: '由<木落>代骰:\n<Szz>的属性变化:\n生命值: 10 ➯ 9 (扣除-1=-1)'},
+{content: '.st show hp @Szz', send: true},
+{content: '由<木落>代骰:\n<Szz>的个人属性为:\n生命值:9/10'}
 ]"/>
 
 :::
@@ -119,15 +121,15 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 ::: note 示例
 
-> 假设角色的侦查技能是40
+假设角色的侦查技能是40
 
 <ChatBox :messages="[
 {content: '.ra 侦查', send: true},
-{content: '<玩家>的&quot;侦查&quot;检定结果为: D100=64/40 失败'},
+{content: '<木落>的&quot;侦查&quot;检定结果为: D100=64/40 失败'},
 {content: '.ra 侦查+10', send: true},
-{content: '<玩家>的&quot;侦查&quot;检定结果为: D100=15/50 困难成功'},
+{content: '<木落>的&quot;侦查&quot;检定结果为: D100=15/50 困难成功'},
 {content: '.ra 侦查99', send: true},
-{content: '<玩家>的&quot;侦查&quot;检定结果为: D100=30/99 困难成功'}
+{content: '<木落>的&quot;侦查&quot;检定结果为: D100=30/99 困难成功'}
 ]"/>
 
 :::
@@ -142,7 +144,7 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 <ChatBox :messages="[
 {content: '.ra 3# 侦查', send: true},
-{content: '对<玩家>的&quot;侦查&quot;进行了3次检定，结果为:\nD100=87/40 失败\nD100=24/40 成功\nD100=1/40 大成功'}
+{content: '对<木落>的&quot;侦查&quot;进行了3次检定，结果为:\nD100=87/40 失败\nD100=24/40 成功\nD100=1/40 大成功'}
 ]"/>
 
 :::
@@ -155,11 +157,11 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 ::: note 示例
 
-> 假设角色的侦查技能是40
+假设角色的侦查技能是40
 
 <ChatBox :messages="[
 {content: '.ra 困难侦查+10', send: true},
-{content: '<玩家>的&quot;困难侦查+10&quot;检定结果为: D100=30/25 失败'}
+{content: '<木落>的&quot;困难侦查+10&quot;检定结果为: D100=30/25 失败'}
 ]"/>
 
 :::
@@ -174,7 +176,7 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 <ChatBox :messages="[
 {content: '.ra b2 侦查', send: true},
-{content: '<玩家>的&quot侦查&quot检定结果为: b2=1/40, ([D100=51, 奖励 0 2]) 大成功!'}
+{content: '<木落>的&quot侦查&quot检定结果为: b2=1/40, ([D100=51, 奖励 0 2]) 大成功!'}
 ]"/>
 
 :::
@@ -185,11 +187,11 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 ::: note 示例
 
-> 假定 玩家2 的侦查技能是80
+假定 Szz 的侦查技能是80
 
 <ChatBox :messages="[
-{content: '.ra 侦查 @玩家2', send: true},
-{content: '由<玩家>代骰:\n<玩家2>的&quot;侦查&quot;检定结果为: D100=65/80 成功'}
+{content: '.ra 侦查 @Szz', send: true},
+{content: '由<木落>代骰:\n<Szz>的&quot;侦查&quot;检定结果为: D100=65/80 成功'}
 ]"/>
 
 :::
@@ -199,8 +201,8 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 ::: note 示例
 
 <ChatBox :messages="[
-{content: '.ra 3# p 困难侦查+10 @玩家2', send: true},
-{content: '由<玩家>代骰:\n对<玩家2>的&quot;困难侦查+10&quot;进行了3次检定，结果为:\np=36/45, ([D100=16, 惩罚 3]) 成功\np=91/45, ([D100=91, 惩罚 8]) 失败\np=75/45, ([D100=5, 惩罚 7]) 失败'}
+{content: '.ra 3# p 困难侦查+10 @Szz', send: true},
+{content: '由<木落>代骰:\n对<Szz>的&quot;困难侦查+10&quot;进行了3次检定，结果为:\np=36/45, ([D100=16, 惩罚 3]) 成功\np=91/45, ([D100=91, 惩罚 8]) 失败\np=75/45, ([D100=5, 惩罚 7]) 失败'}
 ]"/>
 
 :::
@@ -227,12 +229,12 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 <ChatBox :messages="[
 {username: 'PL', content: '我要对这个 NPC 使用心理学', send: true},
-{username: 'KP', avatar: '/images/avatar/user2.jpg', content: '可以'},
-{username: 'KP', avatar: '/images/avatar/user2.jpg', content: '.rah 心理学 @PL'},
+{username: 'KP', avatar: '/images/avatar/user3.jpg', content: '可以'},
+{username: 'KP', avatar: '/images/avatar/user3.jpg', content: '.rah 心理学 @PL'},
 {content: '由<KP>代骰:\n<PL>悄悄进行了一项心理学检定'}
 ]"/>
 
-> KP 收到的私聊信息
+KP 收到的私聊信息
 
 <ChatBox :messages="[
 {content: '来自群<群名>(群号)的暗中检定:\n<PL>的&quot;心理学&quot;检定结果为：D100=70/70 成功'}
@@ -264,8 +266,8 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 ::: note 示例
 
 <ChatBox :messages="[
-{content: '.rav 侦查+10 @玩家2', send: true},
-{content: '对抗检定:\n玩家 侦查+10-> 属性值:35 判定值:3 极难成功\n玩家2 侦查+10-> 属性值:90 判定值:23 困难成功\n玩家胜出！'}
+{content: '.rav 侦查+10 @Szz', send: true},
+{content: '对抗检定:\n木落 侦查+10-> 属性值:35 判定值:3 极难成功\nSzz 侦查+10-> 属性值:90 判定值:23 困难成功\n木落胜出！'}
 ]"/>
 
 :::
@@ -279,8 +281,8 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 ::: note 示例
 
 <ChatBox :messages="[
-{content: '.rav 潜行,b 侦查 @玩家2', send: true},
-{content: '对抗检定:\n玩家 潜行-> 属性值:20 判定值:7[[D100=97, 奖励 0]] 困难成功\n玩家2 侦查-> 属性值:80 判定值:28 困难成功\n平手！请自行根据场景(如属性比较、攻击对反击，攻击对闪避)做出判断'}
+{content: '.rav 潜行,b 侦查 @Szz', send: true},
+{content: '对抗检定:\n木落 潜行-> 属性值:20 判定值:7[[D100=97, 奖励 0]] 困难成功\nSzz 侦查-> 属性值:80 判定值:28 困难成功\n平手！请自行根据场景(如属性比较、攻击对反击，攻击对闪避)做出判断'}
 ]"/>
 
 :::
@@ -307,7 +309,7 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 <ChatBox :messages="[
 {content: '.sc 1/1D4+1', send: true},
-{content: '<玩家>的理智检定:\nd100=9/60 极难成功\n理智变化: 60 ➯ 59 (扣除1=1点)'}
+{content: '<木落>的理智检定:\nd100=9/60 极难成功\n理智变化: 60 ➯ 59 (扣除1=1点)'}
 ]"/>
 
 :::
@@ -331,8 +333,8 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 ::: note 示例
 
 <ChatBox :messages="[
-{content: '.sc 0/1 @玩家2', send: true},
-{content: '由<玩家>代骰：\n<玩家2>的理智检定:\nd100=82/60 失败！\n理智变化: 60 ➯ 59 (扣除1=1点)'}
+{content: '.sc 0/1 @Szz', send: true},
+{content: '由<木落>代骰：\n<Szz>的理智检定:\nd100=82/60 失败！\n理智变化: 60 ➯ 59 (扣除1=1点)'}
 ]"/>
 
 :::
@@ -413,7 +415,7 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 <ChatBox :messages="[
 {content: '.coc 2', send: true},
-{content: '<玩家>的七版COC人物作成:\n力量:65 敏捷:80 意志:55\n体质:50 外貌:45 教育:90\n体型:70 智力:75\nHP:12 幸运:45 [530/575]\n\n力量:40 敏捷:60 意志:65\n体质:60 外貌:75 教育:60\n体型:50 智力:75\nHP:11 幸运:55 [485/540]'}
+{content: '<木落>的七版COC人物作成:\n力量:65 敏捷:80 意志:55\n体质:50 外貌:45 教育:90\n体型:70 智力:75\nHP:12 幸运:45 [530/575]\n\n力量:40 敏捷:60 意志:65\n体质:60 外貌:75 教育:60\n体型:50 智力:75\nHP:11 幸运:55 [485/540]'}
 ]"/>
 
 :::
