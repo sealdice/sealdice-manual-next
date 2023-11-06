@@ -1,4 +1,5 @@
 import { defineUserConfig } from "vuepress";
+// @ts-ignore
 import { searchProPlugin } from "vuepress-plugin-search-pro";
 import theme from "./theme";
 
@@ -14,7 +15,7 @@ export default defineUserConfig({
 
   plugins: [
     searchProPlugin({
-      indexConetnt: true,
+      indexContent: true,
       autoSuggestions: true,
     }),
   ],
