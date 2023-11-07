@@ -454,7 +454,7 @@ if (!seal.ext.find('myperm')) {
   cmdMyperm.name = 'myperm';
   cmdMyperm.help = '使用 .myperm 展示我的权限';
   cmdMyperm.solve = (ctx, msg, cmdArgs) => {
-    let text = "啥也不是";
+    let text = "普通用户";
     console.log(ctx.privilegeLevel);
     switch (ctx.privilegeLevel) {
       case 100:
