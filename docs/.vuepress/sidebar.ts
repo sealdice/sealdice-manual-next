@@ -17,6 +17,7 @@ export default sidebar({
             "platform-qq.md",
             "platform-kook.md",
             "platform-dodo.md",
+            "platform-discord.md",
             "Platform-slack.md"
           ],
         },
