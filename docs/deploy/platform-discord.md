@@ -12,17 +12,17 @@ title: Discord
 
 ## 获取 Token
 
-::: tip 代理模式
-
-如果你海豹所处的位置直接访问 Discord 服务有困难，我们提供了通过 HTTP 代理访问的途径。
-
-:::
-
 要获取用于连接海豹的 Token 之前，你需要建立好一个应用。登陆 [Discord 开发者平台](https://discord.com/developers/applications/1178793642148769905/bot)，点击「New application」。按照要求填写应用名字。完成后，点击侧边导航栏「bot」，打开「Privileged Gateway Intents」目录下全部三个开关：`Presence Intent`，`Server Members Intent`，`Message Content Intent`。完成后点击「Save Changes」。
 
 建立好应用后上滑，点击 `Reset Token`，确认后点击 `Copy` 复制。
 
 ## 连接海豹
+
+::: tip 代理模式
+
+如果你海豹所处的位置直接访问 Discord 服务有困难，我们提供了通过 HTTP 代理访问的途径。
+
+:::
 
 登陆海豹并添加账号，选择 Discord 账号。在 `Token` 处粘贴你得到的 Token，点击连接。你的海豹应该可以正常在 Discord 运作了！
 
