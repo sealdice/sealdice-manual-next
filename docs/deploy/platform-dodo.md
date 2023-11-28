@@ -9,6 +9,8 @@ title: DoDo
 
 本节将包含你在 DoDo 平台接入海豹核心需要了解的特定内容。
 
+:::
+
 ## 建立应用
 
 要在 DoDo 开发用于连接海豹的应用前，你需要前往 [DoDo 开发者平台](https://doker.imdodo.com/application)注册账号并申请个人开发者。
@@ -19,7 +21,7 @@ title: DoDo
 
 ## 连接海豹
 
-登陆海豹并添加账号，选择「DoDo语音账号」。在`Client ID` 和 `Bot Token` 下填写对应的信息，点击连接。你的海豹应该可以正常在 DoDo 运作了！
+登陆海豹并添加账号，选择「DoDo语音」。在`Client ID` 和 `Bot Token` 下填写对应的信息，点击连接。你的海豹应该可以正常在 DoDo 运作了！
 
 ## 邀请海豹
 
