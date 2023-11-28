@@ -19,7 +19,7 @@ export default navbar([
           "platform-qq.md",
           "platform-kook.md",
           "platform-dodo.md",
-          "platform-discord-md",
+          "platform-discord.md",
           "platform-slack.md"
         ],
       },
