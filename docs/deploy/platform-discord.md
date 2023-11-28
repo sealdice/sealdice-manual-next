@@ -24,7 +24,7 @@ title: Discord
 
 :::
 
-登陆海豹并添加账号，选择「Discord账号」。在 `Token` 处粘贴你得到的 Token，点击连接。你的海豹应该可以正常在 Discord 运作了！
+登录海豹并添加账号，选择「Discord账号」。在 `Token` 处粘贴你得到的 Token，点击连接。你的海豹应该可以正常在 Discord 运作了！
 
 ## 邀请海豹
 
