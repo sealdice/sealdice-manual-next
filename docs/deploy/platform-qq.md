@@ -156,7 +156,7 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 ### 前情提要
 :::info
-shamrock 是一个基于 lsposed/xposed 的 hook qq 的一种软件。你可以在手机中无损的代替 gocq，只要系统不杀进程那么你的骰娘服务就可以一直进行，遗憾的是由于 root 权限获取变得越来越困难，模拟器实现 shamrock 的效果也并非很可观，因此这种解决方案仅仅适用于你的骰娘是供自己使用，或者供朋友使用。当然如果你的电脑可以一直运行那么 shamrock也是一个很不错的选择。
+shamrock 是一个基于 lsposed/xposed 的 hook qq 的一种软件。你可以在手机中无损的代替 gocq，只要系统不杀进程那么你的骰娘服务就可以一直进行，遗憾的是由于 root 权限获取变得越来越困难，模拟器实现 shamrock 的效果也并非很可观，因此这种解决方案仅仅适用于你的骰娘是供自己使用，或者供朋友使用。当然如果你的电脑可以一直运行那么 shamrock 也是一个很不错的选择。
 :::
 本节内容主要包括使用 shamrock 代替 ***gocq*** 由于 gocq 已经停止开发，而 shamrock 具有良好生态，因此舍弃 gocq 是个很好的选择。
 ::: warning
@@ -191,14 +191,14 @@ shamrock 是一个基于 lsposed/xposed 的 hook qq 的一种软件。你可以�
 :::
 下载完成后，把文件上传到模拟器中
 :::info
-一般情况下，直接把文件拖动到模拟器就可以传文件了，且文件一般在 picture 文件夹中，如果没有请参照你使用模拟器的说明
+一般情况下，直接把文件拖动到模拟器就可以传文件了，且文件一般在 picture 文件夹中，如果没有请参照你使用模拟器的说明。
 :::
 - 在你传完文件之后，在最右侧有一个叫模块的东西，随后你可以看到从本地安装的选项，单击你刚刚传到模拟器里的文件，等待安装完成即可，随后你可以在右下角看到重启的恩扭，单机等待重启。
 - 安装完成后应该这样
 ![lspose](./images/platform-qq-shamrock-2.png)
 **完成！**
 ### 安装 shamrock 模块
-请在[这里](https://github.com/whitechi73/OpenShamrock/actions/workflows/build-apk.yml)下载。直接将 apk 文件托动到模拟器即可下载。***此时你应该做的是将 qq 安装到你的模拟器中，可以访问im.qq.com 下载***
+请在[这里](https://github.com/whitechi73/OpenShamrock/actions/workflows/build-apk.yml)下载。直接将 apk 文件托动到模拟器即可下载。***此时你应该做的是将 qq 安装到你的模拟器中，可以访问 im.qq.com 下载***
 - 首先你应该先启动 shamrock，好让你qq启动时能够注入 shamrock 库
 - 在通知上面你可以打开 lspose 的主页，在**模块一栏中开启 shamrock 模块**
 ![shamrock](./images/platform-qq-shamrock-3.png)
@@ -217,7 +217,7 @@ shamrock 是一个基于 lsposed/xposed 的 hook qq 的一种软件。你可以�
   - nox_4 是模拟器的编号，你可以在多开助手中看到你的编号
   - 选中的文件就是要找的文件，在 vsc 中（或者任何一个文本编辑器）中打开
 ![shamrock](./images/platform-qq-shamrock-7.png)
-  - guestport对应5555的 hostport即为所需 port，对于我的就是 ***62028***，记住这个数字
+  - guestport 对应5555的 hostport 即为所需 port，对于我的就是 ***62028***，记住这个数字
 - 在你解压的 platform-tools 里打开终端，或者你不熟练的话可以把 platform-tools 加入环境变量在启用终端，也可以在 platform-tools 里新建一个文件，把下面的命令写到文件里面，然后把扩展名改为.bat
 - 在打开的终端中输入命令
 ```bash
@@ -237,7 +237,7 @@ shamrock 是一个基于 lsposed/xposed 的 hook qq 的一种软件。你可以�
 ![shamrock](./images/platform-qq-shamrock-8.png)
 ### 对接海豹程序
 :::warning
-请使用 1.4.1 以上版本的海豹进行适配，低版本的海豹未提供 ***shamrock协议适配***，你可以选择到qq群里下载dev版海豹，也可以选择等待更新
+请使用 1.4.1 以上版本的海豹进行适配，低版本的海豹未提供 ***shamrock 协议适配***，你可以选择到 qq 群里下载 dev 版海豹，也可以选择等待更新。
 :::
 - 在账号添加中，选择 ***qq 分离部署***按照下面的格式进行填写
 ![shamrock](./images/platform-qq-shamrock-9.png)
