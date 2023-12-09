@@ -186,7 +186,7 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ![执行 adb 命令](./images/platform-qq-shamrock-8.png)
 
-### 对接海豹
+### 连接海豹
 
 在账号添加中，选择「QQ 分离部署」，按照下面的格式进行填写：
 
@@ -205,13 +205,13 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ## Chronocat <Badge type="tip" text="v1.4.2" vertical="middle" />
 
-海豹从 `v1.4.1` 开始适配了 Chronocat（超时空猫猫）中 Red 协议的连接，在 `v1.4.2` 版后连接更稳定。
+海豹从 `v1.4.2` 开始适配了 Chronocat（超时空猫猫）中 Red 协议的连接。
 
 在账号添加中，选择「QQ Red 协议」，填写相应信息进行连接。
 
 ::: warning Chronocat 已停更
 
-[Chronocat](https://chronocat.vercel.app/) 已经停止更新，同时作者也不希望互联网上再有其相关教程，故海豹也不提供指导，请自行寻找相关内容。
+[Chronocat](https://chronocat.vercel.app/) 已经停止更新，同时作者也不希望互联网上再有其相关教程。因此，海豹核心手册将不提供任何详细说明，请自行寻找相关内容。
 
 :::
 
@@ -304,7 +304,7 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 可以尝试使用 [AutoQSignForMac](https://github.com/Verplitic/AutoQSignForMac)。
 
-在终端运行 `start.sh` 即可配置和启动签名服务器。如果提示 `zsh: access denied`，需要先运行 `chmod -x start.sh`来给予权限。
+在终端运行 `start.sh` 即可配置和启动签名服务器。如果提示 `zsh: access denied`，需要先运行 `chmod -x start.sh` 来给予权限。
 
 初次启动会选择 txlib 版本，及运行 QSign 的主机、端口和 API Key。通常情况下，可以回车跳过而使用默认配置。
 
