@@ -194,6 +194,15 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 成功连接后即可使用。
 
+## Lagrange <Badge type="tip" text="v1.4.2" vertical="middle" />
+
+海豹从 `v1.4.2` 开始适配了 Lagrange（拉格兰）的连接。
+
+在账号添加中，选择「QQ 分离部署」，填写相应信息进行连接。
+
+::: note 施工中……
+:::
+
 ## Chronocat <Badge type="tip" text="v1.4.2" vertical="middle" />
 
 海豹从 `v1.4.1` 开始适配了 Chronocat（超时空猫猫）中 Red 协议的连接，在 `v1.4.2` 版后连接更稳定。
