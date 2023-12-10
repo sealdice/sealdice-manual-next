@@ -328,7 +328,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ### 手动抓取ticket
 
-现在Gocq的过验证码网站已经挂了，想要过验证需要自己抓ticket登录。
+目前，Gocq 的过验证码网站已经停止服务，你需要自行抓取 ticket 进行登录。
 
 步骤如下：
 
