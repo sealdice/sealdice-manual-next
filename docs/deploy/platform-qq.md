@@ -360,7 +360,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ![](./images/image-009.png)
 
-接着点击登陆 然后退出海豹（结束进程）
+接着点击登陆，然后退出海豹（结束进程）。
 
 #### 生成session.token
 
@@ -397,7 +397,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 #### F&Q
 
-##### 1. QSign闪退
+##### 1. QSign 闪退
 1. 确认没有启动多个 qsign（多个 qsign 需要端口不重复）；
 2. 确认端口没有重复。若重复，请重新配置 qsign，修改 port；
 3. 将 qsign 文件夹放到硬盘根目录试试（如 D盘、C盘）。
