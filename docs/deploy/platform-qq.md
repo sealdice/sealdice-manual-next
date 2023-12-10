@@ -233,7 +233,7 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ::: danger 不被 QQ 官方欢迎的第三方机器人
 
-Go-cqhttp的开发者已无力维护此项目。在未来 sign-server 方案彻底被官方封死之后 Go-cqhttp 将无法继续使用.
+Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https://github.com/Mrs4s/go-cqhttp/issues/2471)）。在未来 sign-server 方案彻底被官方封死之后，Go-cqhttp 将无法继续使用。
 
 直至目前，绝大部分群聊中的 QQ 机器人采用「**假用户**」方式，即通过第三方软件接入注册的另一个 QQ 。**QQ 官方一直在对第三方实现进行技术与非技术层面的多重打击。**
 
