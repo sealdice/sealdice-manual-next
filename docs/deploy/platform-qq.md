@@ -115,7 +115,10 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ### 安装 LSPosed 模块
 
-::: tip 理论上更为老旧的xposed,edxposed或在手机上运行虚拟机的virtualXposed实现方案也是可行的，但我们不推荐也未尝试过使用它们。
+::: tip 使用 xposed/edxposed
+
+理论上，使用更为老旧的 xposed/edxposed 或在手机上运行虚拟机的 virtualXposed 的方案也是可行的，但我们不推荐也未尝试过使用它们。
+
 **我们不为任何不按教程行动造成的后果负责。**
 :::
 
