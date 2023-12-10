@@ -357,16 +357,26 @@ Go-cqhttp的开发者已无力维护此项目。在未来 sign-server 方案彻�
 
 1. 将go-cqhttp\go-cqhttp.exe文件复制到`海豹目录/data/default/extra/gocqQQ号(你登陆骰娘的qq号)`这个文件夹下
 
+![](./images/image-010.png)
+
 2. 双击运行go-cqhttp.exe，两次确认后出现go-cqhttp.bat文件
 
+![](./images/image-011.png) ![](./images/image-012.png)
+
 3. 双击运行go-cqhttp.bat，出现以下消息后输入 2 ，回车，复制链接到浏览器（终端选中后右键即可复制粘贴，没有选项）
+
+![](./images/image-013.png)
 
 ::: tip 出现open image cache db failed之类的就是你海豹没有关干净，去任务管理器里把gocq杀了
 :::
 
 4. 按照[手动抓取ticket教程-哔哩哔哩](https://b23.tv/GRGg4GR)视频教程操作，成功滑条后（需要抓ticket，不只是滑条）复制ticket到终端后回车
 
+![](./images/image-014.png)
+
 5. 复制一份token到桌面作为临时备份，避免出现意外
+
+![](./images/image-015.png)
 
 6. 关闭go-cqhttp，打开海豹，启用账号（不要点重新登陆，如果没有启用请先禁用再启用）
 
