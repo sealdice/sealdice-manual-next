@@ -73,7 +73,10 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 :::
 
-::: tip 但是root手机的教程可以在https://magiskcn.com/找到。你也可以去酷安，那里有更详细的教程。
+::: tip 如何 Root 手机
+
+Root 手机可以参阅 [小米手机安装面具教程](https://magiskcn.com)。也可以前往 [酷安](https://www.coolapk.com/) 寻找更详细的教程。
+
 :::
 
 ::: warning 低配置设备可能无法使用 Shamrock！
