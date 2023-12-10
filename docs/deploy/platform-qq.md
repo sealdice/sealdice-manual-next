@@ -364,7 +364,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 #### 生成session.token
 
-1. 将 `go-cqhttp\go-cqhttp.exe` 文件复制到 `海豹目录/data/default/extra/gocqQQ号(你登陆骰娘的qq号)` 这个文件夹下。
+1. 将 `go-cqhttp\go-cqhttp.exe` 文件复制到 `海豹目录/data/default/extra/gocqQQ号(你登录骰娘的qq号)` 这个文件夹下。
 
 ![](./images/image-010.png)
 
@@ -390,9 +390,9 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ![](./images/image-015.png)
 
-6. 关闭 `go-cqhttp`，打开海豹，启用账号（不要点重新登陆，如果没有启用请先禁用再启用）。
+6. 关闭 `go-cqhttp`，打开海豹，启用账号（不要点重新登录，如果没有启用请先禁用再启用）。
 
-如果登录失败（比如不小心选了重新登陆），可将桌面的 token 文件复制一份回原位，再次操作第 6 步。登录成功后无需保留 token 文件。
+如果登录失败（比如不小心选了重新登录），可将桌面的 token 文件复制一份回原位，再次操作第 6 步。登录成功后无需保留 token 文件。
 
 
 #### F&Q
