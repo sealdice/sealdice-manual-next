@@ -119,7 +119,8 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 理论上，使用更为老旧的 xposed/edxposed 或在手机上运行虚拟机的 virtualXposed 的方案也是可行的，但我们不推荐也未尝试过使用它们。
 
-**我们不为任何不按教程行动造成的后果负责。**
+**任何不按教程的行动请自行处理疑难问题**，海豹官方不对此提供帮助。
+
 :::
 
 请于 [LSPosed Releases](https://github.com/LSPosed/LSPosed/releases) 页下载模块。
