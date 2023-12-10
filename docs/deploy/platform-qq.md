@@ -360,7 +360,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ![](./images/image-009.png)
 
-接着点击登陆，然后退出海豹（结束进程）。
+接着点击登录，然后退出海豹（结束进程）。
 
 #### 生成session.token
 
