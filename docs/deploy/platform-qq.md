@@ -208,6 +208,80 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 成功连接后即可使用。
 
+## shamrock lspatch <Badge type="tip" text="v1.4.2" vertical="middle" />
+
+::: warning Andriod 版本要求
+
+由于 lspatch 要求安卓版本 9.0 以上，因此你的安卓手机版本必须超过安卓 9。
+
+:::
+
+::: info lspatch
+
+lspatch 是在无 root 环境下完成 shamrock 的一种途径，原理是利用 shizuku 安装经 lspatch 修补后的 qq 然后 shamrock 劫持 qq 并对外开放 api。
+
+:::
+
+### 安装shizuku
+::: info shizuku
+
+[shizuku](https://github.com/RikkaApps/Shizuku/releases) 是一个对多个模块进行支持的 apk，使用 shizuku 功能的前提是需要具备电脑运行 shizuku 的sh。
+
+:::
+
+首先，在你的手机安装 shizuku，随后，使用 adb 命令，这里详细介绍一下如何使用 `终端` 。
+
+::: tip 使用 终端
+
+-  安装 adb ，在上文中有下载链接，此处暂不提及。
+-  启用命令行终端，如果你的电脑是 win 11 操作系统，你可以直接右键 platform-tools 文件夹单击**在此处打开命令行**，如果你的电脑是 win 11 以前的操作系统那可能会稍麻烦一点
+  - 可以选择将 adb 添加至系统环境变量，在系统开始一栏中可以直接搜索到该功能，随后将**解压好的** platform-tools 路径填入至系统变量中的 path，例如，adb 在 E://shamrock achieve/platform-tools 文件夹中，那么你只需要将该路径填入 path 即可。对于 win 7 操作系统没有先进的 gui 你需要使用 **分号( \; )** 隔开不同的路径。![adb path](.\images\image-016.png)
+  - 也可以选择使用 `cd` 命令切换至 adb 目录，使用此方法请将 adb 放在 C 盘，由于 windows 权限问题，使用运行开启的 cmd 实例无法访问 C 盘之外的路径。
+    - win（就是那四个块的按键）+ R 键启动运行。
+    - 在运行中输入 cmd 并回车。
+    - 在打开的黑框框中输入
+    ```bash
+    cd 路径
+    ```
+    例如![cmd](.\images\image-017.png)
+- 还可以选择在 platform-tools 文件夹中新建`.bat`文件
+
+:::
+
+在手机中，你需要开启 *USB 调试* ，在手机设置中，选择更多设置—关于手机，多次点击软件版本号即可进入开发者模式。随后在更多设置—开发者选项中打开 *USB 调试* 将手机使用数据线相连，之后在你的手机中会出现指纹调试，给予通过。
+在电脑中使用命令
+```bash
+adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
+```
+![shizuku](.\images\image-018.png)
+
+### 安装 lspatch
+:::info lspatch
+
+[lspatch](https://github.com/LSPosed/LSPatch/releases) 可以在无 root 环境实现 lspose 。可以[参考](https://duzhaokun123.github.io/2022/05/06/simple-lspatch-guide.html)
+
+:::
+
+1. 你需要在 shizuku 中启用 lspatch，并重启shizuku。
+2. 在管理中，单击加号，选择已经下载的 qq apk 文件，选择本地修补，等待一会，然后就可以安装了。
+
+### 安装 shamrock
+上文有提及，此处不予重复。
+
+### 激活 shamrock 框架
+在 lspatch 中，长嗯修补后的 qq 出现模块作用域，允许 shamrock 然后重启 lspatch。激活 shamrock 模块有三个前提，即 qq 进程，shamrock 进程和 lspatch 进程存活，请自觉配置保活策略，例如自启动，后台存活和后台高耗电等。
+
+### 对接海豹
+安装海豹安卓端
+::: warning
+
+请使用版本为 1.4.2 以上的安卓端海豹。
+:::
+建议使用**反向 ws** 设置  
+在海豹中，账号添加中选择 onebotv11 反向 ws 在需要填的内容中填入骰子 QQ 号和要开放的 ws 地址（例如6544）。
+随后在 shamrock 中的被动 ws 连接地址中写ws://localhost:6544/ws
+如果一次没有成功可以多试几次，此时你的骰娘服务就上线啦！
+
 ## Lagrange <Badge type="tip" text="v1.4.2" vertical="middle" />
 
 海豹从 `v1.4.2` 开始适配了 Lagrange（拉格兰）的连接。
