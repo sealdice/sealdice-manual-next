@@ -1,0 +1,5 @@
+
+User-agent:*
+Disallow:
+
+Sitemap: http://localhost:8080/sealdice-manual-next/sitemap.xml

@@ -1,0 +1,22 @@
+import{_ as o}from"./plugin-vue_export-helper-c27b6911.js";import{r as s,o as c,c as r,a as e,b as n,d as t,w as l,e as a}from"./app-d6b81ca0.js";const u={},h=a(`<h1 id="编写复杂文案" tabindex="-1"><a class="header-anchor" href="#编写复杂文案" aria-hidden="true">#</a> 编写复杂文案</h1><div class="hint-container info"><p class="hint-container-title">本节内容</p><p>本节将展示复杂文案的编写技巧，请善用侧边栏和搜索，按需阅读文档。</p></div><h2 id="示例" tabindex="-1"><a class="header-anchor" href="#示例" aria-hidden="true">#</a> 示例</h2><h3 id="根据骰点结果展示不同文案" tabindex="-1"><a class="header-anchor" href="#根据骰点结果展示不同文案" aria-hidden="true">#</a> 根据骰点结果展示不同文案</h3><p>在文案中通常会有结果变量，通过对结果变量的判断来实现展示不同文案。如修改 <code>.r 骰点_单项结果文本</code> 文案为例</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>{$t表达式文本}{$t计算过程}={$t计算结果}{%
+$t计算结果 == 100 ? &quot; 乐！&quot;,
+$t计算结果 == 1 ? &quot; 啧！&quot;
+%}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,6),v={class:"hint-container note"},m=e("p",{class:"hint-container-title"},"示例",-1),p=e("h3",{id:"多套文案的实现",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#多套文案的实现","aria-hidden":"true"},"#"),t(" 多套文案的实现")],-1),_={class:"hint-container note"},b=e("p",{class:"hint-container-title"},"了解自定义回复的编写",-1),x=e("p",null,"如果你想使用 JS 插件实现也是可以的，不过示例以更简单的自定义回复为例。",-1),q=a(`<h4 id="切换命令实现" tabindex="-1"><a class="header-anchor" href="#切换命令实现" aria-hidden="true">#</a> 切换命令实现</h4><p>正则匹配：<code>mode switch(.*)</code> 回复：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>{%
+if $t1==&quot;&quot;||$t1==&quot; 默认&quot; {$g文案模式 = 0; $t输出=&quot;默认模式启用&quot;};
+if $t1==&quot; 模式1&quot; {$g文案模式 = 1; $t输出=&quot;模式1启用&quot;};  
+if $t1==&quot; 模式2&quot; {$g文案模式 = 2; $t输出=&quot;模式2启用&quot;};
+if $t1!=&quot;&quot;&amp;&amp;$t1!=&quot; 默认&quot;&amp;&amp;$t1!=&quot; 模式1&quot;&amp;&amp;$t1!=&quot; 模式2&quot; {$t输出=\`不存在指定模式{$t1}\`};  
+$t输出
+%}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>精确匹配：<code>mode show</code> 回复：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>{% 
+$g文案模式==0 ? &quot;当前在默认模式&quot;,
+$g文案模式==1 ? &quot;当前在模式1&quot; ,
+$g文案模式==2 ? &quot;当前在模式2&quot;
+%}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="文案调整" tabindex="-1"><a class="header-anchor" href="#文案调整" aria-hidden="true">#</a> 文案调整</h4><p>按如下模式调整你的自定义文案项：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>{
+if $g文案模式 == 0 {$t目标文案 = \`（这里填你个性化的默认模式文案）\`};
+if $g文案模式 == 1 {$t目标文案 = \`（这里填你个性化的模式1文案）\`};
+if $g文案模式 == 2 {$t目标文案 = \`（这里填你个性化的模式2文案）\`}
+}{$t目标文案}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="展示" tabindex="-1"><a class="header-anchor" href="#展示" aria-hidden="true">#</a> 展示</h4><p>以修改了 <code>.jrrp</code> 的文案为例：</p>`,10),$={class:"hint-container note"},g=e("p",{class:"hint-container-title"},"示例",-1);function f(w,B){const i=s("ChatBox"),d=s("RouterLink");return c(),r("div",null,[h,e("div",v,[m,n(i,{messages:[{content:".r",send:!0},{content:"<木落>掷出了 D100=1 啧！"},{content:".r",send:!0},{content:"<木落>掷出了 D100=100 乐！"}]},null,8,["messages"])]),p,e("div",_,[b,e("p",null,[t("多套文案的实现一般需要用到「自定义回复」来提供切换命令，见 "),n(d,{to:"/advanced/edit_reply.html"},{default:l(()=>[t("编写自定义回复")]),_:1}),t("。")]),x]),q,e("div",$,[g,n(i,{messages:[{content:"mode show",send:!0},{content:"默认模式启用"},{content:"mode switch 模式1",send:!0},{content:"模式1启用"},{content:"mode show",send:!0},{content:"当前在模式1"},{content:".jrrp",send:!0},{content:"（这里填你个性化的模式1文案）"},{content:"mode switch 模式2",send:!0},{content:"模式2启用"},{content:".jrrp",send:!0},{content:"（这里填你个性化的模式2文案）"},{content:"mode switch",send:!0},{content:"默认模式启用"},{content:".jrrp",send:!0},{content:"（这里填你个性化的默认模式文案）"}]},null,8,["messages"])])])}const C=o(u,[["render",f],["__file","edit_complex_custom_text.html.vue"]]);export{C as default};
