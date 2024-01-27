@@ -152,7 +152,7 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 
 配置完成后的文件夹如下：
 
-![Lagrange 配置文件夹](./images/platform-qq-lagrange-3.png =40%x40%)
+![准备运行前的 Lagrange 文件夹](./images/platform-qq-lagrange-3.png =40%x40%)
 
 设置文件保存后，双击运行 `Lagrange.OneBot.exe` 启动 Lagrange，有可能会先弹出如下警告，按步骤允许即可：
 
@@ -160,7 +160,7 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 
 ![Lagrange 运行警告 2](./images/platform-qq-lagrange-5.png =40%x40%)
 
-成功运行时，很快会弹出一个命令行窗口，同时在同一文件夹下会出现一张登录二维码图片 `qr-0.png`，快速使用手机 QQ 扫码连接。
+成功运行时，很快会弹出一个命令行窗口，同时在同一文件夹下会出现一张登录二维码图片 `qr-0.png`，尽快在二维码过期前使用手机 QQ 扫码连接。
 
 Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时出现报错，需要去下载 [.Net SDK](https://dotnet.microsoft.com/zh-cn/download) 并安装。
 
