@@ -69,7 +69,7 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 
 :::
 
-### 准备 Lagrange 环境
+### 准备 Lagrange
 
 可以在 [Lagrange Github 仓库](https://github.com/LagrangeDev/Lagrange.Core) 中获取到相应程序，通常你需要进入 Action 页面，根据你的系统选择相应版本的最新制品。
 
@@ -146,7 +146,7 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 
 ::: info Linux NTQQ 的签名服务
 
-由于总所周知的原因，Lagrange 不能提供公共签名服务，海豹官方也不会对相关信息进行说明。但你可以在相应 TG 群找到由海外热心网友提供的一些帮助。
+由于众所周知的原因，Lagrange 不能提供公共签名服务，海豹官方也不会对相关信息进行说明。但你可以在相应 TG 群找到由海外热心网友提供的一些帮助。
 
 :::
 
