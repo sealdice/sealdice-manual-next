@@ -486,6 +486,221 @@ if (!seal.ext.find('myperm')) {
 }
 ```
 
+## 黑名单 / 信任名单操作
+
+### 黑名单操作的函数
+
+添加：`seal.ban.addBan(ctx, uid, place, reason)` 
+
+移除：`seal.ban.remove(ctx, uid)`
+- `ctx`：`MsgContext` 类型，指令上下文，`solve()` 函数传进来的第一个参数
+- `uid`：用户 ID，字符串类型，例如 `QQ:123456789`, `TG:123456789`
+- `place`：拉黑的地方，字符串类型，随便写，一般来说在群内拉黑就写群 ID
+- `reason`：拉黑原因，字符串类型，随便写
+
+### 信任用户名单
+
+添加：`seal.ban.addTrust(ctx, uid, place, reason)` 参数说明同上
+
+移除：`seal.ban.remove(ctx, uid)`
+
+::: tip 相同的移除函数
+
+黑名单和信任名单存储在同一个数据库中，因此移除时使用的是同一个函数。
+
+你在进行移除操作时需要自己判断是否符合你的预期。
+
+:::
+
+### 获取黑名单 / 信任名单列表
+
+使用 `seal.ban.getList()`
+
+返回值为一个数组，数组中的每一项都是一个 `BanListInfoItem` 对象，包含以下字段：
+- `id`：用户 ID，字符串类型
+- `name`：用户昵称，字符串类型
+- `score`：怒气值，整数类型
+- `rank`：拉黑/信任等级 0 没事 -10警告 -30禁止 30信任
+- `times`：事发时间，数组类型，内部元素为整数时间戳
+- `reasons`：拉黑/信任原因，数组类型，内部元素为字符串
+- `places`：拉黑/信任的发生地点，数组类型，内部元素为字符串
+- `banTime`：拉黑/信任的时间，整数时间戳
+
+### 获取用户在黑名单 / 信任名单中的信息
+使用 `seal.ban.getUser(uid)`
+
+如果用户没有在黑名单 / 信任名单中，返回值为空值。
+
+如果有则返回一个 `BanListInfoItem` 对象，字段同上。
+
+### 示例代码：黑名单 / 信任名单操作
+
+```javascript
+// ==UserScript==
+// @name         js-ban
+// @author       SzzRain
+// @version      1.0.0
+// @description  演示 js 扩展操作黑名单
+// @timestamp    1706684850
+// @license      MIT
+// @homepageURL  https://github.com/Szzrain
+// ==/UserScript==
+
+if (!seal.ext.find('js-ban')) {
+const ext = seal.ext.new('js-ban', 'SzzRain', '1.0.0');
+    // 创建一个命令
+    const cmdcban = seal.ext.newCmdItemInfo();
+    cmdcban.name = 'cban';
+    cmdcban.help = '使用.cban <用户id> 来拉黑目标用户，仅master可用';
+    cmdcban.solve = (ctx, msg, cmdArgs) => {
+        let val = cmdArgs.getArgN(1);
+        switch (val) {
+            case 'help': {
+                const ret = seal.ext.newCmdExecuteResult(true);
+                ret.showHelp = true;
+                return ret;
+            }
+            default: {
+                if (ctx.privilegeLevel === 100) {
+                    seal.ban.addBan(ctx, val, "JS扩展拉黑", "JS扩展拉黑测试");
+                    seal.replyToSender(ctx, msg, "已拉黑用户" + val);
+                } else {
+                    seal.replyToSender(ctx, msg, "你没有权限执行此命令");
+                }
+                return seal.ext.newCmdExecuteResult(true);
+            }
+        }
+    }
+    // 注册命令
+    ext.cmdMap['cban'] = cmdcban;
+
+    // 创建一个命令
+    const cmdcunban = seal.ext.newCmdItemInfo();
+    cmdcunban.name = 'cunban';
+    cmdcunban.help = '使用.cunban <用户id> 来解除拉黑/移除信任目标用户，仅master可用';
+    cmdcunban.solve = (ctx, msg, cmdArgs) => {
+        let val = cmdArgs.getArgN(1);
+        switch (val) {
+            case 'help': {
+                const ret = seal.ext.newCmdExecuteResult(true);
+                ret.showHelp = true;
+                return ret;
+            }
+            default: {
+                if (ctx.privilegeLevel === 100) {
+                    // 信任用户和拉黑用户存在同一个列表中，remove 前请先判断是否符合预期
+                    seal.ban.remove(ctx, val);
+                    seal.replyToSender(ctx, msg, "已解除拉黑/信任用户" + val);
+                } else {
+                    seal.replyToSender(ctx, msg, "你没有权限执行此命令");
+                }
+                return seal.ext.newCmdExecuteResult(true);
+            }
+        }
+    }
+    // 注册命令
+    ext.cmdMap['cunban'] = cmdcunban;
+
+    // 创建一个命令
+    const cmdctrust = seal.ext.newCmdItemInfo();
+    cmdctrust.name = 'ctrust';
+    cmdctrust.help = '使用.ctrust <用户id> 来信任目标用户，仅master可用';
+    cmdctrust.solve = (ctx, msg, cmdArgs) => {
+        let val = cmdArgs.getArgN(1);
+        switch (val) {
+            case 'help': {
+                const ret = seal.ext.newCmdExecuteResult(true);
+                ret.showHelp = true;
+                return ret;
+            }
+            default: {
+                if (ctx.privilegeLevel === 100) {
+                    seal.ban.addTrust(ctx, val, "JS扩展信任", "JS扩展信任测试");
+                    seal.replyToSender(ctx, msg, "已信任用户" + val);
+                } else {
+                    seal.replyToSender(ctx, msg, "你没有权限执行此命令");
+                }
+                return seal.ext.newCmdExecuteResult(true);
+            }
+        }
+    }
+    // 注册命令
+    ext.cmdMap['ctrust'] = cmdctrust;
+
+    // 创建一个命令
+    const cmdcbanlist = seal.ext.newCmdItemInfo();
+    cmdcbanlist.name = 'cbanlist';
+    cmdcbanlist.help = '使用.cbanlist 来查看黑名单和信任列表，仅master可用';
+    cmdcbanlist.solve = (ctx, msg, cmdArgs) => {
+        let val = cmdArgs.getArgN(1);
+        switch (val) {
+            case 'help': {
+                const ret = seal.ext.newCmdExecuteResult(true);
+                ret.showHelp = true;
+                return ret;
+            }
+            default: {
+                if (ctx.privilegeLevel === 100) {
+                    let text = "黑名单/信任列表：\n";
+                    seal.ban.getList().forEach((v) => {
+                        text += `${v.name}(${v.id}) 当前等级:${v.rank} 怒气值:${v.score}\n`;
+                    });
+                    seal.replyToSender(ctx, msg, text);
+                } else {
+                    seal.replyToSender(ctx, msg, "你没有权限执行此命令");
+                }
+                return seal.ext.newCmdExecuteResult(true);
+            }
+        }
+    }
+    // 注册命令
+    ext.cmdMap['cbanlist'] = cmdcbanlist;
+
+    // 创建一个命令
+    const cmdcget = seal.ext.newCmdItemInfo();
+    cmdcget.name = 'cget';
+    cmdcget.help = '使用.cget <用户id> 来查看目标用户的黑名单/信任信息，仅master可用';
+    cmdcget.solve = (ctx, msg, cmdArgs) => {
+        let val = cmdArgs.getArgN(1);
+        switch (val) {
+            case 'help': {
+                const ret = seal.ext.newCmdExecuteResult(true);
+                ret.showHelp = true;
+                return ret;
+            }
+            default: {
+                if (ctx.privilegeLevel === 100) {
+                    let info = seal.ban.getUser(val);
+                    if (!info) {
+                        seal.replyToSender(ctx, msg, "用户不存在或未被拉黑/信任");
+                        return seal.ext.newCmdExecuteResult(true);
+                    }
+                    let level = info.rank;
+                    // 不知道为什么，用 === 是 false
+                    if (info.rank == 30) {
+                        level = "信任"
+                    } else if (info.rank == -30) {
+                        level = "拉黑"
+                    } else if (info.rank == -10) {
+                        level = "警告"
+                    }
+                    let text = `用户${info.name}(${info.id}) 当前等级:${level} 怒气值:${info.score}`;
+                    seal.replyToSender(ctx, msg, text);
+                } else {
+                    seal.replyToSender(ctx, msg, "你没有权限执行此命令");
+                }
+                return seal.ext.newCmdExecuteResult(true);
+            }
+        }
+    }
+    // 注册命令
+    ext.cmdMap['cget'] = cmdcget;
+
+    // 注册扩展
+    seal.ext.register(ext);
+}
+```
+
 ## 存取数据
 
 相关的 API 是两个函数，`ExtInfo.storageSet(key, value)` 函数和 `ExtInfo.storageGet(key)`，一个存，一个取。
