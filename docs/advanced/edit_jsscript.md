@@ -486,7 +486,7 @@ if (!seal.ext.find('myperm')) {
 }
 ```
 
-## 黑名单 / 信任名单操作
+## 黑名单 / 信任名单操作 <Badge type="tip" text="v1.4.4" vertical="middle" />
 
 ### 黑名单操作的函数
 
@@ -1214,7 +1214,7 @@ if (!seal.ext.find('xxx')){
 }
 ```
 
-## 注册插件配置项
+## 注册插件配置项 <Badge type="tip" text="v1.4.1" vertical="middle" />
 
 插件若要在 UI 中注册可供用户修改的配置项，需要在插件注册后调用 `seal.ext.registerXXXConfig()` 函数注册配置项。
 
@@ -1440,6 +1440,26 @@ seal.gameSystem.newTemplateByYaml(string) //从 yaml 解析新的游戏规则。
 seal.getCtxProxyAtPos(ctx, pos) //获取第 pos 个被 at 的人，pos 从 0 开始计数
 seal.atob(base64String) //返回被解码的 base64 编码
 seal.btoa(string) //将 string 编码为 base64 并返回
+
+//下面是 1.4.1 新增 api
+seal.ext.newConfigItem() //用于创建一个新的配置项，返回一个 ConfigItem 对象
+seal.ext.registerConfig(configItem) //用于注册一个配置项，参数为 ConfigItem 对象
+seal.ext.getConfig(ext, "key") //用于获取一个配置项的值，参数为扩展对象和配置项的 key
+seal.ext.registerStringConfig(ext, "key", "defaultValue") //用于注册一个 string 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerIntConfig(ext, "key", 123) //用于注册一个 int 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerFloatConfig(ext, "key", 123.456) //用于注册一个 float 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerBoolConfig(ext, "key", true) //用于注册一个 bool 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerTemplateConfig(ext, "key", ["1", "2", "3", "4"]) //用于注册一个 template 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerOptionConfig(ext, "key", "1", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) //用于注册一个 option 类型的配置项，参数为扩展对象、配置项的 key、默认值和可选项
+seal.ext.getStringConfig(ext, "key") //用于获取一个 string 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getIntConfig(ext, "key") //用于获取一个 int 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getFloatConfig(ext, "key") //用于获取一个 float 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getBoolConfig(ext, "key") //用于获取一个 bool 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getTemplateConfig(ext, "key") //用于获取一个 template 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getOptionConfig(ext, "key") //用于获取一个 option 类型配置项的值，参数为扩展对象和配置项的 key
+
+//下面是 1.4.4 新增 api
+setPlayerGroupCard(ctx, tmpl) //设置当前 ctx 玩家的名片
 ```
 <!-- TODO: 添加 1.4.1 中新增的插件配置项 -->
 
@@ -1538,6 +1558,7 @@ seal.deck.reload() //重新加载牌堆
 seal.gameSystem.newTemplate(string) //从 json 解析新的游戏规则。
 seal.gameSystem.newTemplateByYaml(string) //从 yaml 解析新的游戏规则。
 seal.applyPlayerGroupCardByTemplate(ctx, tmpl) // 设定当前 ctx 玩家的自动名片格式
+setPlayerGroupCard(ctx, tmpl) // 立刻设定当前 ctx 玩家的名片格式
 ```
 
 #### 其他
