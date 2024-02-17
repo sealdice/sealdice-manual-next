@@ -57,9 +57,132 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 :::
 
+## Lagrange <Badge type="tip" text="v1.4.2" vertical="middle" />
+
+海豹从 `v1.4.2` 开始适配了 Lagrange（拉格兰）的连接。
+
+::: info Lagrange
+
+Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括目前实现了 Linux NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 Api 的 Lagrange.Onebot 两部分。
+
+与 GoCqhttp 类似，Lagrange 可以很方便的在多个平台（Windows、Linux、Mac）部署，海豹核心可以对接其提供的 OneBot-V11 Api 来提供 QQ 骰子服务。
+
+:::
+
+### 准备 Lagrange
+
+可以在 [Lagrange Github 仓库](https://github.com/LagrangeDev/Lagrange.Core) 中获取到相应程序，通常你需要进入 Action 页面，根据你的系统选择相应版本的最新制品。
+
+![Lagrange Action](./images/platform-qq-lagrange-1.png =80%x80%)
+
+点击进入页面后拉到最下方，选择相应版本下载。
+
+![Lagrange Action Artifacts](./images/platform-qq-lagrange-2.png =40%x40%)
+
+### 运行 Lagrange
+
+首先解压对应制品压缩文件，你可以看见 `Lagrange.OneBot.exe` 等多个文件。
+
+在运行之前，需要在与 `Lagrange.OneBot.exe` 同级的目录下，新建一个 `appsettings.json` 文件，用来填写 Lagrange 的配置。
+
+配置示例在 Lagrange Github 的介绍中有提供，你也可以参照下面进行配置：
+
+`appsettings.json`：
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Trace",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "SignServerUrl": "",
+  "Account": {
+    "Uin": 0,
+    "Password": "",
+    "Protocol": "Linux",
+    "AutoReconnect": true,
+    "GetOptimumServer": true
+  },
+  "Message": {
+    "IgnoreSelf": true
+  },
+  "Implementation": {
+    "ForwardWebSocket": {
+      "Host": "127.0.0.1",
+      "Port": 8081,
+      "HeartBeatInterval": 5000,
+      "AccessToken": ""
+    },
+    "ReverseWebSocket": {
+      "Host": "127.0.0.1",
+      "Port": 8080,
+      "Suffix": "/onebot/v11/ws",
+      "ReconnectInterval": 5000,
+      "HeartBeatInterval": 5000,
+      "AccessToken": ""
+    },
+    "Http": {
+      "Host": "",
+      "Port": 0,
+      "EventEnabled": false
+    },
+    "HttpPost": {
+      "Host": "127.0.0.1",
+      "Port": 8080,
+      "Suffix": "/onebot/v11/http",
+      "Timeout": 0
+    }
+  }
+}
+```
+
+其中有几个重要的设置项需要填写和注意：
+- `Account` 下的 `Uin` 保持为 0 以使用二维码登录；
+- `SignServerUrl`：NTQQ 的签名服务地址，**注意此处的签名服务需要是 Linux NTQQ 签名服务，不可以使用 QSign、Shamrock 等提供的 Android QQ 签名服务**；
+- `Implementation.ForwardWebSocket` 下的 `Host` 和 `Port`，这是 Lagrange 将提供的 **OneBot-V11 正向 WS 服务地址**，记下后续使用。如果对应端口已占用请自行调整。
+
+::: info Linux NTQQ 的签名服务
+
+由于众所周知的原因，Lagrange 不能提供公共签名服务，海豹官方也不会对相关信息进行说明。但你可以在相应 TG 群找到由海外热心网友提供的一些帮助。
+
+:::
+
+配置完成后的文件夹如下：
+
+![准备运行前的 Lagrange 文件夹](./images/platform-qq-lagrange-3.png =40%x40%)
+
+设置文件保存后，双击运行 `Lagrange.OneBot.exe` 启动 Lagrange，有可能会先弹出如下警告，按步骤允许即可：
+
+![Lagrange 运行警告 1](./images/platform-qq-lagrange-4.png =40%x40%)
+
+![Lagrange 运行警告 2](./images/platform-qq-lagrange-5.png =40%x40%)
+
+成功运行时，很快会弹出一个命令行窗口，同时在同一文件夹下会出现一张登录二维码图片 `qr-0.png`，尽快在二维码过期前使用手机 QQ 扫码连接。
+
+Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时出现报错，需要去下载 [.Net SDK](https://dotnet.microsoft.com/zh-cn/download) 并安装。
+
+### 海豹连接 Lagrange
+
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebott11分离部署)」。
+
+账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://{Host}:{Port}`，如 `ws://127.0.0.1:8081`。
+
+![海豹连接 Lagrange](./images/platform-qq-lagrange-6.png =65%x65%)
+
+成功连接后即可使用。
+
 ## Shamrock <Badge type="tip" text="v1.4.2" vertical="middle" />
 
 海豹从 `v1.4.2` 开始适配了 Shamrock 的连接。
+
+::: warning 有难度的操作
+
+此方式存在一定难度，你可能需要对Root，使用命令行程序等有所了解。
+
+:::
 
 ::: info Shamrock
 
@@ -208,88 +331,106 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 成功连接后即可使用。
 
-## shamrock lspatch <Badge type="tip" text="v1.4.2" vertical="middle" />
+## Shamrock LSPatch <Badge type="tip" text="v1.4.2" vertical="middle" />
+
+::: warning 有难度的操作
+
+此方式存在一定难度，你可能需要对使用命令行程序有所了解。
+
+:::
 
 ::: warning Andriod 版本要求
 
-由于 lspatch 要求安卓版本 9.0 以上，因此你的安卓手机版本必须超过安卓 9。
+由于 LSPatch 要求安卓版本 9.0 以上，因此你的安卓手机版本必须超过安卓 9。
 
 :::
 
-::: info lspatch
+::: info LSPatch
 
-lspatch 是在无 root 环境下完成 shamrock 的一种途径，原理是利用 shizuku 安装经 lspatch 修补后的 qq 然后 shamrock 劫持 qq 并对外开放 api。
-
-:::
-
-### 安装shizuku
-::: info shizuku
-
-[shizuku](https://github.com/RikkaApps/Shizuku/releases) 是一个对多个模块进行支持的 apk，使用 shizuku 功能的前提是需要具备电脑运行 shizuku 的sh。
+LSPatch 是在无 root 环境下使用 Shamrock 的一种途径，原理是利用 Shizuku 安装经 LSPatch 修补后的 QQ，再使用 Shamrock 劫持 QQ 并对外开放 API。
 
 :::
 
-首先，在你的手机安装 shizuku，随后，使用 adb 命令，这里详细介绍一下如何使用 `终端` 。
+### 安装 Shizuku
 
-::: tip 使用 终端
+::: info Shizuku
 
--  安装 adb ，在上文中有下载链接，此处暂不提及。
--  启用命令行终端，如果你的电脑是 win 11 操作系统，你可以直接右键 platform-tools 文件夹单击**在此处打开命令行**，如果你的电脑是 win 11 以前的操作系统那可能会稍麻烦一点
-  - 可以选择将 adb 添加至系统环境变量，在系统开始一栏中可以直接搜索到该功能，随后将**解压好的** platform-tools 路径填入至系统变量中的 path，例如，adb 在 E://shamrock achieve/platform-tools 文件夹中，那么你只需要将该路径填入 path 即可。对于 win 7 操作系统没有先进的 gui 你需要使用 **分号( \; )** 隔开不同的路径。![adb path](.\images\image-016.png)
-  - 也可以选择使用 `cd` 命令切换至 adb 目录，使用此方法请将 adb 放在 C 盘，由于 windows 权限问题，使用运行开启的 cmd 实例无法访问 C 盘之外的路径。
-    - win（就是那四个块的按键）+ R 键启动运行。
-    - 在运行中输入 cmd 并回车。
-    - 在打开的黑框框中输入
-    ```bash
-    cd 路径
-    ```
-    例如![cmd](.\images\image-017.png)
-- 还可以选择在 platform-tools 文件夹中新建`.bat`文件
+[Shizuku](https://github.com/RikkaApps/Shizuku/releases) 是一个帮助其他应用直接使用系统 API 的应用，而 Shizuku 本身则需要通过电脑使用 adb 工具赋予权限。
+
+Adb 即 [Android 调试桥](https://developer.android.com/studio/command-line/adb?hl=zh-cn)，是安卓官方提供的帮助在电脑端调试 Android 设备的命令行工具。
 
 :::
 
-在手机中，你需要开启 *USB 调试* ，在手机设置中，选择更多设置—关于手机，多次点击软件版本号即可进入开发者模式。随后在更多设置—开发者选项中打开 *USB 调试* 将手机使用数据线相连，之后在你的手机中会出现指纹调试，给予通过。
-在电脑中使用命令
-```bash
+首先需要在你的手机安装 Shizuku，安装后需要在电脑中使用 adb 命令为其赋予权限。
+
+::: tabs
+
+@tab Windows#windows
+
+**在 Windows 中使用 cmd 执行 adb 命令：**
+
+1. 安装 adb，工具下载见 [上文](#开放模拟器端口供海豹对接)；
+2. 打开 cmd 窗口；
+  - 如果你的电脑是 Window 11 操作系统，你可以直接右键 `platform-tools` 文件夹单击 **在此处打开命令行**；
+  - 其它版本的打开方式请自行搜索。
+3. 你有多种方式使用 adb：
+  - 将 adb 添加至系统环境变量，在系统开始一栏中可以直接搜索到该功能，随后将 **解压好的** `platform-tools` 路径填入至系统变量中的 `path`，例如，adb 在 `E:/shamrock achieve/platform-tools` 文件夹中，那么你只需要将该路径填入 `path` 即可。
+  ![adb path](.\images\image-016.png)
+    - 如果你是旧版本 Window（如 Win 7），系统未提供对应的 GUI，你需要使用 **`;`** 隔开不同的路径。
+  - 也可以选择使用 `cd` 命令切换至 adb 目录，使用此方法请将 adb 放在 C 盘；（由于 Windows 权限问题，使用运行开启的 cmd 实例无法访问 C 盘之外的路径。）
+    - `win + R` 键启动「运行」；
+    - 在运行中输入 `cmd` 并回车；
+    - 在打开的黑框框中输入命令 `cd <替换为对应路径>`。
+  ![切换到adb文件夹](.\images\image-017.png)
+- 还可以选择在 `platform-tools` 文件夹中新建`.bat` 文件。
+
+:::
+
+在手机中，你需要开启 **USB 调试** ，在手机设置中，选择「更多设置—关于手机」，多次点击软件版本号，即可进入开发者模式。
+
+随后在「更多设置—开发者选项」中打开 **USB 调试**，使用数据线连接电脑和手机，随后在你的手机中出现指纹调试弹框，给予通过。
+
+在电脑中使用命令：
+
+```cmd
 adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
 ```
-![shizuku](.\images\image-018.png)
+![为Shizuku赋予adb权限](.\images\image-018.png)
 
-### 安装 lspatch
-:::info lspatch
+### 安装 LSPatch
 
-[lspatch](https://github.com/LSPosed/LSPatch/releases) 可以在无 root 环境实现 lspose 。可以[参考](https://duzhaokun123.github.io/2022/05/06/simple-lspatch-guide.html)
+:::info LSPatch
+
+[LSPatch](https://github.com/LSPosed/LSPatch/releases) 可以在无 root 环境使用 LSPosed 框架。
+
+可以参看 [LSPatch 使用教程](https://duzhaokun123.github.io/2022/05/06/simple-lspatch-guide.html) 了解更多。
 
 :::
 
-1. 你需要在 shizuku 中启用 lspatch，并重启shizuku。
-2. 在管理中，单击加号，选择已经下载的 qq apk 文件，选择本地修补，等待一会，然后就可以安装了。
+1. 你需要在 Shizuku 中启用 LSPatch，并重启 Shizuku。
+2. 在管理中，单击加号，选择已经下载的 QQ apk 文件，选择本地修补，等待一会，然后就可以安装了。
 
-### 安装 shamrock
-上文有提及，此处不予重复。
+### 安装并激活 Shamrock
 
-### 激活 shamrock 框架
-在 lspatch 中，长嗯修补后的 qq 出现模块作用域，允许 shamrock 然后重启 lspatch。激活 shamrock 模块有三个前提，即 qq 进程，shamrock 进程和 lspatch 进程存活，请自觉配置保活策略，例如自启动，后台存活和后台高耗电等。
+安装方式 [上文](#安装-shamrock) 有提及，此处不予重复。
+
+在 LSPatch 中，长按修补后的 QQ 出现模块作用域，允许 Shamrock 然后重启 LSPatch。
+
+激活 Shamrock 模块有三个前提，即 QQ 进程，Shamrock 进程和 LSPatch 进程存活，请自行配置保活策略，例如允许自启动，允许后台存活和关闭后台高耗电等。
 
 ### 对接海豹
-安装海豹安卓端
-::: warning
+
+首先安装海豹安卓端。
+
+::: warning 确认海豹版本
 
 请使用版本为 1.4.2 以上的安卓端海豹。
+
 :::
-建议使用**反向 ws** 设置  
-在海豹中，账号添加中选择 onebotv11 反向 ws 在需要填的内容中填入骰子 QQ 号和要开放的 ws 地址（例如6544）。
-随后在 shamrock 中的被动 ws 连接地址中写ws://localhost:6544/ws
-如果一次没有成功可以多试几次，此时你的骰娘服务就上线啦！
 
-## Lagrange <Badge type="tip" text="v1.4.2" vertical="middle" />
+建议使用 **反向 ws** 设置。在海豹中，账号添加中选择「onebot v11 反向 ws」，填入骰子 QQ 号和要开放的 ws 端口（例如 `:6544`）。
 
-海豹从 `v1.4.2` 开始适配了 Lagrange（拉格兰）的连接。
-
-在账号添加中，选择「QQ 分离部署」，填写相应信息进行连接。
-
-::: note 施工中……
-:::
+随后在 Shamrock 中的被动 ws 连接地址中写 `ws://localhost:6544/ws`。
 
 ## Chronocat <Badge type="tip" text="v1.4.2" vertical="middle" />
 
@@ -300,6 +441,24 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 ::: warning Chronocat 已停更
 
 [Chronocat](https://chronocat.vercel.app/) 已经停止更新，同时作者也不希望互联网上再有其相关教程。因此，海豹核心手册将不提供任何详细说明，请自行寻找相关内容。
+
+:::
+
+## Liteloader ONEBOT-API <Badge type="tip" text="v1.4.2" vertical="middle" />
+:::info介绍 liteloader-onebotapi
+*Liteloader* 是 NTQQ 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能，例如 *Liteloader-OnebotApi*（以下简称 LLObApi），可以实现劫持客户端对外开放 API ，可以理解为装在 PC 上的 Shamrock。
+:::
+### 安装 Liteloader 
+社区提供了非常简便的[安装脚本](https://github.com/Mzdyl/LiteLoaderQQNT_Install/)，安装方法中在文档中，请自行查看。
+
+### 安装 LLObApi
+在 Liteloader 中安装 LLObApi，具体方法请参考 [LLObApi仓库](https://github.com/linyuchen/LiteLoaderQQNT-OneBotApi)。
+
+### 配置海豹
+安装完成后重新登录 QQ，默认开放的正向ws端口为 3001，在海豹的新添账号选择 ONEBOT 分离部署，账号处随便填写，连接地址填 **ws://localhost:3001** 就看到登录成功了！
+:::warning 一些坑
+- 非 win 用户使用一键脚本时要安装 git ，具体方法见 [git官网](https://git-scm.com/)。
+- 一定要在安装 QQ 客户端的主机上使用安装脚本。
 
 :::
 
@@ -485,6 +644,9 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 3. 登录频繁，过段时间重新尝试登录（时间不确定）。
 ##### 4. Code 1
 1. 账号密码错误，输入正确的账号密码。
+##### 5. Code 237
+1. 登录过于频繁 ，请等待一段时间继续。
+2. 让他人帮助你滑条。
 ##### 5. 如何启动多个 qsign？（仅当需要备用签名或不同协议版本的时候有此需求）
 解压一个新的 qsign 文件，重新配置，端口需要输入不同于前面的端口。
 ##### 6. 什么是 go-cqhttp？（通常简称 gocq）
