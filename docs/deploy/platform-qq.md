@@ -445,7 +445,7 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 :::
 
 ## Liteloader ONEBOT-API <Badge type="tip" text="v1.4.2" vertical="middle" />
-:::info介绍 liteloader-onebotapi
+:::info 介绍 liteloader-onebotapi
 *Liteloader* 是 NTQQ 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能，例如 *Liteloader-OnebotApi*（以下简称 LLObApi），可以实现劫持客户端对外开放 API ，可以理解为装在 PC 上的 Shamrock。
 :::
 ### 安装 Liteloader 
