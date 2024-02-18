@@ -140,8 +140,9 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 ```
 
 其中有几个重要的设置项需要填写和注意：
-- `Account` 下的 `Uin` 保持为 0 以使用二维码登录；
-- `SignServerUrl`：NTQQ 的签名服务地址，**注意此处的签名服务需要是 Linux NTQQ 签名服务，不可以使用 QSign、Shamrock 等提供的 Android QQ 签名服务**；
+- 运行 Lagrange 需要 [.NET](https://dotnet.microsoft.com/download)，安装对应拉格郎日的版本（例如拉格朗日后面是 7 则需安装 SDK 的版本为 7）。
+- `Password` 为空时为扫码，这里请留空。
+- `SignServerUrl`：NTQQ 的签名服务地址，**注意此处的签名服务需要是 Linux NTQQ 签名服务，不可以使用 QSign、Shamrock 等提供的 Android QQ 签名服务**；签名地址请到拉格朗日的 MD 文档中自行寻找。
 - `Implementation.ForwardWebSocket` 下的 `Host` 和 `Port`，这是 Lagrange 将提供的 **OneBot-V11 正向 WS 服务地址**，记下后续使用。如果对应端口已占用请自行调整。
 
 ::: info Linux NTQQ 的签名服务
@@ -456,7 +457,22 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 
 社区提供了非常简便的[安装脚本](https://github.com/Mzdyl/LiteLoaderQQNT_Install/)，安装方法中在文档中，请自行查看。
 
+:::warning 注意
+
+- 使用 windows 部署时脚本要使用管理员模式运行。
+- 非 windows 使用一键脚本，请在系统中配置 [git官网](https://git-scm.com/)。
+- 一定要在安装 QQ 客户端的主机上使用安装脚本。
+
+:::
+
 ### 安装 OneBotAPI
+
+:::info 寻找 Plugins 文件夹
+
+安装完成 Liteloader 后，如图所示![](./images/image-020.png)
+所指处即插件文件夹，打开这个文件夹并且在Plugins新建一个文件夹，把OneBotAPI **Release** 版本的四个文件解压到新建的文件夹处，重启 QQ 即可。
+
+:::
 
 在 LiteLoader 中安装 OneBotAPI，具体方法请参考 [OneBotAPI仓库](https://github.com/linyuchen/LiteLoaderQQNT-OneBotApi)。
 
@@ -465,10 +481,6 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 安装完成后重新登录 QQ，默认开放的正向ws端口为 3001，在海豹的新添账号选择 OneBot 分离部署，账号处随便填写，连接地址填 **ws://localhost:3001** 就看到登录成功了！
 
 :::warning 注意事项
-
-- 非 Windows 用户使用一键脚本时要安装 git ，具体方法见 [git官网](https://git-scm.com/)。
-
-- 一定要在安装 QQ 客户端的主机上使用安装脚本。
 
 - 暂时未添加反向 ws，只能通过正向 ws 连接，如若想修改端口请在 QQ 的设置 UI 自行修改。
 
