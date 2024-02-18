@@ -445,20 +445,34 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 :::
 
 ## Liteloader ONEBOT-API <Badge type="tip" text="v1.4.2" vertical="middle" />
-:::info介绍 liteloader-onebotapi
-*Liteloader* 是 NTQQ 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能，例如 *Liteloader-OnebotApi*（以下简称 LLObApi），可以实现劫持客户端对外开放 API ，可以理解为装在 PC 上的 Shamrock。
+
+:::info 介绍 LiteLoader-OneBotAPI
+
+*Liteloader* 是 NTQQ 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能，例如 *LiteLoader-OneBotAPI*，可以实现劫持客户端对外开放 API ，可以理解为装在 PC 上的 Shamrock。
+
 :::
-### 安装 Liteloader 
+
+### 安装 LiteLoader 
+
 社区提供了非常简便的[安装脚本](https://github.com/Mzdyl/LiteLoaderQQNT_Install/)，安装方法中在文档中，请自行查看。
 
-### 安装 LLObApi
-在 Liteloader 中安装 LLObApi，具体方法请参考 [LLObApi仓库](https://github.com/linyuchen/LiteLoaderQQNT-OneBotApi)。
+### 安装 OneBotAPI
 
-### 配置海豹
-安装完成后重新登录 QQ，默认开放的正向ws端口为 3001，在海豹的新添账号选择 ONEBOT 分离部署，账号处随便填写，连接地址填 **ws://localhost:3001** 就看到登录成功了！
-:::warning 一些坑
-- 非 win 用户使用一键脚本时要安装 git ，具体方法见 [git官网](https://git-scm.com/)。
+在 LiteLoader 中安装 OneBotAPI，具体方法请参考 [OneBotAPI仓库](https://github.com/linyuchen/LiteLoaderQQNT-OneBotApi)。
+
+### 配置海豹 <Badge type="tip" text="v1.4.2" vertical="middle" />
+
+安装完成后重新登录 QQ，默认开放的正向ws端口为 3001，在海豹的新添账号选择 OneBot 分离部署，账号处随便填写，连接地址填 **ws://localhost:3001** 就看到登录成功了！
+
+:::warning 注意事项
+
+- 非 Windows 用户使用一键脚本时要安装 git ，具体方法见 [git官网](https://git-scm.com/)。
+
 - 一定要在安装 QQ 客户端的主机上使用安装脚本。
+
+- 暂时未添加反向 ws，只能通过正向 ws 连接，如若想修改端口请在 QQ 的设置 UI 自行修改。
+
+- 由于采用劫持路线，暂不清楚多账号登录情况。
 
 :::
 
@@ -647,6 +661,16 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 ##### 5. Code 237
 1. 登录过于频繁 ，请等待一段时间继续。
 2. 让他人帮助你滑条。
+3. 内置的 ticket 抓取工具失效，需要手动抓取
+
+:::info 手动抓取 ticket
+
+- 首先在 gocq 终端显示输入 1 或 2 时选择 2。
+- 然后把 gocq 输出的地址粘贴到浏览器中，并嗯 F12 键打开开发者工具，选项卡选择 `网络`，完成验证。
+- 随后在 `网络`处找到 `cap_union_new_verify`，选择 `预览`处即可看到 token，如图所示![ ](./images/image-019.png)
+
+:::
+
 ##### 5. 如何启动多个 qsign？（仅当需要备用签名或不同协议版本的时候有此需求）
 解压一个新的 qsign 文件，重新配置，端口需要输入不同于前面的端口。
 ##### 6. 什么是 go-cqhttp？（通常简称 gocq）
