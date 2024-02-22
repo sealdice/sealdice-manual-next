@@ -53,6 +53,21 @@ export default navbar([
     ],
   },
   {
+    text: "计算机及开源程序相关科普", 
+    prefix: "/for_ 0/",
+    children:
+     [
+      {
+        text: "计算机相关",
+        children: ["About_PC.md"],
+    },
+       {
+        text: "开源程序相关",
+      children:["About_OpenSource.md"]
+      },
+       ],
+  }, 
+  {
     text: "使用",
     prefix: "/use/",
     children: [
@@ -116,4 +131,5 @@ export default navbar([
     prefix: "/about/",
     children: ["about.md", "license.md", "develop.md"],
   },
+ 
 ]);

@@ -54,6 +54,23 @@ export default sidebar({
       ],
     },
   ],
+  "/for_0/":[
+   {
+    text: "计算机及开源程序相关科普",
+    link: "/for_0/",
+    prefix: "/for_0/",
+    children: [
+      {
+        text: "计算机相关科普",
+        children: ["About_PC.md"],
+      },
+      {
+        text: "开源程序相关科普",
+        children:["About_OpenSource.md"],
+      },
+    ],
+  }
+  ],
   "/use/": [
     {
       text: "使用",
