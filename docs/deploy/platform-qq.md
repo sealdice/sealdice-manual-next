@@ -16,7 +16,7 @@ title: QQ
 - 能接受复杂部署流程，有能力自行部署 QSign，需要功能支持完整的，见 [Go-cqhttp](#go-cqhttp--mirai)。该部署方式中的常见问题解答见 [FAQ](#gocqhttp-faq)；
 - Android 手机/模拟器用户见 [Shamrock](#shamrock)（需要 Root）或 [Shamrock LSPatch](#shamrock-lspatch)。
 
-不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和问题，请根据自己的情况选择适合的方式。
+不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和其它问题，请根据自己的情况选择适合的方式。
 
 :::
 
@@ -90,7 +90,13 @@ Lagrange（拉格兰） 是一个 NTQQ 协议相关的开源项目。其包括�
 
 ### 运行 Lagrange
 
+::: tip .Net SDK 
+
 Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时出现报错，需要去下载 [.Net SDK](https://dotnet.microsoft.com/zh-cn/download) 并安装。
+
+在下载 Lagrange 时，后缀中的数字说明了其对 .Net 版本的需求，请根据说明下载对应版本（例如后面是 8.0，则需安装 SDK 的版本为 8.0）。
+
+:::
 
 首先解压对应制品压缩文件，你可以看见 `Lagrange.OneBot.exe` 等多个文件。
 
@@ -143,8 +149,6 @@ Lagrange 项目对其配置文件的格式进行过破坏兼容的更改。以�
 ```
 
 其中有几个重要的设置项需要填写和注意：
-
-- 运行 Lagrange 需要 [.NET](https://dotnet.microsoft.com/download)，安装对应拉格兰的版本（例如拉格兰后面是 7 则需安装 SDK 的版本为 7）。
 - `Password` 为空时为扫码，这里请留空。
 - `SignServerUrl`：NTQQ 的签名服务地址，**注意此处的签名服务需要是 Linux NTQQ 签名服务，不可以使用 QSign、Shamrock 等提供的 Android QQ 签名服务**；
 - `Implementations`：海豹将使用 `ForwardWebSocket`，即正向 WebSocket 方式连接 Lagrange，该项下的 `Host` 和 `Port` 是 Lagrange 将提供的 **OneBot-V11 正向 WS 服务地址**，记下以供后续使用。如果对应端口已占用请自行调整。
