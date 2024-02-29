@@ -12,7 +12,7 @@ title: 参与项目
 几个比较重要的仓库：
 - [核心](https://github.com/sealdice/sealdice-core)：海豹的 Go 后端代码仓库，这个仓库也作为海豹的主仓库，Bug 可反馈在该仓库的 issue 中；
 - [UI](https://github.com/sealdice/sealdice-ui)：海豹的前端代码，基于 Vue3 + ElementPlus 开发；
-- [手册（新）](https://github.com/sealdice/sealdice-manual-next)：海豹新版官方手册（即当前的手册）的源码，如对手册有什么改进内容可以在该项目提交 pr；
+- [手册](https://github.com/sealdice/sealdice-manual)：海豹官方手册（即当前的手册）的源码，如对手册有什么改进内容可以在该项目提交 pr；
 - [构建](https://github.com/sealdice/sealdice-build)：海豹的自动构建仓库，用于自动化发布海豹的每日构建包与 Release；
 - ……
 
@@ -50,7 +50,7 @@ title: 参与项目
 
 ### 对目标仓库进行 fork
 
-首先 fork 对应想要修改的仓库，此处以手册仓库 [sealdice-manual-next](https://github.com/sealdice/sealdice-manual-next) 为例：
+首先 fork 对应想要修改的仓库，此处以手册仓库 [sealdice-manual](https://github.com/sealdice/sealdice-manual) 为例：
 
 ![fork 对应仓库](./images/develop-fork-1.png)
 

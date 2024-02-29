@@ -1,8 +1,8 @@
-# sealdice-manual-next
+# sealdice-manual
 
 VuePress2 驱动的海豹骰全新官方使用手册。
 
-当前手册预览可见 [海豹手册](https://sealdice.github.io/sealdice-manual-next/)。
+当前手册预览可见 [海豹手册](https://sealdice.github.io/sealdice-manual/)。
 
 ## 编写文档
 
@@ -30,7 +30,7 @@ pnpm run docs:dev
 
 ## 将自己的分支发布为 GitHub Pages
 
-[主仓库](https://github.com/sealdice/sealdice-manual-next) 的 [Pages](https://sealdice.github.io/sealdice-manual-next/) 自动追踪主仓库的 main 分支。
+[主仓库](https://github.com/sealdice/sealdice-manual) 的 [Pages](https://sealdice.github.io/sealdice-manual/) 自动追踪主仓库的 main 分支。
 
 如果你希望请其他人预览修改的效果，或者有其他需求，需要将自己的分支也发布为 GitHub Pages。
 

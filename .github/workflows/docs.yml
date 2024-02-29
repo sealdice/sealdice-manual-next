@@ -8,7 +8,7 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    if: (github.repository == 'sealdice/sealdice-manual-next' && github.ref_name == 'main') || github.repository != 'sealdice/sealdice-manual-next'
+    if: (github.repository == 'sealdice/sealdice-manual' && github.ref_name == 'main') || github.repository != 'sealdice/sealdice-manual'
 
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes
-        if: github.repository == 'sealdice/sealdice-manual-next'
+        if: github.repository == 'sealdice/sealdice-manual'
         env:
           KEY: ${{ secrets.KEY }}
           URL: ${{ secrets.URL }}

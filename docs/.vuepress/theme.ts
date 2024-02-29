@@ -23,7 +23,7 @@ export default hopeTheme({
   pageInfo: ["ReadingTime"],
   contributors: false,
   editLink: false,
-  docsRepo: "sealdice/sealdice-manual-next",
+  docsRepo: "sealdice/sealdice-manual",
   docsBranch: "main",
   displayFooter: false,
   home: "/index.md",

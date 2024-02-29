@@ -21,7 +21,7 @@ title: 关于
 
 ## 手册贡献者
 
-[**新手册贡献者**](https://github.com/sealdice/sealdice-manual-next/graphs/contributors)
+[**新手册贡献者**](https://github.com/sealdice/sealdice-manual/graphs/contributors)
 
 ---
 

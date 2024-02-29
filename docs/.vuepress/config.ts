@@ -7,7 +7,7 @@ import { cut } from "@node-rs/jieba";
 
 import theme from "./theme";
 
-const basePath: any = process.env.BASE_PATH ?? "/sealdice-manual-next/";
+const basePath: any = process.env.BASE_PATH ?? "/sealdice-manual/";
 
 export default defineUserConfig({
   base: basePath,
