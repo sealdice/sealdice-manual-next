@@ -12,7 +12,7 @@
   "author": "Sealdice Team",
   "license": "MIT",
   "devDependencies": {
-    "@node-rs/jieba": "^1.9.2",
+    "@node-rs/jieba": "^1.10.0",
     "@vuepress/client": "2.0.0-beta.67",
     "@vuepress/plugin-register-components": "2.0.0-rc.0",
     "@vuepress/utils": "2.0.0-rc.2",
