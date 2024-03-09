@@ -12,7 +12,7 @@ title: QQ
 由于众所周知的原因，在 QQ 平台部署机器人目前有一定难度。所有支持的途径参见侧边目录，本节提供了多种对接途径的引导：
 
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](#官方机器人)；
-- 需要比较简单的部署流程的，见 [Liteloader ONEBOT-API](#liteloader-onebot-api)；
+- 需要比较简单的部署流程的，见 [LLOneBot API](#llonebot-api)；
 - 需要比较简单的部署流程，且有能力上 Telegram 的，见 [Lagrange](#lagrange)；
 - 能接受复杂部署流程，有能力自行部署 QSign，需要功能支持完整的，见 [Go-cqhttp](#go-cqhttp--mirai)。该部署方式中的常见问题解答见 [FAQ](#gocqhttp-faq)；
 - Android 手机/模拟器用户见 [Shamrock](#shamrock)（需要 Root）或 [Shamrock LSPatch](#shamrock-lspatch)。
