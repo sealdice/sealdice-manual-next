@@ -127,7 +127,7 @@ export default navbar([
     text: "关于",
     prefix: "/about/",
     children: [
-      "how-to-read.md",
+      "start-from-zero.md",
       "about.md",
       "license.md",
       "develop.md",

@@ -134,7 +134,7 @@ export default sidebar({
       link: "/about/",
       prefix: "/about/",
       children: [
-        "how-to-read.md",
+        "start-from-zero.md",
         "about.md",
         "license.md",
         "develop.md",
