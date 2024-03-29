@@ -9,10 +9,13 @@ bgImageDark: /images/bg/4-dark.svg
 bgImageStyle:
   background-attachment: fixed
 actions:
+  - text: 如何阅读手册
+    icon: question
+    link: /about/how-to-read
+    type: primary
   - text: 指令上手
     icon: interact
     link: /use/quick-start
-    type: primary
   - text: 快速部署
     icon: light
     link: /deploy/quick-start
