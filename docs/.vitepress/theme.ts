@@ -1,6 +1,6 @@
 import { about, advanced, config, deploy, use } from "./catalogue";
 
-export const theme =  {
+export const theme = {
   // https://vitepress.dev/reference/default-theme-config
   logo: {
     light: '/images/sealdice.svg',
@@ -33,10 +33,24 @@ export const theme =  {
   lastUpdated: {
     text: '上次更新于',
     formatOptions: {
-      dateStyle: 'short',
-      timeStyle: 'short'
-    }
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    },
   },
+  docFooter: {
+    prev: '上一节',
+    next: '下一节'
+  },
+  darkModeSwitchLabel: '主题',
+  lightModeSwitchTitle: '切换到浅色模式',
+  darkModeSwitchTitle: '切换到深色模式',
+  sidebarMenuLabel: '菜单',
+  returnToTopLabel: '返回顶部',
   search: {
     provider: 'local',
     options: {
@@ -50,7 +64,8 @@ export const theme =  {
           resetButtonTitle: '清除查询条件',
           footer: {
             selectText: '选择',
-            navigateText: '切换'
+            navigateText: '切换',
+            closeText: '关闭',
           }
         }
       },
