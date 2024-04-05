@@ -339,7 +339,6 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 ::: danger 危险：`1.1.0` 及以上版本的 Shamrock 不适用以下教程
 
-
 2024 年 4 月 2 日，OpenShamrock 开发组于 [Discussion#272](https://github.com/whitechi73/OpenShamrock/discussions/272#discussion-6300354) 宣布，Shamrock 将会从 `1.1.0` 版本起弃用 OneBot V11 支持，迁移至新的 [Kritor](https://github.com/KarinJS/kritor) 协议。
 
 **这意味着 `1.1.0` 及之后版本的 Shamrock 将不再支持 OneBot V11，以下教程也不再适用。**请仔细分辨，以免造成麻烦。
