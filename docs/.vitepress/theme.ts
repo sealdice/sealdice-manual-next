@@ -1,4 +1,4 @@
-import { about, advanced, config, deploySidebar, deployNav, use } from "./catalogue";
+import { about, advanced, config, deploySidebar, deployNav, useNav, useSidebar } from "./catalogue";
 import type { DefaultTheme } from 'vitepress'
 
 export const theme: DefaultTheme.Config = {
@@ -14,14 +14,14 @@ export const theme: DefaultTheme.Config = {
     },
     deployNav,
     config,
-    use,
+    useNav,
     advanced,
     about,
   ] as DefaultTheme.NavItem[],
   sidebar: {
     "/deploy/": deploySidebar,
     "/config/": config,
-    "/use/": use,
+    "/use/": useSidebar,
     "/advanced/": advanced,
     "/about/": about,
   } as DefaultTheme.SidebarMulti,

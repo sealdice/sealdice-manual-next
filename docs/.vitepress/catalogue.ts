@@ -106,7 +106,7 @@ export const config = {
   ],
 }
 
-export const use = {
+export const useNav = {
   text: "使用",
   base: "",
   items: [
@@ -130,6 +130,60 @@ export const use = {
         { text: "龙与地下城 5E", link: "/use/dnd5e" },
         { text: "属性同义词", link: "/use/attribute_alias" },
         { text: "其它规则支持", link: "/use/other_rules" },
+      ],
+    },
+    {
+      text: "功能扩展",
+      items: [
+        { text: "故事", link: "/use/story" },
+        { text: "日志", link: "/use/log" },
+        { text: "娱乐", link: "/use/fun" },
+        { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
+      ],
+    },
+    {
+      text: "常见问题",
+      items: [
+        { text: "常见问题", link: "/use/faq" },
+      ],
+    },
+  ],
+}
+
+export const useSidebar = {
+  text: "使用",
+  base: "",
+  items: [
+    {
+      text: "新手入门",
+      items: [
+        { text: "基础概念", link: "/use/introduce" },
+        { text: "快速上手", link: "/use/quick-start" },
+      ],
+    },
+    {
+      text: "核心指令",
+      items: [
+        { text: "核心指令", link: "/use/core" },
+      ],
+    },
+    {
+      text: "规则扩展",
+      items: [
+        { text: "克苏鲁的呼唤 7 版", link: "/use/coc7" },
+        { text: "龙与地下城 5E", link: "/use/dnd5e" },
+        { text: "属性同义词", link: "/use/attribute_alias" },
+        {
+          text: "其它规则支持",
+          link: "/use/other_rules",
+          items: [
+            { text: "绿色三角洲 Delta Green", link: "/use/other_rules#%E7%BB%BF%E8%89%B2%E4%B8%89%E8%A7%92%E6%B4%B2-delta-green" },
+            { text: "黑暗世界 World of Darkness", link: "/use/other_rules#%E9%BB%91%E6%9A%97%E4%B8%96%E7%95%8C-world-of-darkness" },
+            { text: "双重十字 Double Cross", link: "/use/other_rules#%E5%8F%8C%E9%87%8D%E5%8D%81%E5%AD%97-double-cross" },
+            { text: "暗影狂奔 Shadowrun", link: "/use/other_rules#%E6%9A%97%E5%BD%B1%E7%8B%82%E5%A5%94-shadowrun" },
+            { text: "共鸣性怪异 Emoklore", link: "/use/other_rules#%E5%85%B1%E9%B8%A3%E6%80%A7%E6%80%AA%E5%BC%82-emoklore" },
+          ]
+        },
       ],
     },
     {
