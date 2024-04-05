@@ -337,11 +337,14 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 :::
 
-::: danger 以下教程不确保适用于 Shamrock 版本号为 `1.1.0` 以及 `1.1.0` 以上的用户
+::: danger 警告：`1.1.0` 及以上版本的 Shamrock 不适用以下教程
 
-2024 年 4 月 2 日，Shamrock 仓库的 [discussion#272](https://github.com/whitechi73/OpenShamrock/discussions/272#discussion-6300354) 宣布，Shamrock 将会在 `1.1.0`版本之后，将原先适配的 OneBot V11 的协议接口迁移至 [Kritor](https://github.com/KarinJS/kritor-kotlin)。这意味着，`1.1.0`版本之后的 Shamrock 将不再使用 OneBot V11 协议接口，如下的教程也不再能适用于`1.1.0`版本及之后的 Shamrock，请仔细分辨，以免造成麻烦。
 
-海豹开发组也正在对 未来 Shamrock 中[Kritor](https://github.com/KarinJS/kritor-kotlin)协议接口进行适配，请耐心等待。
+2024 年 4 月 2 日，OpenShamrock 开发组于 [Discussion#272](https://github.com/whitechi73/OpenShamrock/discussions/272#discussion-6300354) 宣布，Shamrock 将会从 `1.1.0` 版本起弃用 OneBot V11 支持，迁移至新的 [Kritor](https://github.com/KarinJS/kritor) 协议。
+
+**这意味着 `1.1.0` 及之后版本的 Shamrock 将不再支持 OneBot V11，以下教程也不再适用。**请仔细分辨，以免造成麻烦。
+
+海豹开发组也正在着手对新的 Kritor 协议进行适配，请耐心等待。
 
 :::
 
