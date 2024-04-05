@@ -1,5 +1,6 @@
-export const deploy = {
+export const deployNav = {
   text: "部署",
+  base: "",
   items: [
     {
       text: "基础知识（电脑小白先看我）",
@@ -32,8 +33,57 @@ export const deploy = {
   ],
 }
 
+export const deploySidebar = {
+  text: "部署",
+  base: "",
+  items: [
+    {
+      text: "基础知识（电脑小白先看我）",
+      items: [
+        { text: "计算机相关", link: "/deploy/about_pc" },
+        { text: "开源程序相关", link: "/deploy/about_opensource" },
+      ],
+    },
+    {
+      text: "部署指南",
+      items: [
+        { text: "快速开始", link: "/deploy/quick-start" },
+        { text: "迁移", link: "/deploy/transfer" },
+        { text: "特色功能", link: "/deploy/special_feature" },
+        { text: "数据库检查和修复", link: "/deploy/db-repair" },
+      ]
+    },
+    {
+      text: "连接平台",
+      items: [
+        {
+          text: "QQ",
+          link: "/deploy/platform-qq",
+          items: [
+            { text: "指南", link: "/deploy/platform-qq#%E6%8C%87%E5%8D%97" },
+            { text: "Lagrange", link: "/deploy/platform-qq#lagrange" },
+            { text: "LLOneBot API", link: "/deploy/platform-qq#llonebot-api" },
+            { text: "Shamrock", link: "/deploy/platform-qq#shamrock" },
+            { text: "Shamrock LSPatch", link: "/deploy/platform-qq#shamrock-lspatch" },
+            { text: "Chronocat", link: "/deploy/platform-qq#chronocat" },
+            { text: "官方机器人", link: "/deploy/platform-qq#%E5%AE%98%E6%96%B9%E6%9C%BA%E5%99%A8%E4%BA%BA" },
+            { text: "Go-cqhttp / Mirai", link: "/deploy/platform-qq#go-cqhttp-mirai" },
+          ]
+        },
+        { text: "KOOK", link: "/deploy/platform-kook" },
+        { text: "DoDo", link: "/deploy/platform-dodo" },
+        { text: "Discord", link: "/deploy/platform-discord" },
+        { text: "Telegram", link: "/deploy/platform-telegram" },
+        { text: "Slack", link: "/deploy/platform-slack" },
+        { text: "钉钉", link: "/deploy/platform-dingtalk" },
+      ],
+    },
+  ],
+}
+
 export const config = {
   text: "配置",
+  base: "",
   items: [
     {
       text: "扩展功能",
@@ -58,6 +108,7 @@ export const config = {
 
 export const use = {
   text: "使用",
+  base: "",
   items: [
     {
       text: "新手入门",
@@ -101,6 +152,7 @@ export const use = {
 
 export const advanced = {
   text: "进阶",
+  base: "",
   items: [
     { text: "进阶介绍", link: "/advanced/introduce" },
     { text: "内置脚本语言", link: "/advanced/script" },
@@ -121,6 +173,7 @@ export const advanced = {
 
 export const about = {
   text: "关于",
+  base: "",
   items: [
     { text: "从零开始", link: "/about/start-from-zero" },
     { text: "关于", link: "/about/about" },
