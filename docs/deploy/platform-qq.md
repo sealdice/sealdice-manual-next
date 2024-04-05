@@ -184,7 +184,7 @@ Action 中获取的 Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时�
 
 与可执行文件在同级目录下的 `appsettings.json` 文件，是 Lagrange 的配置文件。
 
-最新的 Lagrange 会在没有该文件时自动创建默认配置，如果没有生成该文件，你可以按照 [官方仓库的最新说明](https://github.com/LagrangeDev/Lagrange.Core) 手动创建这一文件。
+最新的 Lagrange 会在没有该文件时自动创建默认配置，如果没有生成该文件，你可以按照 [官方仓库的最新说明](https://github.com/KonataDev/Lagrange.Core) 手动创建这一文件。
 
 ::: warning 注意：使用最新的 Lagrange
 
