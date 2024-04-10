@@ -53,7 +53,7 @@ title: 配置安卓端保活
 
 在 HyperOS（澎湃系统）中，「访问存储空间」被拆分为三个权限：「照片和视频」「音乐和音频」「文件和文档」。请全部允许这些权限。
 
-<img src="./images/keepalive_hyperos_storage.jpg" width="450" />
+<img src="./images/keepalive_hyperos_storage.jpg" width="66%" />
 
 :::
 
@@ -73,11 +73,11 @@ title: 配置安卓端保活
 
 在 HyperOS（澎湃系统）中，请始终开启「锁屏显示」「后台弹出界面」「显示悬浮窗」「动态壁纸服务」四项权限。
 
-<img src="./images/keepalive_hyperos_additional.jpg" width="450" />
+<img src="./images/keepalive_hyperos_additional.jpg" width="66%" />
 
 如果保活仍然失效，请尝试在应用信息界面中开启「自启动」。
 
-<img src="./images/keepalive_hyperos_selflaunch.jpg" width="450" />
+<img src="./images/keepalive_hyperos_selflaunch.jpg" width="66%" />
 
 :::
 
@@ -91,31 +91,31 @@ title: 配置安卓端保活
 
 选择「省电策略」，并在新的页面里选择「无限制」。然后，回到应用信息页面，选择联网控制，尽量允许海豹核心使用所有数据来源（无线网络和手机卡）。
 
-<img src="./images/keepalive_miui_permpage.jpg" width="450">
+<img src="./images/keepalive_miui_permpage.jpg" width="66%">
 
 == 鸿蒙系统
 
 在「应用和服务」中，选择「应用启动管理」，找到海豹核心，关闭其「自动管理」开关，并允许自启动、关联启动和后台活动。
 
-<img src="./images/keepalive_harmonyos_applaunch.jpg" width="450">
+<img src="./images/keepalive_harmonyos_applaunch.jpg" width="66%">
 
 回到「设置」主页，选择「电池」项目，开启性能模式，并进入「更多电池设置」，在新界面中开启「休眠时始终保持网络连接」。
 
-<img src="./images/keepalive_harmonyos_battery.jpg" width="450">
+<img src="./images/keepalive_harmonyos_battery.jpg" width="66%">
 
 <br/>
 
-<img src="./images/keepalive_harmonyos_batterymore.jpg" width="500">
+<img src="./images/keepalive_harmonyos_batterymore.jpg" width="66%">
 
 == ColorOS
 
 选择「耗电管理」，优先开启所有选项。
 
-<img src="./images/keepalive_coloros_launch.jpg" width="450">
+<img src="./images/keepalive_coloros_launch.jpg" width="66%">
 
 已知护眼模式可能会导致海豹核心意外关闭，请不要开启。
 
-<img src="./images/keepalive_coloros_nightshift.jpg" width="500">
+<img src="./images/keepalive_coloros_nightshift.jpg" width="66%">
 
 ::::
 
@@ -129,19 +129,19 @@ title: 配置安卓端保活
 
 长按海豹核心的任务卡片，并点击锁图标。
 
-<img src="./images/keepalive_miui_multitask.jpg" width="450">
+<img src="./images/keepalive_miui_multitask.jpg" width="66%">
 
 == 鸿蒙系统
 
 将海豹核心的任务卡片下拉并释放，见到卡片右上角出现锁图标即可。
 
-<img src="./images/keepalive_harmonyos_multitask.jpg" width="450">
+<img src="./images/keepalive_harmonyos_multitask.jpg" width="66%">
 
 == ColorOS
 
 选择海豹核心任务卡片右上角的三个点，并选择「锁定」。
 
-<img src="./images/keepalive_coloros_multitask.jpg" width="450">
+<img src="./images/keepalive_coloros_multitask.jpg" width="66%">
 
 ::::
 
@@ -151,6 +151,6 @@ title: 配置安卓端保活
 
 在海豹核心应用中，选择右上角的设置图标，可以看到一些保活策略。通常来说，启用上面的系统设置已经足够，但如果你发现海豹核心仍然时常掉线，可以考虑这里的额外手段。
 
-<img src="./images/keepalive_inapp.jpg" width="450">
+<img src="./images/keepalive_inapp.jpg" width="66%">
 
 前三个策略可能需要相应权限才能生效。
