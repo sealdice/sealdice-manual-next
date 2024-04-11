@@ -23,7 +23,7 @@ title: 配置安卓端保活
 
 在继续之前，你应该先从[官网下载](https://dice.weizaima.com/download)安卓版海豹核心，并将其安装到你的设备上。
 
-## 系统设置
+系统设置
 
 ### 授予海豹核心必要权限
 
@@ -59,9 +59,7 @@ title: 配置安卓端保活
 
 在「应用信息」界面，请允许海豹核心绕过省电策略，并在后台连接网络。
 
-:::: tabs
-
-== HyperOS
+## HyperOS
 
 在 HyperOS（澎湃系统）中，启动核心前请全部允许这些权限。「访问存储空间」被拆分为三个权限：「照片和视频」「音乐和音频」「文件和文档」。
 
@@ -79,7 +77,7 @@ title: 配置安卓端保活
 
 <img src="./images/keepalive_hyperos_selflaunch.jpg" width="66%" />
 
-== MIUI
+## MIUI
 
 初次启动时提示是否运行“海豹核心”发送通知，选择「始终允许」
 
@@ -93,7 +91,7 @@ title: 配置安卓端保活
 
 <img src="./images/keepalive_miui_multitask.jpg" width="66%">
 
-== 鸿蒙系统
+## 鸿蒙系统
 
 在「应用和服务」中，选择「应用启动管理」，找到海豹核心，关闭其「自动管理」开关，并允许自启动、关联启动和后台活动。
 
@@ -111,7 +109,7 @@ title: 配置安卓端保活
 
 <img src="./images/keepalive_harmonyos_multitask.jpg" width="66%">
 
-== ColorOS
+## ColorOS
 
 选择「耗电管理」，优先开启所有选项。
 
