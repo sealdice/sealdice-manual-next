@@ -55,10 +55,10 @@ export const deploySidebar = {
         { text: "配置安卓端保活", 
          link: "/deploy/android_keepalive" ,
          items: [
-            { text: "HyperOS", link: "/deploy/android_keepalive#HyperOS" },
-            { text: "MIUI", link: "/deploy/android_keepalive#MIUI" },
+            { text: "HyperOS", link: "/deploy/android_keepalive#hyperos" },
+            { text: "MIUI", link: "/deploy/android_keepalive#miui" },
             { text: "鸿蒙系统", link: "/deploy/android_keepalive#%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F" },
-            { text: "ColorOS", link: "/deploy/android_keepalive#ColorOS" },
+            { text: "ColorOS", link: "/deploy/android_keepalive#coloros" },
             { text: "通用设置", link: "/deploy/android_keepalive#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE" },
           ],
         },
