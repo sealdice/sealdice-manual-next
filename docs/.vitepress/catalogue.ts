@@ -24,7 +24,9 @@ export const deployNav = {
             { text: "鸿蒙系统", link: "/deploy/android_keepalive#%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F" },
             { text: "ColorOS", link: "/deploy/android_keepalive#ColorOS" },
             { text: "通用设置", link: "/deploy/android_keepalive#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE" },
-      ]
+            ],
+            },
+        ],
     },
     {
       text: "连接平台",
