@@ -16,16 +16,7 @@ export const deployNav = {
         { text: "迁移", link: "/deploy/transfer" },
         { text: "特色功能", link: "/deploy/special_feature" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
-        { text: "配置安卓端保活", 
-         link: "/deploy/android_keepalive",
-         items: [
-            { text: "HyperOS", link: "/deploy/android_keepalive#HyperOS" },
-            { text: "MIUI", link: "/deploy/android_keepalive#MIUI" },
-            { text: "鸿蒙系统", link: "/deploy/android_keepalive#%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F" },
-            { text: "ColorOS", link: "/deploy/android_keepalive#ColorOS" },
-            { text: "通用设置", link: "/deploy/android_keepalive#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE" },
-          ],
-        },
+        { text: "配置安卓端保活", link: "/deploy/android_keepalive"},
       ],
     },
     {
@@ -61,8 +52,17 @@ export const deploySidebar = {
         { text: "迁移", link: "/deploy/transfer" },
         { text: "特色功能", link: "/deploy/special_feature" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
-        { text: "配置安卓端保活", link: "/deploy/android_keepalive" },
-      ]
+        { text: "配置安卓端保活", 
+         link: "/deploy/android_keepalive" ,
+         items: [
+            { text: "HyperOS", link: "/deploy/android_keepalive#HyperOS" },
+            { text: "MIUI", link: "/deploy/android_keepalive#MIUI" },
+            { text: "鸿蒙系统", link: "/deploy/android_keepalive#%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F" },
+            { text: "ColorOS", link: "/deploy/android_keepalive#ColorOS" },
+            { text: "通用设置", link: "/deploy/android_keepalive#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE" },
+          ],
+        },
+      ],
     },
     {
       text: "连接平台",
