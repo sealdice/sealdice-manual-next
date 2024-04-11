@@ -16,7 +16,14 @@ export const deployNav = {
         { text: "迁移", link: "/deploy/transfer" },
         { text: "特色功能", link: "/deploy/special_feature" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
-        { text: "配置安卓端保活", link: "/deploy/android_keepalive" },
+        { text: "配置安卓端保活", 
+         link: "/deploy/android_keepalive",
+         items: [
+            { text: "HyperOS", link: "/deploy/android_keepalive#HyperOS" },
+            { text: "MIUI", link: "/deploy/android_keepalive#MIUI" },
+            { text: "鸿蒙系统", link: "/deploy/android_keepalive#鸿蒙系统" },
+            { text: "ColorOS", link: "/deploy/android_keepalive#ColorOS" },
+            { text: "通用设置", link: "/deploy/android_keepalive#通用设置" }
       ]
     },
     {
