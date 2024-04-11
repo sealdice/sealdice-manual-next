@@ -47,12 +47,6 @@ title: 配置安卓端保活
 
 如果你的系统没有自动允许海豹核心访问存储空间，请在「应用信息」中选择「权限管理」（你可能需要选择「显示所有权限」），并允许「访问存储空间」权限。
 
-::: info HyperOS
-
-在 HyperOS（澎湃系统）中，「访问存储空间」被拆分为三个权限：「照片和视频」「音乐和音频」「文件和文档」。请全部允许这些权限。
-
-<img src="./images/keepalive_hyperos_storage.jpg" width="66%" />
-
 :::
 
 #### 通知权限
@@ -63,20 +57,6 @@ title: 配置安卓端保活
 
 如果你不慎拒绝通知权限，可以稍后在系统设置中授予海豹核心相关权限。
 
-#### 其他权限
-
-依据你的操作系统和海豹核心的保活策略，你可能需要额外开启一些权限，如播放音频、显示在其他应用上层等。
-
-::: info HyperOS
-
-在 HyperOS（澎湃系统）中，请始终开启「锁屏显示」「后台弹出界面」「显示悬浮窗」「动态壁纸服务」四项权限。
-
-<img src="./images/keepalive_hyperos_additional.jpg" width="66%" />
-
-如果保活仍然失效，请尝试在应用信息界面中开启「自启动」。
-
-<img src="./images/keepalive_hyperos_selflaunch.jpg" width="66%" />
-
 :::
 
 ### 解除后台运行限制
@@ -85,11 +65,37 @@ title: 配置安卓端保活
 
 :::: tabs
 
-== MIUI / HyperOS
+== HyperOS
 
-选择「省电策略」，并在新的页面里选择「无限制」。然后，回到应用信息页面，选择联网控制，尽量允许海豹核心使用所有数据来源（无线网络和手机卡）。
+在 HyperOS（澎湃系统）中，启动核心前请全部允许这些权限。「访问存储空间」被拆分为三个权限：「照片和视频」「音乐和音频」「文件和文档」。
 
-<img src="./images/keepalive_miui_permpage.jpg" width="66%">
+<img src="./images/keepalive_hyperos_storage.jpg" width="66%" />
+
+请始终开启「锁屏显示」「后台弹出界面」「显示悬浮窗」「动态壁纸服务」四项权限。
+
+<img src="./images/keepalive_hyperos_additional.jpg" width="66%" />
+
+长按海豹核心的任务卡片，并点击锁图标。
+
+<img src="./images/keepalive_miui_multitask.jpg" width="66%">
+
+如果保活仍然失效，请尝试在应用信息界面中开启「自启动」。
+
+<img src="./images/keepalive_hyperos_selflaunch.jpg" width="66%" />
+
+== MIUI
+
+初次启动时提示是否运行“海豹核心”发送通知，选择「始终允许」
+
+<img src="./images/keepalive_miui_permdialog.png" width="66%">
+
+第二步，在海豹核心的后台配置中选择「无限制」
+
+<img src="./images/keepalive_miui_unlimit.jpg" width="66%">
+
+第三步，长按海豹核心的任务卡片，并点击锁图标。
+
+<img src="./images/keepalive_miui_multitask.jpg" width="66%">
 
 == 鸿蒙系统
 
@@ -105,6 +111,10 @@ title: 配置安卓端保活
 
 <img src="./images/keepalive_harmonyos_batterymore.jpg" width="66%">
 
+将海豹核心的任务卡片下拉并释放，见到卡片右上角出现锁图标即可。
+
+<img src="./images/keepalive_harmonyos_multitask.jpg" width="66%">
+
 == ColorOS
 
 选择「耗电管理」，优先开启所有选项。
@@ -114,28 +124,6 @@ title: 配置安卓端保活
 已知护眼模式可能会导致海豹核心意外关闭，请不要开启。
 
 <img src="./images/keepalive_coloros_nightshift.jpg" width="66%">
-
-::::
-
-### 在最近任务界面中锁定海豹核心
-
-进入「最近任务」界面，具体方式视系统而异。通常来说，如果你使用全面屏手势，请从屏幕底部上滑并在中间位置停顿；如果你使用导航键，请点击显示为方形或三条横线的按键。
-
-:::: tabs
-
-== MIUI / HyperOS
-
-长按海豹核心的任务卡片，并点击锁图标。
-
-<img src="./images/keepalive_miui_multitask.jpg" width="66%">
-
-== 鸿蒙系统
-
-将海豹核心的任务卡片下拉并释放，见到卡片右上角出现锁图标即可。
-
-<img src="./images/keepalive_harmonyos_multitask.jpg" width="66%">
-
-== ColorOS
 
 选择海豹核心任务卡片右上角的三个点，并选择「锁定」。
 
