@@ -85,6 +85,10 @@ title: 配置安卓端保活
 
 <img src="./images/keepalive_harmonyos_batterymore.jpg" width="66%">
 
+在「设置」>「隐私」>「权限管理」>「特殊访问权限」>「电池优化」项目找到海豹核心，选择「不允许」。
+
+<img src="./images/keepalive_harmonyos_batteryoptimization.jpg" width="66%">
+
 将海豹核心的任务卡片下拉并释放，见到卡片右上角出现锁图标即可。
 
 <img src="./images/keepalive_harmonyos_multitask.jpg" width="66%">
