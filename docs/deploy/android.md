@@ -55,7 +55,7 @@ title: 安卓端海豹核心常见问题
 
 ## 海豹文件路径
 
-海豹文件无法直接被读取，需要先停止核心，点击「导出数据」按钮，数据导出路径为 `/storage/emulated/0/Documents/com.sealdice.dice/sealdice/`。
+安卓端海豹文件无法直接被读取，需要先停止核心，点击「导出数据」按钮，数据导出路径为 `/storage/emulated/0/Documents/com.sealdice.dice/sealdice/`。
 
 修改完文件后需要点击「导入数据」按钮才可被海豹核心读取。
 
