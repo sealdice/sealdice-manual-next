@@ -21,7 +21,7 @@ export const deployNav = {
     {
       text: "安卓相关",
       items: [
-        { text: "安卓端海豹相关", link: "/deploy/android" },
+        { text: "安卓端海豹核心常见问题", link: "/deploy/android" },
         { text: "配置安卓端保活", link: "/deploy/android_keepalive"},
       ],
     },
@@ -63,7 +63,7 @@ export const deploySidebar = {
     {
       text: "安卓相关",
       items: [
-        { text: "安卓端海豹相关", link: "/deploy/android" },
+        { text: "安卓端海豹核心常见问题", link: "/deploy/android" },
         { text: "配置安卓端保活", 
           link: "/deploy/android_keepalive" ,
           items: [

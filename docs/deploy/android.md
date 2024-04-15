@@ -13,7 +13,7 @@ title: 安卓端海豹核心常见问题
 
 ## 安卓端登录
 
-安装下载的 APK 包，给予适当的权限并[配置安卓端保活](./android_keepalive.html)。
+安装下载的 APK 包，给予适当的权限并[配置安卓端保活](./android_keepalive.md)。
 
 ## 只有一个设备，但登录需要扫码
 
@@ -75,9 +75,9 @@ title: 安卓端海豹核心常见问题
 
 :::: info 添加图片的方法
 
-1. 利用导入导出功能将图片放入海豹的导出文件夹，然后导入。
+1) 利用导入导出功能将图片放入海豹的导出文件夹，然后导入。
 
-2.使用MT管理的的「[APK一键注入文件提供器功能](https://mt2.cn/guide/reverse/inject-documents-provider.html)」 ,配合「添加本地储存」这两个功能访问海豹的私有目录。
+2) 使用MT管理的的「[APK一键注入文件提供器功能](https://mt2.cn/guide/reverse/inject-documents-provider.html)」，配合「添加本地储存」这两个功能访问海豹的私有目录。
 
 :::: 
 
