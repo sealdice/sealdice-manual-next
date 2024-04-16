@@ -669,9 +669,9 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 ### 连接海豹
 
-登录海豹并添加账号，选择「QQ(官方 bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
+登录海豹并添加账号，选择「QQ(官方bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
 
-<img src="./images/platform-qq-official-3.png" alt="连接官方 Bot" width="80%">
+<img src="./images/platform-qq-official-3.png" alt="连接官方Bot" width="80%">
 
 ### 使用海豹
 
