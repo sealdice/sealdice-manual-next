@@ -77,7 +77,7 @@ title: 安卓海豹常见问题
 
 1) 利用导入导出功能将图片放入海豹的导出文件夹，然后导入。
 
-2) 使用 MT 管理器的「[APK 一键注入文件提供器功能](https://mt2.cn/guide/reverse/inject-documents-provider.html)」，配合「添加本地储存」这两个功能访问海豹的私有目录。
+2) 使用 [MT 管理器](https://mt2.cn/download/)的「[APK 一键注入文件提供器功能](https://mt2.cn/guide/reverse/inject-documents-provider.html)」，配合「添加本地储存」这两个功能访问海豹的私有目录。
 
 :::: 
 
