@@ -339,7 +339,7 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 ::: info NapCatQQ
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是基于 官方 NTQQ 实现的 Bot 框架，因此先需要安装官方 QQ，**注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
+[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是基于 官方 NTQQ 实现的 Bot 框架，使用 LLOneBot API，因此先需要安装官方 QQ，**注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
 
 :::
 
@@ -348,6 +348,14 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 已经安装了的可以跳过，如果安装的 QQ 版本过低会出现启动闪退的情况。
 
 :::: tabs 安装 QQ
+
+== Windows
+
+安装 Windows QQ(22741)。
+
+[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)。
+
+::::
 
 == Linux 安装
 
@@ -364,14 +372,6 @@ sudo apt install ./qq.deb
 
 sudo apt install libgbm1 libasound2
 ```
-
-== Windows
-
-安装 Windows QQ(22741)。
-
-[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)。
-
-::::
 
 ### 下载 NapCatQQ
 
@@ -423,11 +423,17 @@ json 配置内容参数解释：
 
 其中有几个重要的设置项需要填写和注意：
 
-- `enableWs`：这是 NapCat 的 ws 正向连接配置，海豹将使用 `true`,即正向 WebSocket 方式连接 NapCatQQ。
+- `enableWs`：这是 NapCat 的 ws 正向连接配置，海豹将使用 `true`，即正向 WebSocket 方式连接 NapCatQQ。
 - `wsPort`：这是正向连接端口，请记下以便后续使用。
 - `messagePostFormat`: 这是消息上报格式，修改为 `string`。
 
 ::: tabs 启动 NapCatQQ
+
+== Windows 启动 
+
+运行 `powershell ./napcat.ps1`， 或者 `napcat.bat`，如果出现乱码，可以尝试运行 `napcat-utf8.ps1` 或 `napcat-utf8.bat`。
+
+*如果出现 powershell 运行不了，以管理员身份打开 powershell，输入 `Set-ExecutionPolicy RemoteSigned`*。
 
 == Linux 启动 
 
@@ -435,15 +441,9 @@ json 配置内容参数解释：
 
 或使用 [NapCatDocker](https://github.com/NapNeko/NapCat-Docker)。
 
-== Windows 启动 
-
-运行 `powershell ./napcat.ps1`, 或者 `napcat.bat`，如果出现乱码，可以尝试运行 `napcat-utf8.ps1` 或 `napcat-utf8.bat`。
-
-*如果出现 powershell 运行不了，以管理员身份打开 powershell，输入 `Set-ExecutionPolicy RemoteSigned`*。
-
 :::
 
-启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.sh -q 1234567`。
+启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.bat -q 1234567`。
 
 ### 海豹连接
 
