@@ -334,6 +334,121 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 - **如果你是在服务器上部署，可能需要使用 [Mem Reduct](https://memreduct.org/mem-reduct-download/) 之类的工具定时清理过高的内存占用。**
 
 :::
+## NapCatQQ
+
+::: info NapCatQQ
+
+[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是基于 官方 NTQQ 实现的 Bot 框架，因此先需要安装官方 QQ，**注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
+
+:::
+
+### 安装 QQ
+
+已经安装了的可以跳过，如果安装的 QQ 版本过低会出现启动闪退的情况。
+
+:::: tabs 安装 QQ
+
+== Linux 安装
+
+[deb x86 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_amd64_01.deb) [deb arm 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_arm64_01.deb)
+
+[rpm x86 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_x86_64_01.rpm) [rpm arm 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_aarch64_01.rpm)
+
+```bash
+sudo apt install ./qq.deb
+```
+
+```bash
+安装QQ的依赖
+sudo apt install libgbm1 libasound2
+```
+
+== Windows
+
+安装 Windows QQ(22741)。
+
+[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)
+
+::::
+
+### 下载 NapCatQQ
+
+前往 [NapCatQQ Release](页面下载最新版本) 页面下载最新版本。
+
+### 启动 NapCatQQ
+
+在启动前，你需要修改 `config/onebot11.json` 内容，并重名为 `onebot11_<你的QQ号>.json` ，如 `onebot11_1234567.json` 。
+
+json 配置内容参数解释：
+
+```json{6-9,22-23}
+{
+  // 是否启用 http 服务，true 为启动，false 为禁用，如果启用，可以通过 http 接口发送消息
+  "enableHttp": false,
+  // http 服务端口
+  "httpPort": 3000,
+  // 是否启用正向 websocket 服务
+  "enableWs": true,
+  // 正向 websocket 服务端口
+  "wsPort": 3001,
+  // 是否启用反向 websocket 服务
+  "enableWsReverse": false,
+  // 反向 websocket 对接的地址，如 ["ws://127.0.0.1:8080/onebot/v11/ws"]
+  "wsReverseUrls": [],
+  // 是否启用 http 上报服务
+  "enableHttpPost": false,
+  // http 上报地址，如 ["http://127.0.0.1:8080/onebot/v11/http"]
+  "httpPostUrls": [],
+  // 是否启用 http 心跳
+  "enableHttpHeart": false,
+  // http 上报密钥，可为空
+  "httpSecret": "",
+  // 消息上报格式，array 为消息组，string 为 cq 码字符串
+  "messagePostFormat": "string",
+  // 是否上报自己发送的消息
+  "reportSelfMessage": false,
+  // 是否开启调试模式，开启后上报消息会携带一个 raw 字段，为原始消息内容
+  "debug": false,
+  // 调用 get_file 接口时如果获取不到 url 则使用 base64 字段返回文件内容
+  "enableLocalFile2Url": true,
+  // ws 心跳间隔，单位毫秒
+  "heartInterval": 30000,
+  // access_token，可以为空
+  "token": ""
+}
+
+```
+
+其中有几个重要的设置项需要填写和注意：
+
+- `enableWs`：这是 NapCat 的 ws 正向连接配置，海豹将使用 `true`,即正向 WebSocket 方式连接 NapCatQQ。
+- `wsPort`：这是正向连接端口，请记下以便后续使用。
+- `messagePostFormat`: 这是消息上报格式，修改为 `string`。
+
+::: tabs 启动 NapCatQQ
+
+== Linux 启动 
+
+运行`napcat.sh`。
+
+或使用 [NapCatDocker](https://github.com/NapNeko/NapCat-Docker)。
+
+== Windows 启动 
+
+运行`powershell ./napcat.ps1`, 或者 `napcat.bat`，如果出现乱码，可以尝试运行`napcat-utf8.ps1` 或 `napcat-utf8.bat`。
+
+*如果出现 powershell 运行不了，以管理员身份打开 powershell，输入 `Set-ExecutionPolicy RemoteSigned`*。
+
+:::
+
+启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.sh -q 1234567`
+
+### 海豹连接
+
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
+
+账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://127.0.0.1:{wsPort}`，如 `ws://127.0.0.1:3001`。
+
 
 ## Shamrock <Badge type="tip" text="v1.4.2" />
 
@@ -667,9 +782,9 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 ### 连接海豹
 
-登录海豹并添加账号，选择「QQ(官方bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
+登录海豹并添加账号，选择「QQ(官方 bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
 
-<img src="./images/platform-qq-official-3.png" alt="连接官方Bot" width="80%">
+<img src="./images/platform-qq-official-3.png" alt="连接官方 Bot" width="80%">
 
 ### 使用海豹
 
