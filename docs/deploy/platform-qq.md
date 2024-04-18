@@ -339,41 +339,13 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 ::: info NapCatQQ
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是基于 官方 NTQQ 实现的 Bot 框架，使用 LLOneBot API，因此先需要安装官方 QQ，**注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
+[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头(没有界面)的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
+
+**注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
 
 :::
 
-### 安装 QQ
-
-已经安装了的可以跳过，如果安装的 QQ 版本过低会出现启动闪退的情况。
-
-:::: tabs 安装 QQ
-
-== Windows
-
-安装 Windows QQ(22741)。
-
-[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)。
-
-== Linux 安装
-
-下载对应版本的QQ。
-
-[deb x86 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_amd64_01.deb) [deb arm 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_arm64_01.deb)
-
-[rpm x86 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_x86_64_01.rpm) [rpm arm 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_aarch64_01.rpm)
-
-```bash
-sudo apt install ./qq.deb
-```
-
-安装QQ的依赖。
-
-```bash
-sudo apt install libgbm1 libasound2
-```
-
-::::
+NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCatQQ](https://github.com/NapNeko/NapCatQQ?tab=readme-ov-file#%E5%AE%89%E8%A3%85) 的 README 安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
 
 ### 下载 NapCatQQ
 
@@ -425,32 +397,16 @@ json 配置内容参数解释：
 
 其中有几个重要的设置项需要填写和注意：
 
-- `enableWs`：这是 NapCat 的 ws 正向连接配置，海豹将使用 `true`，即正向 WebSocket 方式连接 NapCatQQ。
+- `enableWs`：这是 NapCat 的 ws 正向连接配置，你需要将其修改为 `true`，即启用正向 WebSocket 方式连接 NapCatQQ。
 - `wsPort`：这是正向连接端口，请记下以便后续使用。
 
-::: tabs 启动 NapCatQQ
-
-== Windows 启动 
-
-运行 `powershell ./napcat.ps1`， 或者 `napcat.bat`，如果出现乱码，可以尝试运行 `napcat-utf8.ps1` 或 `napcat-utf8.bat`。
-
-*如果出现 powershell 运行不了，以管理员身份打开 powershell，输入 `Set-ExecutionPolicy RemoteSigned`*。
-
-== Linux 启动 
-
-运行 `napcat.sh`。
-
-或使用 [NapCatDocker](https://github.com/NapNeko/NapCat-Docker)。
-
-:::
-
-启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.bat -q 1234567`。
+修改完文件后请根据 [NapCatQQ](https://github.com/NapNeko/NapCatQQ?tab=readme-ov-file#windows-%E5%90%AF%E5%8A%A8) 的教程启动程序，扫码登录即可。
 
 ### 海豹连接
 
-进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11正向WS)」。 
 
-账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://127.0.0.1:{wsPort}`，如 `ws://127.0.0.1:3001`。
+账号填写骰子的 QQ 号，连接地址使用上面记下的 ws 正向服务地址 `ws://127.0.0.1:{wsPort}`，如 `ws://127.0.0.1:3001`。
 
 ## Shamrock <Badge type="tip" text="v1.4.2" />
 
