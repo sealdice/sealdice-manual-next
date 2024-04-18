@@ -385,7 +385,7 @@ sudo apt install libgbm1 libasound2
 
 json 配置内容参数解释：
 
-```json{6-9,22-23}
+```json{6-9}
 {
   // 是否启用 http 服务，true 为启动，false 为禁用，如果启用，可以通过 http 接口发送消息
   "enableHttp": false,
@@ -408,7 +408,7 @@ json 配置内容参数解释：
   // http 上报密钥，可为空
   "httpSecret": "",
   // 消息上报格式，array 为消息组，string 为 cq 码字符串
-  "messagePostFormat": "string",
+  "messagePostFormat": "array",
   // 是否上报自己发送的消息
   "reportSelfMessage": false,
   // 是否开启调试模式，开启后上报消息会携带一个 raw 字段，为原始消息内容
@@ -427,7 +427,6 @@ json 配置内容参数解释：
 
 - `enableWs`：这是 NapCat 的 ws 正向连接配置，海豹将使用 `true`，即正向 WebSocket 方式连接 NapCatQQ。
 - `wsPort`：这是正向连接端口，请记下以便后续使用。
-- `messagePostFormat`: 这是消息上报格式，修改为 `string`。
 
 ::: tabs 启动 NapCatQQ
 
