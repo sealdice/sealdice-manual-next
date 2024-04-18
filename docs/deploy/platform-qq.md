@@ -355,9 +355,9 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 [Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)。
 
-::::
-
 == Linux 安装
+
+下载对应版本的QQ。
 
 [deb x86 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_amd64_01.deb) [deb arm 版本](https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.7_240403_arm64_01.deb)
 
@@ -367,11 +367,13 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 sudo apt install ./qq.deb
 ```
 
-```bash
-安装QQ的依赖
+安装QQ的依赖。
 
+```bash
 sudo apt install libgbm1 libasound2
 ```
+
+::::
 
 ### 下载 NapCatQQ
 
