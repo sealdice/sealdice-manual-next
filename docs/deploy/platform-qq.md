@@ -361,6 +361,7 @@ sudo apt install ./qq.deb
 
 ```bash
 安装QQ的依赖
+
 sudo apt install libgbm1 libasound2
 ```
 
@@ -368,13 +369,13 @@ sudo apt install libgbm1 libasound2
 
 安装 Windows QQ(22741)。
 
-[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)
+[Windows 版本 QQ 下载](https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.9_240403_x64_01.exe)。
 
 ::::
 
 ### 下载 NapCatQQ
 
-前往 [NapCatQQ Release](页面下载最新版本) 页面下载最新版本。
+前往 [NapCatQQ Release](https://github.com/NapNeko/NapCatQQ/releases) 页面下载最新版本。
 
 ### 启动 NapCatQQ
 
@@ -430,19 +431,19 @@ json 配置内容参数解释：
 
 == Linux 启动 
 
-运行`napcat.sh`。
+运行 `napcat.sh`。
 
 或使用 [NapCatDocker](https://github.com/NapNeko/NapCat-Docker)。
 
 == Windows 启动 
 
-运行`powershell ./napcat.ps1`, 或者 `napcat.bat`，如果出现乱码，可以尝试运行`napcat-utf8.ps1` 或 `napcat-utf8.bat`。
+运行 `powershell ./napcat.ps1`, 或者 `napcat.bat`，如果出现乱码，可以尝试运行 `napcat-utf8.ps1` 或 `napcat-utf8.bat`。
 
 *如果出现 powershell 运行不了，以管理员身份打开 powershell，输入 `Set-ExecutionPolicy RemoteSigned`*。
 
 :::
 
-启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.sh -q 1234567`
+启动后扫码登录即可。若你已经成功登录过 QQ，可以加参数 ` -q <你的QQ>` 进行登录，如 `napcat.sh -q 1234567`。
 
 ### 海豹连接
 
@@ -782,9 +783,9 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 ### 连接海豹
 
-登录海豹并添加账号，选择「QQ(官方 bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
+登录海豹并添加账号，选择「QQ(官方bot)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
 
-<img src="./images/platform-qq-official-3.png" alt="连接官方 Bot" width="80%">
+<img src="./images/platform-qq-official-3.png" alt="连接官方Bot" width="80%">
 
 ### 使用海豹
 
