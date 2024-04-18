@@ -334,6 +334,7 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 - **如果你是在服务器上部署，可能需要使用 [Mem Reduct](https://memreduct.org/mem-reduct-download/) 之类的工具定时清理过高的内存占用。**
 
 :::
+
 ## NapCatQQ
 
 ::: info NapCatQQ
@@ -448,7 +449,6 @@ json 配置内容参数解释：
 进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
 
 账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://127.0.0.1:{wsPort}`，如 `ws://127.0.0.1:3001`。
-
 
 ## Shamrock <Badge type="tip" text="v1.4.2" />
 
