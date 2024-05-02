@@ -81,7 +81,7 @@ chmod +x ./sealdice-core && xattr -rd com.apple.quarantine ./sealdice-core
 chmod +x ./lagrange/Lagrange.OneBot && xattr -rd com.apple.quarantine ./lagrange/Lagrange.OneBot
 ```
 
-这两条命令移除海豹核心程序和lagrange的 [隔离属性](https://zhuanlan.zhihu.com/p/611471192)，并给予其足够的运行权限。
+这两条命令移除海豹核心程序和Lagrange的 [隔离属性](https://zhuanlan.zhihu.com/p/611471192)，并给予其足够的运行权限。
 
 随后，运行 `./sealdice-core` 来启动海豹。在浏览器中输入 `localhost:3211` 来访问后台（WebUI）。
 
