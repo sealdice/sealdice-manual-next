@@ -13,6 +13,7 @@ export const deployNav = {
       text: "部署指南",
       items: [
         { text: "快速开始", link: "/deploy/quick-start" },
+        { text: "海豹文件路径", link: "/deploy/about_file" },
         { text: "迁移", link: "/deploy/transfer" },
         { text: "特色功能", link: "/deploy/special_feature" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
@@ -56,6 +57,7 @@ export const deploySidebar = {
       text: "部署指南",
       items: [
         { text: "快速开始", link: "/deploy/quick-start" },
+        { text: "海豹文件路径", link: "/deploy/about_file" },
         { text: "迁移", link: "/deploy/transfer" },
         { text: "特色功能", link: "/deploy/special_feature" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
