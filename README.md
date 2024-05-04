@@ -10,6 +10,18 @@ VitePress 驱动的海豹骰官方使用手册。
 
 如需调整导航栏和侧边栏，则涉及到修改 `docs/.vitepress/theme.ts` 和 `docs/.vitepress/catalogue.ts` 中的配置。
 
+## Lint
+
+提交前请务必使用 markdownlint 进行检查，不满足格式要求的修改无法合并入主仓库。
+
+```shell
+pnpm install
+pnpm run lint:md
+pnpm run lint:md:fix // 检查并进行部分自动修复
+```
+
+对于 VS Code 用户，请使用 [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) 插件获取编辑器警告。这一插件已经被添加到本项目的推荐插件中，只需在打开本项目时按 VS Code 的提示安装即可。
+
 ## 排版
 
 文档排版应当遵循 [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines) 的规范。
@@ -31,7 +43,7 @@ VitePress 驱动的海豹骰官方使用手册。
 
 在紧随以上标题的第一段正文开头，也应该做出文字叙述，例如：
 
-> 从 <Badge type="tip" text="vA.B.C"/> 起，海豹支持某新加入的功能……
+> 从 &lt;Badge type="tip" text="vA.B.C"/&gt; 起，海豹支持某新加入的功能……
 
 ## 本地调试
 
