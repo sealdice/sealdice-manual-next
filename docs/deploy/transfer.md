@@ -1,9 +1,9 @@
 ---
 lang: zh-cn
-title: 迁移
+title: 迁移与上云
 ---
 
-# 迁移
+# 迁移与上云
 
 ::: info 本节内容
 
@@ -62,3 +62,87 @@ find . -type d | xargs chmod 755
 如果在上次导出后产生了新数据，而再次进行导入，会导致新产生的数据被之前导出的数据覆盖，丢失这段时间以来录入的角色卡、Log、修改的自定义文案等海豹内部的数据。
 
 :::
+
+## 上云
+
+### 前情提要
+
+- 使用本教程的前提是你已经购置完成了服务器，且在本地登录成功。
+
+- 本教程以腾讯云为演示，各家云服务商服务器控制台相差不大，找不到地方请询问群友或使用搜索引擎，优先参考对应云服务商的官方指南。
+
+- 本教程默认你的电脑和服务器都为Windows系统，Mac稍后说明。具体版本无要求，它们的差异不大。
+
+- 服务器购买教程可以看[这个视频 P1](https://www.bilibili.com/video/BV1uq4y1c7Xe/)的3:33-10:46，软件不一样但内容类似，本教程提到的其他内容在其中也有呈现。
+
+### 服务器控制台设置
+
+在服务器官网打开控制台。
+
+<img src="./images/cloud_server_1.png" alt="控制台" width="100%">
+
+根据你购买的服务器类型（标准/轻量），进入对应的页面，二者差异不大，这里以轻量应用服务器为例。
+
+<img src="./images/cloud_server_2.png" alt="服务器类型" width="100%">
+
+进入你买的服务器的控制界面，放行 3211 端口。
+
+<img src="./images/cloud_server_3.png" alt="放行端口" width="100%">
+
+<img src="./images/cloud_server_4.png" alt="放行端口" width="100%">
+
+进行密码重置，按提示依次进行，记住密码和用户名。
+
+<img src="./images/cloud_server_5.png" alt="重置密码" width="100%">
+
+<img src="./images/cloud_server_6.png" alt="重置密码" width="100%">
+
+### 远程链接服务器
+
+#### Windows
+
+腾讯云[官方指南](https://cloud.tencent.com/document/product/1207/44579)，可供参考，下面是 Win10 版本操作示范。
+
+按窗户键/ win 键，输入“远程桌面连接”，打开程序。
+
+<img src="./images/cloud_server_7.png" alt="远程桌面连接" width="100%">
+
+点击显示选项。
+
+<img src="./images/cloud_server_8.png" alt="更多选项" width="100%">
+
+<img src="./images/cloud_server_9.png" alt="更多选项" width="100%">
+
+保存好 rdp 文件，后面双击就能连接服务器。
+
+<img src="./images/cloud_server_10.png" alt="rdp文件" width="100%">
+
+输入密码连接服务器。
+
+<img src="./images/cloud_server_11.png" alt="输入密码" width="100%">
+
+之后会弹出几个警告窗口，全部选择确定，可以点击“不再显示”让下次连接不出现。
+
+#### Mac系统
+
+参考教程 [MacOS 远程桌面控制 Windows](https://blog.devhitao.com/2019/03/23/microsoft-remote-desktop-for-mac/)，其他与上述类似。
+
+### 复制海豹并启动
+
+关闭海豹，将海豹文件夹打包成压缩包。
+
+<img src="./images/cloud_server_12.png" alt="压缩文件" width="100%">
+
+简单的复制粘贴，当远程桌面启动之后，你的电脑和服务器某种意义上是一体的，所以它们共享剪贴板。
+
+<img src="./images/cloud_server_13.png" alt="复制" width="45%">
+
+<img src="./images/cloud_server_14.png" alt="粘贴" width="45%">
+
+粘贴完后解压文件夹并打开，如同本地运行一般即可完成上云。
+
+### 远程访问海豹ui
+
+打开浏览器，在地址栏输入`服务器IP:海豹端口`,打开网址。
+
+<img src="./images/cloud_server_15.png" alt="粘贴" width="100%">
