@@ -13,7 +13,7 @@ title: 归档
 
 ## Go-cqhttp / Mirai
 
-::: warning 注意：海豹已于 <Badge type="tip" text="v1.4.5"/> 版本弃用此方案，以下内容归档于 2024 年 5 月 7 日。
+::: warning 注意：海豹已于 <Badge type="warning" text="v1.4.5"/> 版本弃用此方案，以下内容归档于 2024 年 5 月 7 日。
 
 :::
 
@@ -243,7 +243,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ## Chronocat Red 协议
 
-::: warning 注意：海豹已于 <Badge type="tip" text="v1.4.5"/> 版本弃用此方案，以下内容归档于 2024 年 5 月 7 日。
+::: warning 注意：海豹已于 <Badge type="warning" text="v1.4.5"/> 版本弃用此方案，以下内容归档于 2024 年 5 月 7 日。
 
 :::
 

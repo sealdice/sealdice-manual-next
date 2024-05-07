@@ -45,11 +45,11 @@ title: QQ
 - 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot)；
 - Android 手机/模拟器用户见 [Shamrock](#shamrock)（需要 Root）或 [Shamrock LSPatch](#shamrock-lspatch)。
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](#官方机器人)；
-- [Go-cqhttp](/about/archieve.md#go-cqhttp--mirai) 与 QSign 方案已经接近不可用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。之前的资料保留备查。
+- Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。[之前的资料](/about/archieve.md#go-cqhttp--mirai)保留备查。
 
 不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和其它问题，请根据自己的情况选择适合的方式。
 
-::: warning
+::: warning 注意
 
 内置客户端、Lagrange、LLOneBot 和 Napcat 都占用 pc 端协议，不可再次登录 pc 端 QQ。
 
@@ -682,7 +682,7 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 
 [Chronocat](https://chronocat.vercel.app/) 主要分为 0.0.x 的旧版本和 0.2.x 及以上的新版本。
 
-在0.0.x 的旧版本中，海豹主要对接其 Red 协议，海豹从 <Badge type="tip" text="v1.4.3"/> 开始弃用此协议。
+在 0.0.x 的旧版本中，海豹主要对接其 Red 协议，海豹从 <Badge type="tip" text="v1.4.3"/> 开始弃用此协议。  
 
 在目前的新版本中，Chronocat 移除了 Red 协议，提供 Satori 协议的连接支持，使用该版本的见 [Chronocat Satori 协议](#chronocat-satori-协议)。
 
