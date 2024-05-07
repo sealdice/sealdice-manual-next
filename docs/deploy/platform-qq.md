@@ -51,9 +51,9 @@ title: QQ
 
 ::: warning 注意
 
-内置客户端、Lagrange、LLOneBot 和 Napcat 都占用 pc 端协议，不可再次登录 pc 端 QQ。
+内置客户端、Lagrange、LLOneBot 和 Napcat 都占用 PC 端协议。在使用这些连接方式时，不可同时登录 PC 端 QQ，否则将导致挤占下线。
 
-由于官方 QQ 设定，pc 端协议（即以上四种登录方式）每隔30天需要重新登录。
+由于官方 QQ 设定，PC 端协议（即以上四种登录方式）每隔 30 天需要重新登录。
 
 :::
 
