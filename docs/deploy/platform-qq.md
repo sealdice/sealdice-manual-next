@@ -220,7 +220,7 @@ Action 中获取的 Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时�
 
 ### 海豹连接 Lagrange
 
-进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11正向WS)」。
 
 账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://{Host}:{Port}`，如 `ws://127.0.0.1:8081`。
 
@@ -311,7 +311,7 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 支持两种方式与海豹对接：
 
-- 正向连接：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11 正向 WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
+- 正向连接：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11正向WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
 - 反向连接：关闭正向连接开关，打开反向连接，点击「添加」，输入 `ws://127.0.0.1:4001/ws`，在海豹的新添账号选择「QQ(onebot11 反向 WS)」，输入账号。
 
 ::: tip
@@ -326,7 +326,8 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 ::: info NapCatQQ
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头 (没有界面) 的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
+[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头（没有界面）的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。  
+
 
 [NapCat 官方文档](https://napneko.github.io/zh-CN/)
 
