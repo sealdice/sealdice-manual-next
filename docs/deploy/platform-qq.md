@@ -19,7 +19,7 @@ title: QQ
 
 从目前的表现看来，QQ 官方会对账号行为进行检测，来区分出账号是否是正常用户（如不正常的登录方式，以不合理的速度在多地区登录等等）。我们无法得知具体的检测细节，但已证实的是，当 QQ 账号用作机器人并被检测到时，该 QQ 会视为风险账号，被官方予以警告，封禁，临时甚至 **永久冻结** 的惩罚。
 
-尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 [Go-Cqhttp](#go-cqhttp--mirai) 已经基本不可用，而 [Lagrange](#lagrange) 和 [LLOneBot](#llonebot) 等基于 NTQQ 的方案目前比较稳定），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
+尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 [Go-Cqhttp](/docs/about/archieve.md/#go-cqhttp--mirai) 已经**基本不可用**，而 [Lagrange](#lagrange) 和 [LLOneBot](#llonebot) 等基于 NTQQ 的方案目前比较稳定），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
 
 因此，*是否在 QQ 平台搭建这样的非官方机器人取决于你的慎重考虑*。同时，第三方方案的可用性也可能会随时间推移而存在变化，海豹官方无法做出任何保证。
 
@@ -220,7 +220,7 @@ Action 中获取的 Lagrange 依赖 .Net SDK，如果你在运行 Lagrange 时�
 
 ### 海豹连接 Lagrange
 
-进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11正向WS)」。
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
 
 账号填写骰子的 QQ 号，连接地址使用上面记下的 WS 正向服务地址 `ws://{Host}:{Port}`，如 `ws://127.0.0.1:8081`。
 
@@ -311,8 +311,8 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 支持两种方式与海豹对接：
 
-- 正向连接：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11正向WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
-- 反向连接：关闭正向连接开关，打开反向连接，点击「添加」，输入 `ws://127.0.0.1:4001/ws`，在海豹的新添账号选择「QQ(onebot11反向WS)」，输入账号。
+- 正向连接：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11 正向 WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
+- 反向连接：关闭正向连接开关，打开反向连接，点击「添加」，输入 `ws://127.0.0.1:4001/ws`，在海豹的新添账号选择「QQ(onebot11 反向 WS)」，输入账号。
 
 ::: tip
 
@@ -326,7 +326,7 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 ::: info NapCatQQ
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头(没有界面)的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
+[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头 (没有界面) 的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
 
 [NapCat 官方文档](https://napneko.github.io/zh-CN/)
 
@@ -393,7 +393,7 @@ json 配置内容参数解释：
 
 ### 海豹连接
 
-进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11正向WS)」。
+进入海豹 Web UI 的「账号设置」新增链接，选择账号类型「QQ(onebot11 正向 WS)」。
 
 账号填写骰子的 QQ 号，连接地址使用上面记下的 ws 正向服务地址 `ws://127.0.0.1:{wsPort}`，如 `ws://127.0.0.1:3001`。
 
@@ -565,7 +565,7 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ### 连接海豹
 
-在账号添加中，选择「QQ(onebot11正向WS)」，按照下面的格式进行填写：
+在账号添加中，选择「QQ(onebot11 正向 WS)」，按照下面的格式进行填写：
 
 <img src="./images/platform-qq-shamrock-9.png" alt="连接 Shamrock" width="100%">
 
@@ -670,7 +670,7 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 
 :::
 
-建议使用 **反向 ws** 设置。在海豹中，账号添加中选择「QQ(onebot11反向WS)」，填入骰子 QQ 号和要开放的 ws 端口（例如 `:6544`）。
+建议使用 **反向 ws** 设置。在海豹中，账号添加中选择「QQ(onebot11 反向 WS)」，填入骰子 QQ 号和要开放的 ws 端口（例如 `:6544`）。
 
 随后在 Shamrock 中的被动 ws 连接地址中写 `ws://localhost:6544/ws`。
 
@@ -728,7 +728,7 @@ QQ 官方目前已开放了机器人功能，可进入 [QQ 开放平台](https:/
 
 登录海豹并添加账号，选择「QQ(官方机器人)」。填写对应的信息点击连接。你的海豹应该可以正常连接官方机器人运作了！
 
-<img src="./images/platform-qq-official-3.png" alt="连接官方Bot" width="100%">
+<img src="./images/platform-qq-official-3.png" alt="连接官方 Bot" width="100%">
 
 ### 使用海豹
 
