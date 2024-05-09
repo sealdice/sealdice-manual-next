@@ -328,7 +328,6 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头（没有界面）的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。  
 
-
 [NapCat 官方文档](https://napneko.github.io/zh-CN/)
 
 **注意同个账号不能同时登录原版 QQ 和 NapCatQQ**。
