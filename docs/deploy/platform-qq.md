@@ -45,7 +45,7 @@ title: QQ
 - 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot)；
 - Android 手机/模拟器用户见 [Shamrock](#shamrock)（需要 Root）或 [Shamrock LSPatch](#shamrock-lspatch)。
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](#官方机器人)；
-- Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。[之前的资料](/about/archieve.md#go-cqhttp--mirai)保留备查。
+- Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。[之前的资料](/about/archieve.md)保留备查。
 
 不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和其它问题，请根据自己的情况选择适合的方式。
 
