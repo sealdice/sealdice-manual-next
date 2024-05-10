@@ -168,7 +168,7 @@ export const useNav = {
       items: [
         { text: "故事", link: "/use/story" },
         { text: "日志", link: "/use/log" },
-        { text: "娱乐", link: "/use/fun" },
+        { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
       ],
     },
@@ -222,7 +222,7 @@ export const useSidebar = {
       items: [
         { text: "故事", link: "/use/story" },
         { text: "日志", link: "/use/log" },
-        { text: "娱乐", link: "/use/fun" },
+        { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
       ],
     },
