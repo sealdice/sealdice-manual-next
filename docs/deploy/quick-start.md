@@ -40,6 +40,9 @@ title: 快速开始
 - MacOS：提供给 Mac 用户使用，需要使用终端启动。
   - arm64：Apple Silicon 芯片（M1、M2 等）请使用 arm64 版。
   - x64：Intel 芯片请使用 x64 版。
+- Docker：提供给 Docker 部署的镜像。
+  - amd64：提供给 amd64 用户。
+  - arm64：提供给 arm64 用户。
 - Android：提供 Android 的 apk 安装包。
 
 ## 启动
@@ -92,9 +95,23 @@ chmod +x ./lagrange/Lagrange.OneBot && xattr -rd com.apple.quarantine ./lagrange
 
 :::
 
+== Docker
+
+从 1.4.6 起，海豹支持 docker 部署海豹核心，有 arm64 和 amd64 两种镜像。输入以下命令部署：
+
+```bash
+docker run -d --name sealdice -p 3211:3211 ghcr.io/sealdice/sealdice:sha-65327e1
+```
+
+::: warning 容器模式功能限制
+
+Docker 部署的海豹功能有所限制，如无法使用内置客户端登录、无法在线更新等。
+
+:::
+
 == Android
 
-请查看[安卓端登录](./android.html)。
+请查看[安卓端登录](./android.md)。
 
 ::::
 
