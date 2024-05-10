@@ -97,10 +97,10 @@ chmod +x ./lagrange/Lagrange.OneBot && xattr -rd com.apple.quarantine ./lagrange
 
 == Docker
 
-从 1.4.6 起，海豹支持 docker 部署海豹核心，有 arm64 和 amd64 两种镜像。输入以下命令部署：
+海豹支持 docker 部署，有 arm64 和 amd64 两种镜像。输入以下命令部署：
 
 ```bash
-docker run -d --name sealdice -p 3211:3211 ghcr.io/sealdice/sealdice:sha-65327e1
+docker run -d --name sealdice -p 3211:3211 ghcr.io/sealdice/sealdice:latest
 ```
 
 ::: warning 容器模式功能限制
