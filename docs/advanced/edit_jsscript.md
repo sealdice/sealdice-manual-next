@@ -13,7 +13,6 @@ outline: [2,6]
 我们假定你熟悉 JavaScript / TypeScript，编程语言的教学超出了本文档的目的，如果你还不熟悉它们，可以从互联网上寻找到很多优秀的教程。如：
 
 - [MDN | JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
-
 - [现代 JavaScript 教程](https://zh.javascript.info)
 - [JavaScript 教程 - 廖雪峰](https://www.liaoxuefeng.com/wiki/1022910821149312)
 - [JavaScript - 菜鸟教程](https://www.runoob.com/js/js-tutorial.html)
@@ -35,6 +34,7 @@ outline: [2,6]
 - `console` 专门与海豹的日志模块进行交互。
 - `setTimeout/setInterval` 等与事件循环相关的函数。
 - `fetch` 用于网络请求。
+- `atob/btoa` 用于 base64 编解码。
 
 ::: warning 警告
 
@@ -1693,8 +1693,6 @@ seal.setPlayerGroupCard(ctx, tmpl) // 立刻设定当前 ctx 玩家的名片格�
 ```javascript
 seal.newMessage() //返回一个空白的 Message 对象，结构与收到消息的 msg 相同
 seal.createTempCtx(endpoint, msg) // 制作一个 ctx, 需要 msg.MessageType 和 msg.Sender.UserId
-seal.atob(base64String) //返回被解码的 base64 编码
-seal.btoa(string) //将 string 编码为 base64 并返回
 seal.getEndPoints() //返回骰子（应该？）的 EndPoints
 seal.getVersion() //返回一个 map，键值为 version 和 versionCode
 ```
