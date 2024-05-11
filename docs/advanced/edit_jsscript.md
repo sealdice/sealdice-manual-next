@@ -1607,7 +1607,7 @@ seal.replyPerson(ctx, msg, 'something'); //触发者会收到"something"的私�
 seal.replyToSender(ctx, msg, 'something'); //触发者会收到"something"的回复
 ```
 
-###### `memberBan` `memberKick`
+##### `memberBan` `memberKick`
 
 > 是否保留待议
 
@@ -1617,7 +1617,7 @@ seal.memberBan(ctx, groupID, userID, dur) //将群为 groupID，userid 为 userI
 seal.memberKick(ctx, groupID, userID) //将群为 groupID，userid 为 userID 的人踢出那个群
 ```
 
-###### `format` `formatTmpl`
+##### `format` `formatTmpl`
 
 ```javascript
 //注意 format 不会自动 reply，而是 return，所以请套一层 reply
@@ -1629,7 +1629,7 @@ seal.replyToSender(ctx, msg, seal.formatTmpl(unknown))
 //这里等大佬来了再研究
 ```
 
-###### `getCtxProxyFirst` `getCtxProxyAtPos`
+##### `getCtxProxyFirst` `getCtxProxyAtPos`
 
 ```javascript
 cmd.solve = (ctx, msg, cmdArgs) => {
@@ -1648,7 +1648,7 @@ ext.cmdMap['test'] = cmd
 //返回：C（第三个被@的人）的名称。这里其实获取的是 C 玩家的 ctx，具体见 ctx 数据结构。
 ```
 
-###### `vars`
+##### `vars`
 
 ```javascript
 // 要看懂这里你可能需要学习一下初阶豹语
@@ -1658,19 +1658,19 @@ seal.vars.strSet(ctx, `$g群友经典语录`, `我要 Git Blame 一下看看是�
 seal.vars.strGet(ctx, `$g群友经典语录`) //返回 ["我要 Git Blame 一下看看是谁写的",true]
 ```
 
-###### `ext`
+##### `ext`
 
 ```javascript
 //用于注册扩展和定义指令的 api，已有详细示例，不多赘述
 ```
 
-###### `coc`
+##### `coc`
 
 ```javascript
 //用于创建 coc 村规的 api，已有详细示例，不多赘述
 ```
 
-###### `deck`
+##### `deck`
 
 ```javascript
 seal.deck.draw(ctx, `煤气灯`, false) //返回 放回抽取牌堆“煤气灯”的结果
@@ -1678,7 +1678,7 @@ seal.deck.draw(ctx, `煤气灯`, true) //返回 不放回抽取牌堆“煤气�
 seal.deck.reload() //重新加载牌堆
 ```
 
-###### 自定义 TRPG 规则相关
+##### 自定义 TRPG 规则相关
 
 ```javascript
 //这里实在不知道如何举例了
@@ -1688,7 +1688,7 @@ seal.applyPlayerGroupCardByTemplate(ctx, tmpl) // 设定当前 ctx 玩家的自�
 seal.setPlayerGroupCard(ctx, tmpl) // 立刻设定当前 ctx 玩家的名片格式
 ```
 
-###### 其他
+##### 其他
 
 ```javascript
 seal.newMessage() //返回一个空白的 Message 对象，结构与收到消息的 msg 相同
@@ -1759,7 +1759,7 @@ isActive
 playerGet
 ```
 
-###### `ctx.player` 的内容
+##### `ctx.player` 的内容
 
 ```javascript
 // 成员
@@ -1771,7 +1771,7 @@ autoSetNameTemplate
 getValueNameByAlias
 ```
 
-###### `ctx.endPoint` 的内容
+##### `ctx.endPoint` 的内容
 
 ```javascript
 // 成员
