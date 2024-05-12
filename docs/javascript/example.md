@@ -130,7 +130,7 @@ cmdSeal.solve = (ctx, msg, cmdArgs) => {
 
 给消息发送者回应，需要使用 `seal.replyToSender()` 函数，前两个参数和 `solve()` 函数接收的参数一致，第三个参数是你要发送的文本。
 
-发送的文本中，可以包含 [变量](./script.md#变量)（例如`{$t玩家}`），也可以包含 [CQ 码](https://docs.go-cqhttp.org/cqcode)，用来实现回复发送者、@发送者、发送图片、发送分享卡片等功能。
+发送的文本中，可以包含 [变量](../advanced/script.md#变量)（例如`{$t玩家}`），也可以包含 [CQ 码](https://docs.go-cqhttp.org/cqcode)，用来实现回复发送者、@发送者、发送图片、发送分享卡片等功能。
 
 在这个例子中，我们需要获取作为海豹名字的参数，获取不到就使用默认值，随后向消息发送者发送回应。
 
