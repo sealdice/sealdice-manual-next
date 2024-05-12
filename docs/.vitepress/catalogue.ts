@@ -246,12 +246,21 @@ export const advanced = {
         { text: "编写复杂文案", link: "/advanced/edit_complex_custom_text" },
         { text: "编写自定义回复", link: "/advanced/edit_reply" },
         { text: "编写牌堆", link: "/advanced/edit_deck" },
-        { text: "编写 JavaScript 插件", link: "/advanced/edit_jsscript" },
-        { text: "编写新的 TRPG 规则", link: "/advanced/edit_gamesystem" },
         { text: "编写帮助文档", link: "/advanced/edit_helpdoc" },
         { text: "编写敏感词库", link: "/advanced/edit_sensitive_words" },
       ],
     },
+  ],
+}
+
+export const javascript = {
+  text: "插件",
+  base: "",
+  items: [
+    { text: "开始之前", link: "/javascript/before_start" },
+    { text: "API 列表", link: "/javascript/api_list" },
+    { text: "API 参考", link: "/javascript/example" },
+    { text: "编写新的 TRPG 规则", link: "/javascript/gamesystem" },
   ],
 }
 
