@@ -1,9 +1,9 @@
 ---
 lang: zh-cn
-title: API 参考
+title: 常见用法示例
 ---
 
-# API 参考
+# 常见用法示例
 
 ## 创建和注册扩展
 

@@ -250,17 +250,15 @@ export const advanced = {
         { text: "编写敏感词库", link: "/advanced/edit_sensitive_words" },
       ],
     },
-  ],
-}
-
-export const javascript = {
-  text: "插件",
-  base: "",
-  items: [
-    { text: "开始之前", link: "/javascript/before_start" },
-    { text: "API 列表", link: "/javascript/api_list" },
-    { text: "API 参考", link: "/javascript/example" },
-    { text: "编写新的 TRPG 规则", link: "/javascript/gamesystem" },
+    {
+      text: "Javascript 插件",
+      items: [
+        { text: "前言", link: "/advanced/Javascript_start" },
+        { text: "常见用法示例", link: "/advanced/example" },
+        { text: "编写新的 TRPG 规则", link: "/advanced/gamesystem" },
+        { text: "API 列表", link: "/advanced/api_list" },
+      ],
+    },
   ],
 }
 
