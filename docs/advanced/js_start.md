@@ -7,7 +7,7 @@ title: 前言
 
 ::: info 本节内容
 
-本节将介绍 JavaScript 脚本的编写的前置知识，更多内容请看 [API 列表](./api_list.md) 和 [API 参考](./example.md)，请善用侧边栏和搜索，按需阅读文档。
+本节将介绍 JavaScript 脚本的编写的前置知识，更多内容请看 [API 列表](./js_api_list.md) 和 [API 参考](./js_example.md)，请善用侧边栏和搜索，按需阅读文档。
 
 我们假定你熟悉 JavaScript / TypeScript，编程语言的教学超出了本文档的目的，如果你还不熟悉它们，可以从互联网上寻找到很多优秀的教程。如：
 
@@ -34,9 +34,6 @@ title: 前言
 - `setTimeout/setInterval` 等与事件循环相关的函数。
 - `fetch` 用于网络请求。
 - `atob/btoa` 用于 base64 编解码。
-
-具体 API 列表请看 [API 列表](./api_list.md)。
-API 使用例子请看 [常见用法示例](./example.md)。
 
 ::: warning 警告
 
