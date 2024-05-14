@@ -95,6 +95,8 @@ PC 端：在 WebUI 删除账号，删掉 data/default/extra/lagrange-QQ 号文�
 
 安卓端：停止海豹核心，在右上角设置中将「文件同步模式」打开，返回主界面，点击「导出文件」，到显示的目录删掉 data/default/extra/lagrange-QQ 号文件夹，然后点击「导入文件」，删除账号重新添加。
 
+:::
+
 ## Lagrange <Badge type="tip" text="v1.4.2" />
 
 海豹从 <Badge type="tip" text="v1.4.2"/> 开始适配了 Lagrange（拉格兰）的连接。
