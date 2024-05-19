@@ -298,6 +298,88 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 :::
 
+### 通过 `docker compose` 同时部署海豹与 Lagrange
+
+::: info 本小节假定你对 `docker` 与 `docker compose` 有足够的了解。
+
+:::
+
+#### 创建 `docker-compose.yml`
+
+首先，在工作目录下创建 `docker-compose.yml` 文件，并填入以下内容：
+
+```yaml
+services:
+  sealdice:
+    image: ghcr.io/sealdice/sealdice:edge
+    user: <uid>:<gid>
+    ports:
+      - 3211:3211
+    volumes:
+      - ./seal_data:/data
+      - ./seal_backups:/backups
+    restart: unless-stopped
+
+  lagrange:
+    image: ghcr.io/konatadev/lagrange.onebot:edge
+    environment:
+      - UID=<uid>
+      - GID=<gid>
+    volumes:
+      - ./lagrange_data:/app/data
+    restart: unless-stopped
+```
+
+此文件参考了[通过 docker 部署海豹](./quick-start.md)与[通过 docker 部署 Lagrange](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
+
+请将 `<uid>` 与 `<gid>` 替换为实际值，可以通过 `echo $UID` 与 `echo $GID` 或者 `id -u` 与 `id -g` 获取。
+
+此文件将宿主机 3211 端口映射到海豹容器的 3211 端口，如有需要，请根据实际情况自行调整端口映射。
+
+此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 目录挂载到 Lagrange 容器的 `/app/data` 目录，如有需要，请根据实际情况自行调整挂载的目录。
+
+#### 首次启动容器
+
+在工作目录下使用以下命令启动容器：
+
+```bash
+docker compose up -d
+```
+
+首次启动容器后，`docker compose` 会自动创建 `seal_data`、`seal_backups` 以及 `lagrange_data` 目录。
+
+#### Lagrange 容器配置
+
+首先使用以下命令停止容器运行：
+
+```bash
+docker compose stop
+```
+
+随后，按照上文中运行 Lagrange 一节修改 `lagrange_data/appsettings.json` 文件。需要特别注意的是，为了允许海豹容器正常访问 Lagrange 端口，需要将监听地址修改为 `0.0.0.0`：
+
+`appsettings.json`：
+
+```json{5}
+{
+  "Implementations": [
+    {
+      "Type": "ForwardWebSocket",
+      "Host": "0.0.0.0",
+      "Port": 8081,
+      "HeartBeatInterval": 5000,
+      "AccessToken": ""
+    }
+  ]
+}
+```
+
+随后，通过 `docker compose up -d` 重新启动容器。通过 `docker ps` 找到 Lagrange 容器对应的容器 ID 或容器名称（通常为`sealdice-lagrange-1`），然后通过 `docker logs <ID/name>` 访问 Lagrange 容器的日志，在日志中可以看到 QQ 登录二维码，尽快使用手机 QQ 扫码连接。
+
+#### 海豹连接 Lagrange
+
+请参见上文。在填写 WS 正向服务地址 `ws://{Host}:{Port}` 时，`{Host}` 填写为 `lagrange` 即可，`docker compose` 会自动处理主机名解析。`{Port}` 正常填写配置文件中设定的监听地址，在上文的例子中为 8081。
+
 ## LLOneBot <Badge type="tip" text="v1.4.2" />
 
 海豹从 <Badge type="tip" text="v1.4.2"/> 版本开始支持通过 OneBot 协议连接 LLOneBot。
