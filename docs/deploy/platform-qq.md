@@ -330,13 +330,52 @@ services:
     restart: unless-stopped
 ```
 
-此文件参考了[通过 docker 部署海豹](./quick-start.md)与[通过 docker 部署 Lagrange](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
+此文件参考了[通过 docker 部署海豹](./quick-start/#启动)与[通过 docker 部署 Lagrange](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
 
 请将 `<uid>` 与 `<gid>` 替换为实际值，可以通过 `echo $UID` 与 `echo $GID` 或者 `id -u` 与 `id -g` 获取。
 
 此文件将宿主机 3211 端口映射到海豹容器的 3211 端口，如有需要，请根据实际情况自行调整端口映射。
 
 此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 目录挂载到 Lagrange 容器的 `/app/data` 目录，如有需要，请根据实际情况自行调整挂载的目录。
+
+::: details 补充：登录多个 QQ 账号
+
+只需简单修改 `docker-compose.yml` 即可登录到多个 QQ 号：
+
+```yaml
+services:
+  sealdice:
+    image: ghcr.io/sealdice/sealdice:edge
+    user: <uid>:<gid>
+    ports:
+      - 3211:3211
+    volumes:
+      - ./seal_data:/data
+      - ./seal_backups:/backups
+    restart: unless-stopped
+
+  lagrange-1:
+    image: ghcr.io/konatadev/lagrange.onebot:edge
+    environment:
+      - UID=<uid>
+      - GID=<gid>
+    volumes:
+      - ./lagrange_data_1:/app/data
+    restart: unless-stopped
+
+  lagrange-2:
+    image: ghcr.io/konatadev/lagrange.onebot:edge
+    environment:
+      - UID=<uid>
+      - GID=<gid>
+    volumes:
+      - ./lagrange_data_2:/app/data
+    restart: unless-stopped
+```
+
+分别对每个 Lagrange 容器完成下述配置文件修改及扫码登录过程，并在下述海豹连接 Lagrange 填写 WS 地址时，将 `{Host}` 分别填入 `lagrange-1`、`lagrange-2` 即可。
+
+:::
 
 #### 首次启动容器
 
@@ -379,6 +418,17 @@ docker compose stop
 #### 海豹连接 Lagrange
 
 请参见上文。在填写 WS 正向服务地址 `ws://{Host}:{Port}` 时，`{Host}` 填写为 `lagrange` 即可，`docker compose` 会自动处理主机名解析。`{Port}` 正常填写配置文件中设定的监听地址，在上文的例子中为 8081。
+
+#### 更新海豹容器或 Lagrange 容器
+
+运行以下命令：
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+当任一镜像有更新时，以上命令会完成容器更新。
 
 ## LLOneBot <Badge type="tip" text="v1.4.2" />
 
