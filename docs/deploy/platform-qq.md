@@ -374,7 +374,7 @@ docker compose stop
 }
 ```
 
-随后，通过 `docker compose up -d` 重新启动容器。通过 `docker ps` 找到 Lagrange 容器对应的容器 ID 或容器名称（通常为`sealdice-lagrange-1`），然后通过 `docker logs <ID/name>` 访问 Lagrange 容器的日志，在日志中可以看到 QQ 登录二维码，尽快使用手机 QQ 扫码连接。
+随后，通过 `docker compose up -d` 重新启动容器。通过 `docker ps` 找到 Lagrange 容器对应的容器 ID 或容器名称（通常为 `sealdice-lagrange-1`），然后通过 `docker logs <ID/name>` 访问 Lagrange 容器的日志，在日志中可以看到 QQ 登录二维码，尽快使用手机 QQ 扫码连接。
 
 #### 海豹连接 Lagrange
 
