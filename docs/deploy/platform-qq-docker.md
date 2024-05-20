@@ -29,7 +29,6 @@ name: sealdice
 services:
   sealdice:
     image: ghcr.io/sealdice/sealdice:edge
-    user: <uid>:<gid>
     ports:
       - 3211:3211
     volumes:
@@ -39,9 +38,6 @@ services:
 
   lagrange:
     image: ghcr.io/konatadev/lagrange.onebot:edge
-    environment:
-      - UID=<uid>
-      - GID=<gid>
     volumes:
       - ./lagrange_data:/app/data
     restart: unless-stopped
@@ -49,11 +45,15 @@ services:
 
 此文件参考了[通过 docker 部署海豹](./quick-start/#启动)与[通过 docker 部署 Lagrange](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
 
-请将 `<uid>` 与 `<gid>` 替换为实际值，可以通过 `echo $UID` 与 `echo $GID` 或者 `id -u` 与 `id -g` 获取。
-
 此文件将宿主机 3211 端口映射到海豹容器的 3211 端口，如有需要，请根据实际情况自行调整端口映射。
 
 此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 目录挂载到 Lagrange 容器的 `/app/data` 目录，如有需要，请根据实际情况自行调整挂载的目录。
+
+::: warning 注意：在容器内以非 root 用户执行海豹进程可能会导致一些权限问题。
+
+因此，示例文件以 root 用户生成容器进程。后续需要修改 `seal_data`、`seal_backups` 及 `lagrange_data` 目录中的内容（包括 Lagrange 配置文件、海豹数据等）时，需要 root 权限。
+
+:::
 
 ::: details 补充：登录多个 QQ 账号
 
