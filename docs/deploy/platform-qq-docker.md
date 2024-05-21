@@ -40,6 +40,7 @@ services:
     image: ghcr.io/konatadev/lagrange.onebot:edge
     volumes:
       - ./lagrange_data:/app/data
+      - ./seal_data:/data
     restart: unless-stopped
 ```
 
@@ -47,7 +48,7 @@ services:
 
 此文件将宿主机 3211 端口映射到海豹容器的 3211 端口，如有需要，请根据实际情况自行调整端口映射。
 
-此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 目录挂载到 Lagrange 容器的 `/app/data` 目录，如有需要，请根据实际情况自行调整挂载的目录。
+此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 与 `seal_data` 目录分别挂载到 Lagrange 容器的 `/app/data` 与 `/data` 目录。由于通过 QQ 后端发送本地图片时，海豹会将图片**在容器内**的绝对路径传递给 QQ 后端，所以需要将海豹数据也挂载到 Lagrange 容器以使 Lagrange 得以访问图片。如有需要，请根据实际情况自行调整挂载的目录。
 
 ::: warning 注意：在容器内以非 root 用户执行海豹进程可能会导致一些权限问题。
 
@@ -149,7 +150,13 @@ docker compose up -d
 
 当任一镜像有更新时，以上命令会完成容器更新。
 
-## 连接到本地 QQ 后端
+## 连接到宿主机上的 QQ 后端
+
+::: warning 注意：此种部署方式可能不能正常发送本地图片。
+
+由于通过 QQ 后端发送本地图片时，海豹会将图片**在容器内**的绝对路径传递给 QQ 后端。宿主机上的 QQ 后端无法正确解析海豹数据目录的路径，因此可能无法正常发送图片。
+
+:::
 
 首先按照 [QQ](./platform-qq) 一节中的介绍，完成 QQ 后端的配置。
 
