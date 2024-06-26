@@ -720,16 +720,16 @@ if (!ext) {
 (() => {
   // src/index.ts
   const HELP = `群内安价收集 (ak 是アンカー罗马字缩写)
-  注意 ak 后面有空格，“.ak”也可以换成“.安价”
+注意 ak 后面有空格，“.ak”也可以换成“.安价”
 
-  .ak help // 查看帮助
-  .ak # 标题 // 新建一轮分歧并设标题
-  .ak + 选项 // 需要添加的选项的内容
-  .ak - 序号 // 需要移除的选项的序号
-  .ak ? // 列出目前所有选项
-  .ak = // 随机抽取 1 个选项并继续
-  .ak = n // 随机抽取 n 个选项并继续
-  `;
+.ak help // 查看帮助
+.ak # 标题 // 新建一轮分歧并设标题
+.ak + 选项 // 需要添加的选项的内容
+.ak - 序号 // 需要移除的选项的序号
+.ak ? // 列出目前所有选项
+.ak = // 随机抽取 1 个选项并继续
+.ak = n // 随机抽取 n 个选项并继续
+`;
   const STORAGE_KEY = "anchor";
   const OPTION_NUM_PER_PAGE = 15; // 列出所有选项时，每页放多少个选项
   function akNew(ctx, msg, ext, title) {
@@ -805,57 +805,59 @@ ${optStr}`);
     let ext = seal.ext.find("anchor");
     if (!ext) {
       ext = seal.ext.new("anchor", "憧憬少", "1.0.0");
+      
+      const cmdSeal = seal.ext.newCmdItemInfo();
+      cmdSeal.name = "安价";
+      cmdSeal.help = HELP;
+      cmdSeal.solve = (ctx, msg, cmdArgs) => {
+        try {
+          let val = cmdArgs.getArgN(1);
+          switch (val) {
+            case "#": {
+              const title = cmdArgs.getArgN(2);
+              akNew(ctx, msg, ext, title);
+              return seal.ext.newCmdExecuteResult(true);
+            }
+            case "+": {
+              const option = cmdArgs.getArgN(2);
+              akAdd(ctx, msg, ext, option);
+              return seal.ext.newCmdExecuteResult(true);
+            }
+            case "-": {
+              const index = Number(cmdArgs.getArgN(2));
+              akDel(ctx, msg, ext, index);
+              return seal.ext.newCmdExecuteResult(true);
+            }
+            case "?":
+            case "？": {
+              akList(ctx, msg, ext);
+              return seal.ext.newCmdExecuteResult(true);
+            }
+            case "=": {
+              let num = 1;
+              if (cmdArgs.args.length >= 2) {
+                num = Number(cmdArgs.getArgN(2));
+              }
+              akGet(ctx, msg, ext, num);
+              return seal.ext.newCmdExecuteResult(true);
+            }
+            case "help":
+            default: {
+              const ret = seal.ext.newCmdExecuteResult(true);
+              ret.showHelp = true;
+              return ret;
+            }
+          }
+        } catch (error) {
+          seal.replyToSender(ctx, msg, error.Message);
+          return seal.ext.newCmdExecuteResult(true);
+        }
+      };
+      ext.cmdMap["安价"] = cmdSeal;
+      ext.cmdMap["ak"] = cmdSeal;
+
       seal.ext.register(ext);
     }
-    const cmdSeal = seal.ext.newCmdItemInfo();
-    cmdSeal.name = "安价";
-    cmdSeal.help = HELP;
-    cmdSeal.solve = (ctx, msg, cmdArgs) => {
-      try {
-        let val = cmdArgs.getArgN(1);
-        switch (val) {
-          case "#": {
-            const title = cmdArgs.getArgN(2);
-            akNew(ctx, msg, ext, title);
-            return seal.ext.newCmdExecuteResult(true);
-          }
-          case "+": {
-            const option = cmdArgs.getArgN(2);
-            akAdd(ctx, msg, ext, option);
-            return seal.ext.newCmdExecuteResult(true);
-          }
-          case "-": {
-            const index = Number(cmdArgs.getArgN(2));
-            akDel(ctx, msg, ext, index);
-            return seal.ext.newCmdExecuteResult(true);
-          }
-          case "?":
-          case "？": {
-            akList(ctx, msg, ext);
-            return seal.ext.newCmdExecuteResult(true);
-          }
-          case "=": {
-            let num = 1;
-            if (cmdArgs.args.length >= 2) {
-              num = Number(cmdArgs.getArgN(2));
-            }
-            akGet(ctx, msg, ext, num);
-            return seal.ext.newCmdExecuteResult(true);
-          }
-          case "help":
-          default: {
-            const ret = seal.ext.newCmdExecuteResult(true);
-            ret.showHelp = true;
-            return ret;
-          }
-        }
-      } catch (error) {
-        seal.replyToSender(ctx, msg, error.Message);
-        return seal.ext.newCmdExecuteResult(true);
-      }
-    };
-    ext.cmdMap["安价"] = cmdSeal;
-    ext.cmdMap["ak"] = cmdSeal;
   }
   main();
 })();
