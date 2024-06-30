@@ -43,6 +43,7 @@ title: QQ
 
 - 需要比较简单的部署流程，希望资源占用低的，见 [Lagrange](#lagrange) 或 [NapCat](#napcatqq)；
 - 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot)；
+- 通过 docker 部署海豹的，见 [QQ - Docker 中的海豹](./platform-qq-docker)；
 - Android 手机/模拟器用户见 [Shamrock](#shamrock)（需要 Root）或 [Shamrock LSPatch](#shamrock-lspatch)。
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](#官方机器人)；
 - Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。[之前的资料](/about/archieve.md#Go-cqhttp/Mirai)保留备查。
@@ -75,7 +76,7 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
-进入海豹 Web UI 的「账号设置」新增连接，选择账号类型「QQ（内置客户端）」，这也是默认选项，填写 QQ 号：
+进入海豹 Web UI 的「账号设置」新增连接，选择账号类型「QQ(内置客户端)」，这也是默认选项，填写 QQ 号：
 
 <img src="./images/platform-qq-builtin-1.png" alt="内置客户端" width="80%">
 
@@ -84,6 +85,17 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 <img src="./images/platform-qq-builtin-2.png" alt="内置客户端扫码登录" width="40%">
 
 在手机上确认登录以后，等待状态变为「已连接」即可。
+
+::: info 内置客户端 BUG
+
+由于内置客户端的实现不完全，会有莫名其妙的 bug，所以我们推荐有能力的骰主使用手册中的其他方案。
+
+但如果你仍然决定使用「QQ(内置客户端)」，当遇到无法使用时可以尝试以下解决方案：  
+
+- PC 端：删除 `data/default/extra/lagrange-QQ号` 文件夹，重启海豹，删除账号重新添加。
+- 安卓端：停止海豹核心，在右上角设置中将「文件同步模式」打开，返回主界面，点击「导出数据」，到显示的目录删除 `data/default/extra/lagrange-QQ号` 目录，然后点击「导入数据」，删除账号重新添加。
+
+:::
 
 ## Lagrange <Badge type="tip" text="v1.4.2" />
 
@@ -188,7 +200,7 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
-::: warning 警告：保证连接模式匹配
+::: warning 注意：保证连接模式匹配
 
 Lagrange 默认生成的配置文件生成的是 `ReverseWebSocket`（即反向 WebSocket），如果你使用该种连接方式，下文海豹对接时应该选择「OneBot 11 反向 WS」模式。
 
@@ -334,7 +346,7 @@ Lagrange 项目对其配置文件的格式进行过更改。如果你是在 2024
 
 :::
 
-NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCatQQ](https://github.com/NapNeko/NapCatQQ?tab=readme-ov-file#%E5%AE%89%E8%A3%85) 的 README 安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
+NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCatQQ](https://napneko.github.io/zh-CN/guide/getting-started#%E5%AE%89%E8%A3%85-qq) 的手册安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
 
 ### 下载 NapCatQQ
 
@@ -346,50 +358,67 @@ NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需�
 
 json 配置内容参数解释：
 
-```json{6-9}
+```json{18-25}
 {
-  // 是否启用 http 服务，true 为启动，false 为禁用，如果启用，可以通过 http 接口发送消息
-  "enableHttp": false,
-  // http 服务端口
-  "httpPort": 3000,
-  // 是否启用正向 websocket 服务
-  "enableWs": true,
-  // 正向 websocket 服务端口
-  "wsPort": 3001,
-  // 是否启用反向 websocket 服务
-  "enableWsReverse": false,
-  // 反向 websocket 对接的地址，如 ["ws://127.0.0.1:8080/onebot/v11/ws"]
-  "wsReverseUrls": [],
-  // 是否启用 http 上报服务
-  "enableHttpPost": false,
-  // http 上报地址，如 ["http://127.0.0.1:8080/onebot/v11/http"]
-  "httpPostUrls": [],
-  // 是否启用 http 心跳
-  "enableHttpHeart": false,
-  // http 上报密钥，可为空
-  "httpSecret": "",
-  // 消息上报格式，array 为消息组，string 为 cq 码字符串
+  "http": {
+    // 是否启用http服务, true为启动，false为禁用
+    "enable": false,
+    // HTTP服务监听的 ip 地址，为空则监听所有地址
+    "host": "",
+    // http服务端口
+    "port": 3000,
+    // http上报密钥，可为空
+    "secret": "",
+    // 是否启用http心跳
+    "enableHeart": false,
+    // 是否启用http上报服务
+    "enablePost": false,
+    // http上报地址, 如["http://127.0.0.1:8080/onebot/v11/http"]
+    "postUrls": []
+  },
+  "ws": {
+    // 是否启用正向websocket服务
+    "enable": true,
+    // 正向websocket服务监听的 ip 地址，为空则监听所有地址
+    "host": "",
+    // 正向websocket服务端口
+    "port": 3001
+  },
+  "reverseWs": {
+    // 是否启用反向websocket服务
+    "enable": false,
+    // 反向websocket对接的地址, 如["ws://127.0.0.1:8080/onebot/v11/ws"]
+    "urls": []
+  },
+  "GroupLocalTime": {
+    "Record": false,//是否开启本地群聊时间记录
+    "RecordList": []//开启全部群 ["-1"]  单个群配置 ["11111"] 多个群 ["1","2","3"]
+  },
+  // 是否开启调试模式，开启后上报消息会携带一个raw字段，为原始消息内容
+  "debug": false,
+  // ws心跳间隔，单位毫秒
+  "heartInterval": 30000,
+  // 消息上报格式，array为消息组，string为cq码字符串
   "messagePostFormat": "array",
+  // 是否将本地文件转换为URL，如果获取不到url则使用base64字段返回文件内容
+  "enableLocalFile2Url": true,
+  // 音乐签名URL，用于处理音乐相关请求
+  "musicSignUrl": "",
   // 是否上报自己发送的消息
   "reportSelfMessage": false,
-  // 是否开启调试模式，开启后上报消息会携带一个 raw 字段，为原始消息内容
-  "debug": false,
-  // 调用 get_file 接口时如果获取不到 url 则使用 base64 字段返回文件内容
-  "enableLocalFile2Url": true,
-  // ws 心跳间隔，单位毫秒
-  "heartInterval": 30000,
   // access_token，可以为空
   "token": ""
 }
-
 ```
 
 其中有几个重要的设置项需要填写和注意：
 
-- `enableWs`：这是 NapCat 的 ws 正向连接配置，你需要将其修改为 `true`，即启用正向 WebSocket 方式连接 NapCatQQ。
-- `wsPort`：这是正向连接端口，请记下以便后续使用。
+- `ws:enable`：这是 NapCat 的 ws 正向连接配置，你需要将其修改为 `true`，即启用正向 WebSocket 方式连接 NapCatQQ。
+- `ws:port`：这是正向连接端口，请记下以便后续使用。
 
-修改完文件后请根据 [NapCatQQ](https://github.com/NapNeko/NapCatQQ?tab=readme-ov-file#windows-%E5%90%AF%E5%8A%A8) 的教程启动程序，扫码登录即可。
+也可以使用 WebUI 进行配置，具体请看 [NapCat 手册](https://napneko.github.io/zh-CN/guide/config)。
+
+修改完文件后请根据 [NapCatQQ](https://napneko.github.io/zh-CN/guide/getting-started#%E5%90%AF%E5%8A%A8) 的教程启动程序，扫码登录即可。
 
 ### 海豹连接
 
@@ -407,7 +436,7 @@ Shamrock 已于 2024 年 4 月 20 日归档，将不再进行更新。
 
 :::
 
-::: danger 危险：*`1.1.0` 及以上版本的 Shamrock 不适用以下教程
+::: danger 危险：`1.1.0` 及以上版本的 Shamrock 不适用以下教程
 
 2024 年 4 月 2 日，OpenShamrock 开发组于 [Discussion#272](https://github.com/whitechi73/OpenShamrock/discussions/272#discussion-6300354) 宣布，Shamrock 将会从 `1.1.0` 版本起弃用 OneBot V11 支持，迁移至新的 [Kritor](https://github.com/KarinJS/kritor) 协议。
 

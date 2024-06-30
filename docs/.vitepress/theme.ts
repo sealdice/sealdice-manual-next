@@ -1,5 +1,5 @@
-import { about, advanced, config, deploySidebar, deployNav, useNav, useSidebar } from "./catalogue";
-import type { DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from 'vitepress';
+import { about, advanced, config, deployNav, deploySidebar, useNav, useSidebar } from "./catalogue";
 
 export const theme: DefaultTheme.Config = {
   // https://vitepress.dev/reference/default-theme-config
@@ -8,6 +8,10 @@ export const theme: DefaultTheme.Config = {
     dark: '/images/sealdice-dark.svg',
   },
   nav: [
+    {
+      text: "官网",
+      link: "https://dice.weizaima.com/",
+    },
     {
       text: "首页",
       link: "/",
@@ -27,6 +31,7 @@ export const theme: DefaultTheme.Config = {
   } as DefaultTheme.SidebarMulti,
   outline: {
     label: '页面导航',
+    level: [2, 3],
   },
   socialLinks: [
     { icon: 'github', link: 'https://github.com/sealdice' }

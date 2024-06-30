@@ -30,6 +30,7 @@ export const deployNav = {
       text: "连接平台",
       items: [
         { text: "QQ", link: "/deploy/platform-qq" },
+        { text: "QQ - Docker 中的海豹", link: "/deploy/platform-qq-docker" },
         { text: "KOOK", link: "/deploy/platform-kook" },
         { text: "DoDo", link: "/deploy/platform-dodo" },
         { text: "Discord", link: "/deploy/platform-discord" },
@@ -96,9 +97,9 @@ export const deploySidebar = {
             { text: "Shamrock LSPatch", link: "/deploy/platform-qq#shamrock-lspatch" },
             { text: "Chronocat", link: "/deploy/platform-qq#chronocat" },
             { text: "官方机器人", link: "/deploy/platform-qq#%E5%AE%98%E6%96%B9%E6%9C%BA%E5%99%A8%E4%BA%BA" },
-            { text: "Go-cqhttp / Mirai", link: "/deploy/platform-qq#go-cqhttp-mirai" },
           ]
         },
+        { text: "QQ - Docker 中的海豹", link: "/deploy/platform-qq-docker" },
         { text: "KOOK", link: "/deploy/platform-kook" },
         { text: "DoDo", link: "/deploy/platform-dodo" },
         { text: "Discord", link: "/deploy/platform-discord" },
@@ -129,11 +130,12 @@ export const config = {
     {
       text: "综合设置",
       items: [
+        { text: "基础设置", link: "/config/basic" },
         { text: "黑白名单", link: "/config/ban" },
         { text: "备份", link: "/config/backup" },
-        { text: "自动退出不活跃群组", link: "/config/quit_grp_auto" },
       ],
     },
+    { text: "辅助功能", link: "/config/utilities" },
   ],
 }
 
@@ -168,7 +170,7 @@ export const useNav = {
       items: [
         { text: "故事", link: "/use/story" },
         { text: "日志", link: "/use/log" },
-        { text: "娱乐", link: "/use/fun" },
+        { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
       ],
     },
@@ -222,7 +224,7 @@ export const useSidebar = {
       items: [
         { text: "故事", link: "/use/story" },
         { text: "日志", link: "/use/log" },
-        { text: "娱乐", link: "/use/fun" },
+        { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
       ],
     },
@@ -247,10 +249,17 @@ export const advanced = {
         { text: "编写复杂文案", link: "/advanced/edit_complex_custom_text" },
         { text: "编写自定义回复", link: "/advanced/edit_reply" },
         { text: "编写牌堆", link: "/advanced/edit_deck" },
-        { text: "编写 JavaScript 插件", link: "/advanced/edit_jsscript" },
-        { text: "编写新的 TRPG 规则", link: "/advanced/edit_gamesystem" },
         { text: "编写帮助文档", link: "/advanced/edit_helpdoc" },
         { text: "编写敏感词库", link: "/advanced/edit_sensitive_words" },
+      ],
+    },
+    {
+      text: "Javascript 插件",
+      items: [
+        { text: "前言", link: "/advanced/js_start" },
+        { text: "常见用法示例", link: "/advanced/js_example" },
+        { text: "编写新的 TRPG 规则", link: "/advanced/js_gamesystem" },
+        { text: "API 列表", link: "/advanced/js_api_list" },
       ],
     },
   ],
