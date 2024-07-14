@@ -61,14 +61,7 @@ title: 基础设置
 
 仅 QQ 平台，关闭后不回应戳一戳。
 
-由于最新版 NTQQ 暂不支持戳一戳，所以 内置客户端/Lagrange/NapCat/LLOneBot 等基于 NTQQ 的连接方案均无法回应戳一戳。
-
-::: warning 注意：对接内置客户端、Lagrange、LLOneBot 和 Napcat 等 PC 端协议时最好关闭 `戳一戳` 功能
-
-由于内置客户端、Lagrange、LLOneBot 和 Napcat **并未完全实现**戳一戳功能。请使用上述客户端连接 QQ 的用户关闭海豹核心后台位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错和麻烦。
-
-<img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
-
+由于最新版 NTQQ 暂不支持戳一戳，所以 内置客户端/Lagrange/NapCat/LLOneBot 等基于 NTQQ 的连接方案均无法回应戳一戳，同时建议使用上述客户端连接 QQ 的用户**关闭此开关**，以免产生不必要的报错和麻烦。
 :::
 
 ## 限制 .text 指令
