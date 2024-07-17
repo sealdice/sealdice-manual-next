@@ -273,7 +273,7 @@ Go-cqhttp 的开发者已无力维护项目（见 [go-cqhttp/issue#2471](https:/
 
 ## Shamrock <Badge type="tip" text="v1.4.2" />
 
-::: warning 注意：以下内容归档于 2024 年 7 月 17 日。
+::: warning 注意：已发现 QQ 客户端针对 Shamrock 增加了检测机制。在新版 QQ 客户端上，Shamrock 已无法使用。以下内容归档于 2024 年 7 月 17 日。
 
 :::
 
@@ -451,7 +451,7 @@ Root 即 Android 的超级用户权限，如对 QQ 应用进行注入等的危�
 
 ## Shamrock LSPatch <Badge type="tip" text="v1.4.2" />
 
-::: warning 注意：以下内容归档于 2024 年 7 月 17 日。
+::: warning 注意：已发现 QQ 客户端针对 Shamrock 增加了检测机制。在新版 QQ 客户端上，Shamrock 已无法使用。以下内容归档于 2024 年 7 月 17 日。
 
 :::
 
