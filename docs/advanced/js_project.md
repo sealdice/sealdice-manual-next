@@ -90,7 +90,7 @@ pnpm run build
   - `seal.d.ts`：类型文件，海豹核心提供的扩展 API。
 - `header.txt`：扩展头信息，会在编译时自动加到目标文件头部；
 - `package.json`：命令 `npm install` 时就在安装这个文件里面所指示的依赖包；
-- `tsconfig.json`：typescript 的配置文件。
+- `tsconfig.json`：TypeScript 的配置文件。
 
 ## 其他问题
 
@@ -106,7 +106,7 @@ pnpm run build
 
 `types/seal.d.ts` 文件中维护了海豹提供的 API，但目前来说维护的并不完全。如果你发现有一些存在的 API 未被提示，可以手动在 `types/seal.d.ts` 补上来解决报错。
 
-*有时 `seal.d.ts` 会有更新，可以去模板项目仓库看看有没有最新的，有的话可以替换到你的项目中。也非常欢迎你向模板仓库提 PR 来帮忙完善。*
+**有时 `seal.d.ts` 会有更新，可以去模板项目仓库看看有没有最新的，有的话可以替换到你的项目中。也非常欢迎你向模板仓库提 PR 来帮忙完善。**
 
 ### 默认输出的插件代码是压缩过的，如何尽量保持产物的可读性？
 
