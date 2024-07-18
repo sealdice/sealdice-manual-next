@@ -234,6 +234,6 @@ VS Code 可以安装 [SealDice Snippets](https://marketplace.visualstudio.com/it
 
 ### 我不会 JavaScript，海豹支持其他编程语言编写插件吗？
 
-这个问题分为两个部分，如果你所说的其他编程语言为 **python、lua 等与 JavaScript 无关的编程语言，那么目前是无法使用这些语言编写海豹插件的**。如果你有一些其它骰系的插件（比如一些 lua 插件），你只能通过按原逻辑重写为海豹 JavaScript 插件的方式来在海豹中使用。
+这个问题分为两个部分，如果你所说的其他编程语言为 **Python、Lua 等与 JavaScript 无关的编程语言，那么目前是无法使用这些语言编写海豹插件的**。如果你有一些其它骰系的插件（比如一些 Lua 插件），你只能通过按原逻辑重写为海豹 JavaScript 插件的方式来在海豹中使用。
 
 但是有些编程语言是可以编译为 JavaScript 的，典型的像 TypeScript、CoffeeScript。这些语言在编写时使用它们自己，最后只要编译成 JavaScript 就可以在海豹中使用了。

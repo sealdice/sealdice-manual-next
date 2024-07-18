@@ -11,7 +11,7 @@ title: API 列表
 
 更好的方式是参考海豹提供的 [seal.d.ts](https://raw.githubusercontent.com/sealdice/sealdice-js-ext-template/master/types/seal.d.ts) 文件。（但同样存在缺失）
 
-如果你需要最准确的内容，当前只能查阅海豹源码中的 [dice_jsvm.go](https://github.com/sealdice/sealdice-core/blob/master/dice/dice_jsvm.go)。
+如果你需要最准确的内容，当前只能查阅海豹源码。主要查看 [dice_jsvm.go](https://github.com/sealdice/sealdice-core/blob/master/dice/dice_jsvm.go)，还有一些 API 以结构体方法的形式存在。
 
 :::
 
