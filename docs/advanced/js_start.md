@@ -23,7 +23,7 @@ title: 前言
 ## 快速开始
 
 > **JavaScript**（**JS**）虽然作为 Web 页面中的脚本语言被人所熟知，但是它也被用到了很多 [非浏览器环境](https://zh.wikipedia.org/wiki/JavaScript#其他) 中，例如 [Node.js](https://developer.mozilla.org/zh-CN/docs/Glossary/Node.js)、[Apache CouchDB](https://couchdb.apache.org/)、[Adobe Acrobat](https://opensource.adobe.com/dc-acrobat-sdk-docs/acrobatsdk/) 等。
-<!-- > <p style="text-align:right"><i>—— 来自 MDN 文档</i></p> -->
+> <p style="text-align:right"><i>—— 来自 MDN 文档</i></p> <!-- markdownlint-disable-line MD033 -->
 
 海豹的 JS 插件就是运行在一个非浏览器环境中—— [goja](https://github.com/dop251/goja) 作为 JS 脚本引擎所提供的环境，该环境目前支持了 ES6 基本上全部的特性，包括 `async/await`、`promise` 和 `generator` 等异步编程友好的特性。
 
@@ -229,3 +229,11 @@ console 打印出来的东西不仅会在控制台中出现，在日志中也会
 ## 一些有帮助的资源
 
 VS Code 可以安装 [SealDice Snippets](https://marketplace.visualstudio.com/items?itemName=yxChangingSelf.sealdice-snippets) 插件，提供了一些常见代码片段，帮助快速生成模板代码。
+
+## 其他问题
+
+### 我不会 JavaScript，海豹支持其他编程语言编写插件吗？
+
+这个问题分为两个部分，如果你所说的其他编程语言为 **python、lua 等与 JavaScript 无关的编程语言，那么目前是无法使用这些语言编写海豹插件的**。如果你有一些其它骰系的插件（比如一些 lua 插件），你只能通过按原逻辑重写为海豹 JavaScript 插件的方式来在海豹中使用。
+
+但是有些编程语言是可以编译为 JavaScript 的，典型的像 TypeScript、CoffeeScript。这些语言在编写时使用它们自己，最后只要编译成 JavaScript 就可以在海豹中使用了。
