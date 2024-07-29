@@ -207,6 +207,8 @@ journalctl -xe -u sealdice.service # 查看日志
 
 你还可以使用命令更新：执行 `.master checkupdate`，此指令需要 Master 权限，具体请看 [Master 管理](../config/basic.md#master-管理)。
 
+如果你采用了任何自动拉起进程的手段，包括但不限于 Linux 系统的 systemd 等，**切勿**使用自动更新。请稳妥地停止进程后进行手动替换更新。
+
 ### 手动更新
 
 从海豹官网下载全新的安装包，解压后请勿运行，直接覆盖替换旧版本海豹，然后启动海豹即可。
@@ -219,12 +221,6 @@ journalctl -xe -u sealdice.service # 查看日志
 
 ### 安卓豹更新
 
-安卓版海豹核心无法使用以上方法进行更新，你可以直接下载新版本海豹进行安装，他会自动替换旧版本海豹核心。
+安卓端海豹核心无法使用以上方法进行更新，你可以直接下载新版本海豹进行安装，会自动替换旧版本海豹核心。
 
-### Docker 更新 <Badge type="tip" text="v1.5.0"/>
-
-运行以下命令：
-
-```bash
-docker pull ghcr.io/sealdice/sealdice:edge
-```
+更新前请「导出数据」以备份数据。
