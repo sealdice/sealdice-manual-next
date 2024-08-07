@@ -3,10 +3,10 @@ title: 部署
 index: false
 ---
 - 基础知识
-  - [如何正确提问](./newbie_question.md)
-  - [如何高效学习](./newbie_learn.md)
-  - [计算机小白常见问题](./newbie_faq.md)
-  - [名词/术语速查表](./newbie_terms)
+  - [如何正确提问](../about/archieve-manual.md#如何正确提问)
+  - [如何高效学习](../about/archieve-manual.md#如何高效学习)
+  - [计算机小白常见问题](../about/archive-manual/#计算机小白常见问题)
+  - [名词/术语速查表](././terms)
 - 部署指南
   - [快速开始](./quick-start.md)
   - [迁移](./transfer.md)
