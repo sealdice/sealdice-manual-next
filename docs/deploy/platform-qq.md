@@ -117,6 +117,14 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 海豹从 <Badge type="tip" text="v1.4.2"/> 开始适配了 Lagrange（拉格兰）的连接。
 
+::: warning 注意：对接 Lagrange 最好关闭 `戳一戳` 功能
+
+由于 Lagrange **并未完全实现**戳一戳功能。请使用上述客户端连接 QQ 的用户关闭海豹核心后台位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错和麻烦。
+
+<img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
+
+:::
+
 ::: info Lagrange
 
 [Lagrange](https://github.com/KonataDev/Lagrange.Core)（拉格兰）是一个 NTQQ 协议相关的开源项目。其包括目前实现了 Linux NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 Api 的 Lagrange.Onebot 两部分。

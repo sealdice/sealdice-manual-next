@@ -69,6 +69,14 @@ title: 基础设置
 
 内置客户端、<Badge type="tip" text="6e350b0" /> 之前的 Lagrange、<Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot 和 <Badge type="tip" text="v1.6.7" /> 之前的 Napcat 等基于 NTQQ 的连接方案均**无法使用**戳一戳，建议使用上述客户端连接 QQ 的用户及时更新或**关闭此开关**，以免产生不必要的报错和麻烦。
 
+::: warning 注意：对接内置客户端、Lagrange、LLOneBot 和 Napcat 等 PC 端协议时最好关闭 `戳一戳` 功能
+
+由于内置客户端、Lagrange、LLOneBot 和 Napcat **并未完全实现**戳一戳功能。请使用上述客户端连接 QQ 的用户关闭海豹核心后台位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错和麻烦。
+
+<img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
+
+:::
+
 ## 限制 .text 指令
 
 默认开启。开启后只有 Master 和信任用户可使用 [`.text`](../use/fun.md#text-文本模板测试) 指令。如果你不了解这个指令，一定要开启。
