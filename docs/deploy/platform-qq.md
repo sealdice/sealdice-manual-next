@@ -19,7 +19,7 @@ title: QQ
 
 从目前的表现看来，QQ 官方会对账号行为进行检测，来区分出账号是否是正常用户（如不正常的登录方式，以不合理的速度在多地区登录等等）。我们无法得知具体的检测细节，但已证实的是，当 QQ 账号用作机器人并被检测到时，该 QQ 会视为风险账号，被官方予以警告，封禁，临时甚至 **永久冻结** 的惩罚。
 
-尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 [Go-Cqhttp](/about/archieve.md#Go-cqhttp/Mirai) 已经**基本不可用**，而 [Lagrange](#lagrange) 和 [LLOneBot](#llonebot) 等基于 NTQQ 的方案目前比较稳定），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
+尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 Go-Cqhttp 已经**基本不可用**，而 [Lagrange](#lagrange) 和 [LLOneBot](#llonebot) 等基于 NTQQ 的方案目前比较稳定），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
 
 因此，*是否在 QQ 平台搭建这样的非官方机器人取决于你的慎重考虑*。同时，第三方方案的可用性也可能会随时间推移而存在变化，海豹官方无法做出任何保证。
 
@@ -45,15 +45,23 @@ title: QQ
 - 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot)；
 - 通过 docker 部署海豹的，见 [QQ - Docker 中的海豹](./platform-qq-docker)；
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](#官方机器人)；
-- Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。[之前的资料](/about/archieve.md#Go-cqhttp/Mirai)保留备查。
+- Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。
 
 不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和其它问题，请根据自己的情况选择适合的方式。
 
-::: warning 注意：PC 端 QQNT 协议框架对 `戳一戳` 功能的实现
+::: warning 注意：对接基于 NTQQ PC 端协议的 QQ 方案时，注意对方是否支持 `戳一戳` 功能
 
-由于内置客户端、<Badge type="tip" text="6e350b0" /> 之前的 Lagrange、<Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot 和 <Badge type="tip" text="v1.6.7" /> 之前的 Napcat **无法使用**戳一戳功能。请使用上述客户端连接 QQ 的用户请注意自己版本的框架是否支持戳一戳功能，若不支持请及时更新或关闭海豹核心后台位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错和麻烦。
+内置客户端/Lagrange、LLOneBot 和 Napcat 等基于 NTQQ PC 的 QQ 方案，在旧版本中由于 NTQQ 旧协议本身不支持的原因，缺失该功能。
 
-<img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
+请使用：
+
+- 海豹版本 <Badge type="tip" text="v1.4.6" /> 之前的内置客户端
+- <Badge type="tip" text="6e350b0" /> 之前的 Lagrange
+- <Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot
+- <Badge type="tip" text="v1.6.7" /> 之前的 Napcat
+- ……
+
+等方案的用户及时更新或**关闭此开关**（位于 `综合设置` - `基本设置`），以免产生不必要的报错信息。
 
 :::
 
