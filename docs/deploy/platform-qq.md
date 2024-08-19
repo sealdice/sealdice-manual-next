@@ -49,9 +49,19 @@ title: QQ
 
 不同的对接方式适应不同的情况，可能会存在途径特有的功能缺失和其它问题，请根据自己的情况选择适合的方式。
 
-::: warning 注意：PC 端 QQNT 协议框架对 `戳一戳` 功能的实现
+::: warning 注意：对接基于 NTQQ PC 端协议的 QQ 方案时，注意对方是否支持 `戳一戳` 功能
 
-由于<Badge type="tip" text="6e350b0" /> 之前的 Lagrange、<Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot 和 <Badge type="tip" text="v1.6.7" /> 之前的 Napcat **无法使用**戳一戳功能。请使用上述客户端连接 QQ 的用户请注意自己版本的框架是否支持戳一戳功能，若不支持请及时更新或关闭海豹核心后台位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错和麻烦。
+内置客户端/Lagrange、LLOneBot 和 Napcat 等基于 NTQQ PC 的 QQ 方案，在旧版本中由于 NTQQ 旧协议本身不支持的原因，缺失该功能。
+
+请使用：
+
+- 海豹版本 <Badge type="tip" text="v1.4.6" /> 之前的内置客户端
+- <Badge type="tip" text="6e350b0" /> 之前的 Lagrange
+- <Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot
+- <Badge type="tip" text="v1.6.7" /> 之前的 Napcat
+- ……
+
+等方案的用户及时更新或**关闭**位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错信息。
 
 <img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
 
@@ -133,9 +143,9 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 ::: info Lagrange
 
-[Lagrange](https://github.com/KonataDev/Lagrange.Core)（拉格兰）是一个 NTQQ 协议相关的开源项目。其包括目前实现了 Linux NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 Api 的 Lagrange.Onebot 两部分。
+[Lagrange](https://github.com/KonataDev/Lagrange.Core)（拉格兰）是一个 NTQQ 协议相关的开源项目。其包括目前实现了 Linux NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 API 的 Lagrange.Onebot 两部分。
 
-与 GoCqhttp 类似，Lagrange 可以很方便的在多个平台（Windows、Linux、Mac）部署，海豹核心可以对接其提供的 OneBot-V11 Api 来提供 QQ 骰子服务。
+与 GoCqhttp 类似，Lagrange 可以很方便的在多个平台（Windows、Linux、Mac）部署，海豹核心可以对接其提供的 OneBot-V11 API 来提供 QQ 骰子服务。
 
 :::
 
@@ -163,7 +173,7 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 ::: warning 使用此方案的用户请注意不要随意*更新* QQ 客户端。
 
-由于 QQ 客户端检测机制的变化，更新 QQ 客户端后可能导致方案不可用，并且更新后需要重新安装登录框架，所以不建议用户随意更新 QQ客户端。
+由于 QQ 客户端检测机制的变化，更新 QQ 客户端后可能导致方案不可用，并且更新后需要重新安装登录框架，所以不建议用户随意更新 QQ 客户端。
 
 :::
 
@@ -202,7 +212,7 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 ::: warning 使用此方案的用户请注意不要随意*更新* QQ 客户端。
 
-由于 QQ 客户端检测机制的变化，更新 QQ 客户端后可能导致方案不可用，并且更新后需要重新安装登录框架，所以不建议用户随意更新 QQ客户端。
+由于 QQ 客户端检测机制的变化，更新 QQ 客户端后可能导致方案不可用，并且更新后需要重新安装登录框架，所以不建议用户随意更新 QQ 客户端。
 
 :::
 
@@ -224,9 +234,9 @@ NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需�
 
 从 <Badge type="tip" text="v1.4.5"/> 开始适配了与 Chronocat 的 Satori 协议连接。
 
-#### 按照 Chronocat
+#### 安装 Chronocat
 
-请按照 [官方手册](https://chronocat.vercel.app/guide/install/shell)安装 Chronocat。
+请按照 [官方手册](https://chronocat.vercel.app/guide/install/shell) 安装 Chronocat。
 
 #### Chronocat Satori 协议 <Badge type="tip" text="v1.4.5" />
 
