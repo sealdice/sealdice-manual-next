@@ -37,8 +37,8 @@ importers:
         specifier: ^1.3.4
         version: 1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0)
       vitepress-plugin-mermaid:
-        specifier: ^2.0.16
-        version: 2.0.16(mermaid@10.9.1)(vitepress@1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0))
+        specifier: ^2.0.17
+        version: 2.0.17(mermaid@10.9.1)(vitepress@1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0))
       vitepress-plugin-tabs:
         specifier: ^0.5.0
         version: 0.5.0(vitepress@1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0))(vue@3.4.38)
@@ -1187,10 +1187,10 @@ packages:
       terser:
         optional: true
 
-  vitepress-plugin-mermaid@2.0.16:
-    resolution: {integrity: sha512-sW0Eu4+1EzRdwZBMGjzwKDsbQiuJIxCy8BlMw7Ur88p9fXalrFYKqZ3wYWLxsFTBipeooFIeanef/xw1P+v7vQ==}
+  vitepress-plugin-mermaid@2.0.17:
+    resolution: {integrity: sha512-IUzYpwf61GC6k0XzfmAmNrLvMi9TRrVRMsUyCA8KNXhg/mQ1VqWnO0/tBVPiX5UoKF1mDUwqn5QV4qAJl6JnUg==}
     peerDependencies:
-      mermaid: '10'
+      mermaid: 10 || 11
       vitepress: ^1.0.0 || ^1.0.0-alpha
 
   vitepress-plugin-tabs@0.5.0:
@@ -2443,7 +2443,7 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.77.8
 
-  vitepress-plugin-mermaid@2.0.16(mermaid@10.9.1)(vitepress@1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0)):
+  vitepress-plugin-mermaid@2.0.17(mermaid@10.9.1)(vitepress@1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0)):
     dependencies:
       mermaid: 10.9.1
       vitepress: 1.3.4(@algolia/client-search@4.24.0)(postcss@8.4.44)(sass@1.77.8)(search-insights@2.13.0)
