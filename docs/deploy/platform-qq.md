@@ -320,7 +320,7 @@ Mac
 
 2.在发布配置界面点击功能配置
 
-<img src="./images/platform-qq-official-11.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-11.png" alt="连接官方 Bot" width="100%">
 
 3.点击指令配置
 
@@ -334,12 +334,12 @@ Mac
 
 8.最后再点击保持配置，这个时候网站会要求你手机扫码，扫码后确认修改就好了
 
-<img src="./images/platform-qq-official-12.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-12.png" width="50%" height="50%" />
 
 推荐指令列表模版
 
-<img src="./images/platform-qq-official-7.png"" alt="连接官方 Bot" width="100%">
-<img src="./images/platform-qq-official-8.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-7.png" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-8.png" alt="连接官方 Bot" width="100%">
 
 ### 机器人上线
 
@@ -351,7 +351,7 @@ Mac
 
 （注意允许消息列表的白名单要是空的，不能添加任何账号）
 
-<img src="./images/platform-qq-official-8.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-8.png" alt="连接官方 Bot" width="100%">
 
 4，然后再点击发布配置页面，上传自测报告与隐私协议
 
@@ -363,11 +363,11 @@ Mac
 
 1.如果你是用企业账号的话，记得在资料一栏里进行开发者资质状态审核，审核简单来说就是你上传企业的银行号码后，腾讯会给你账户发几分钱检查这个账号能不能用。这过程可能会等待较长的时间。开发者资质状态通过后才能将官方机器人送审。
 
-<img src="./images/platform-qq-official-5.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-5.png" alt="连接官方 Bot" width="100%">
 
 2.机器人资料卡界面中资料卡设置设置一栏中的机器人官方频道跳转不能是你骰子的沙盒频道。
 
-<img src="./images/platform-qq-official-9.png"" alt="连接官方 Bot" width="100%">
+<img src="./images/platform-qq-official-9.png" alt="连接官方 Bot" width="100%">
 
 3.有时候功能配置界面会出现bug，就是功能配置与提审显示你审核通过了，但实际并没有通过，这个时候你点击机器人上线的会显示发送错误，这个时候建议点击通知，看机器人哪方面没过审，然后修改后再次提交审核
 
