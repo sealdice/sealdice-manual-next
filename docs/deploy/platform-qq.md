@@ -353,7 +353,7 @@ Mac
 
 4，然后再点击发布配置页面，上传自测报告与隐私协议（这里提供了海豹骰的机器人机器人隐私协议与自测报告模版，建议不要提到海豹骰）
 
-[模版下载链接：](<https://pan.baidu.com/s/1UHclndFyDW-_6168e6gRZg?pwd=trpg>)
+[模版下载链接](<https://pan.baidu.com/s/1UHclndFyDW-_6168e6gRZg?pwd=trpg>)
 
 5.然后点击提交审核
 
