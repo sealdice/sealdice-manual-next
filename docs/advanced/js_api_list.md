@@ -324,7 +324,7 @@ msg.platform // 平台
 // 方法
 .isArgEqual(n, ss...) // 返回 bool, 检查第 n 个参数是否在 ss 中
 .eatPrefixWith(ss...) // 似乎是从 cleanArgs 中去除 ss 中第一个匹配的前缀
-.chopPrefixToArgsWith(ss...) // 似乎是为读取匹配到的参数 ss 前后添加空格
+.chopPrefixToArgsWith(ss...) // 切掉匹配到的参数 ss 前后所需的空格
 .getArgN(n) // -> string
 .getKwarg(str) // -> Kwarg 如果有名为 str 的 flag，返回对象，否则返回 null/undefined(不确定)
 .getRestArgsFrom(n) // -> string 获取从第 n 个参数之后的所有参数，用空格拼接成一个字符串
