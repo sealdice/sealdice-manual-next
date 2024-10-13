@@ -18,7 +18,7 @@ VitePress 驱动的海豹骰官方使用手册。
 pnpm install
 ```
 
-## MarkDown 格式规范
+## Markdown 格式规范
 
 提交前请务必使用 markdownlint 进行检查，不满足格式要求的修改无法合并入主仓库。
 
