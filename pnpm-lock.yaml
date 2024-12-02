@@ -31,8 +31,8 @@ importers:
         specifier: ^0.15.0
         version: 0.15.0
       mermaid:
-        specifier: ^11.4.0
-        version: 11.4.0
+        specifier: ^11.4.1
+        version: 11.4.1
       sass:
         specifier: ^1.80.6
         version: 1.80.6
@@ -41,7 +41,7 @@ importers:
         version: 1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0)
       vitepress-plugin-mermaid:
         specifier: ^2.0.17
-        version: 2.0.17(mermaid@11.4.0)(vitepress@1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0))
+        version: 2.0.17(mermaid@11.4.1)(vitepress@1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0))
       vitepress-plugin-tabs:
         specifier: ^0.5.0
         version: 0.5.0(vitepress@1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0))(vue@3.5.12)
@@ -622,9 +622,6 @@ packages:
   '@types/d3@7.4.3':
     resolution: {integrity: sha512-lZXZ9ckh5R8uiFVt8ogUNf+pIrK4EsWrx2Np75WvF/eTpJ0FMHNhjXk8CKEx/+gpHbNQyJWehbFaTvqmHWB3ww==}
 
-  '@types/dompurify@3.0.5':
-    resolution: {integrity: sha512-1Wg0g3BtQF7sSb27fJQAKck1HECM6zV1EB66j8JH9i3LCjYabJa0FSdiSgsD5K/RbrsR0SiraKacLB+T8ZVYAg==}
-
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
@@ -1037,8 +1034,8 @@ packages:
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
 
-  dompurify@3.1.6:
-    resolution: {integrity: sha512-cTOAhc36AalkjtBpfG6O8JimdTMWNXjiePT2xQH/ppBGi/4uIpmj8eKyIkMJErXWARyINV/sB38yf8JCLF5pbQ==}
+  dompurify@3.2.2:
+    resolution: {integrity: sha512-YMM+erhdZ2nkZ4fTNRTSI94mb7VG7uVF5vj5Zde7tImgnhZE3R6YW/IACGIHb2ux+QkEXMhe591N+5jWOmL4Zw==}
 
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
@@ -1208,8 +1205,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mermaid@11.4.0:
-    resolution: {integrity: sha512-mxCfEYvADJqOiHfGpJXLs4/fAjHz448rH0pfY5fAoxiz70rQiDSzUUy4dNET2T08i46IVpjohPd6WWbzmRHiPA==}
+  mermaid@11.4.1:
+    resolution: {integrity: sha512-Mb01JT/x6CKDWaxigwfZYuYmDZ6xtrNwNlidKZwkSrDaY9n90tdrJTV5Umk+wP1fZscGptmKFXHsXMDEVZ+Q6A==}
 
   micromark-util-character@2.1.0:
     resolution: {integrity: sha512-KvOVV+X1yLBfs9dCBSopq/+G1PcgT3lAK07mC4BzXi5E7ahzMAF8oIupDDJ6mievI6F+lAATkbQQlQixJfT3aQ==}
@@ -2072,10 +2069,6 @@ snapshots:
       '@types/d3-transition': 3.0.9
       '@types/d3-zoom': 3.0.8
 
-  '@types/dompurify@3.0.5':
-    dependencies:
-      '@types/trusted-types': 2.0.7
-
   '@types/estree@1.0.6': {}
 
   '@types/geojson@7946.0.14': {}
@@ -2097,7 +2090,8 @@ snapshots:
 
   '@types/mdurl@2.0.0': {}
 
-  '@types/trusted-types@2.0.7': {}
+  '@types/trusted-types@2.0.7':
+    optional: true
 
   '@types/unist@3.0.3': {}
 
@@ -2512,7 +2506,9 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
-  dompurify@3.1.6: {}
+  dompurify@3.2.2:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
 
   entities@4.5.0: {}
 
@@ -2716,13 +2712,12 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid@11.4.0:
+  mermaid@11.4.1:
     dependencies:
       '@braintree/sanitize-url': 7.1.0
       '@iconify/utils': 2.1.33
       '@mermaid-js/parser': 0.3.0
       '@types/d3': 7.4.3
-      '@types/dompurify': 3.0.5
       cytoscape: 3.30.3
       cytoscape-cose-bilkent: 4.1.0(cytoscape@3.30.3)
       cytoscape-fcose: 2.2.0(cytoscape@3.30.3)
@@ -2730,7 +2725,7 @@ snapshots:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.11
       dayjs: 1.11.13
-      dompurify: 3.1.6
+      dompurify: 3.2.2
       katex: 0.16.11
       khroma: 2.1.0
       lodash-es: 4.17.21
@@ -2979,9 +2974,9 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.80.6
 
-  vitepress-plugin-mermaid@2.0.17(mermaid@11.4.0)(vitepress@1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0)):
+  vitepress-plugin-mermaid@2.0.17(mermaid@11.4.1)(vitepress@1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0)):
     dependencies:
-      mermaid: 11.4.0
+      mermaid: 11.4.1
       vitepress: 1.5.0(@algolia/client-search@4.24.0)(postcss@8.4.47)(sass@1.80.6)(search-insights@2.13.0)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
