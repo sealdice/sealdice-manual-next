@@ -147,7 +147,7 @@ docker compose up -d
 
 ## 通过 `docker-compose` 部署海豹与 NapCat
 
-通过此方式部署的海豹与 NapCat 容器共同构成一个服务栈，可以方便地进行集中管理。请先阅读 [QQ](./platform-qq) 一节中，[NapCatQQ](./platform-qq#napcatqq) 部分，大致了解 NapCat 的部署过程。
+通过此方式快速部署的海豹与 NapCat 容器并集中管理。
 
 ### 创建 `docker-compose.yml`
 
@@ -191,7 +191,65 @@ networks:
   sealdice_network:
     driver: bridge
 ```
-其中，
+
+该示例文件中，映射海豹容器的WebUI端口 `3211` 到宿主机的 `3211`，映射 NapCat 容器的WebUI `6099` 端口为 6099。
+
+为保证海豹数据的持久化，以及图片语音等资源的正常发送，映射 `./data` 和 `./backups` 目录到宿主机，且映射到 NapCat 容器内的相同位置。
+
+为确保 NapCat 能够持久化配置文件和QQ数据，映射 `./napcat/config` 和 `./napcat/QQ_DATA` 目录到宿主机。
+
+`mac_address` 用于指定容器 MAC 地址，用于固化QQ识别的设备信息，推荐自行修改 `mac_address`，注意必须是 `02:42` 开头的 MAC 地址,否则无法正常启动。
+
+### 首次启动容器
+
+根据示例文件定制完毕后（你也可以选择不修改任何内容）通过以下命令行来启动容器。
+
+```
+echo 'ACCOUNT=123456' > .env # 请将 ACCOUNT 的数字替换为骰娘的 QQ 号
+NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
+
+```
+
+### 海豹连接 NapCat
+
+以示例 `docker-compose.yml` 文件的默认设置为例，访问 NapCat 的 WebUI：`http://宿主机IP:6099` 。
+
+在 NapCat 的 WebUI 登录页面输入 TOKEN `napcat`，然后选择右侧的扫码登录按钮，扫描二维码登录。
+
+随后访问海豹的 WebUI：`http://宿主机IP:3211` 。
+
+在「账号设置」中新增账号，「账号类型」选择 `QQ(onebot11正向WS)`，「连接地址」填写 `ws://{Host}:{Port}`，其中 `{Host}` 填写为 `napcat` 即可。 `{Port}` 则填写 `1234`，这是 `NapCat` 运行在 `MODE=sealdice` 模式下的预置端口，无需再另行设置。 
+
+以示例 `docker-compose.yml` 文件的默认设置为例，此处应填写 `ws://napcat:1234`。
+
+如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
+
+关于登录多个QQ号的方法，请参考上一节 [ 通过-docker-compose-同时部署海豹与-lagrange ](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+
+### 管理容器
+
+1. 启动所有服务
+```
+docker-compose up -d
+```
+2. 查看容器状态
+```
+docker-compose ps
+```
+3. 停止服务
+```
+docker-compose down
+```
+4. 更新服务
+```
+docker-compose pull
+docker-compose up -d
+```
+5. 重新创建容器
+```
+docker-compose up -d --force-recreate
+```
+
 
 ## 连接到宿主机上的 QQ 后端
 
