@@ -202,7 +202,13 @@ networks:
 
 ### 首次启动容器
 
-根据示例文件定制完毕后（你也可以选择不修改任何内容）通过以下命令行来启动容器。
+根据示例文件定制完毕后，通过以下命令行来启动容器。
+
+::: tip 
+
+你也可以选择不修改任何内容直接尝试启动
+
+:::
 
 ```
 echo 'ACCOUNT=123456' > .env # 请将 ACCOUNT 的数字替换为骰娘的 QQ 号
@@ -222,9 +228,13 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 以示例 `docker-compose.yml` 文件的默认设置为例，此处应填写 `ws://napcat:1234`。
 
+::: tip 
+
 如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
 
 关于登录多个QQ号的方法，请参考上一节 [ 通过-docker-compose-同时部署海豹与-lagrange ](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+
+:::
 
 ### 管理容器
 
