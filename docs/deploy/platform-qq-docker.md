@@ -222,11 +222,62 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 以示例 `docker-compose.yml` 文件的默认设置为例，此处应填写 `ws://napcat:1234`。
 
-::: tip 多个账号连接同一个海豹容器
+::: details 补充：多个账号连接同一个海豹
 
 如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
 
-关于登录多个QQ号的方法，请参考上一节 [ 通过-docker-compose-同时部署海豹与-lagrange ](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+关于登录多个QQ号的 `docker-compose.yml` 文件修改方法，请参考上一节 [ 通过-docker-compose-同时部署海豹与-lagrange ](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+
+:::
+
+::: details 补充：多个账号连接不同的海豹
+
+如果想要配置多个独立的海豹，可以直接在 **另一个文件目录** 中创建 `docker-compose.yml` 文件，然后再次从头设置并启动容器。
+
+建议在 `docker-compose.yml` 文件中，将 `container_name` 、`ports` 、 `network` 、 `mac_address`等关键设置修改为不同的值，以区分不同的海豹。
+
+例如：
+
+```yaml
+services:
+  sealdice:
+    image: ghcr.io/sealdice/sealdice:edge
+    container_name: sealdice-114514  # 为容器指定个性化的名称方便管理
+    ports:
+      - "13211:3211"  # 为容器指定新的宿主机端口，冒号左侧是宿主机端口，冒号右侧是容器端口
+    volumes:
+      - "./data:/data"
+      - "./backups:/backups"
+    networks:
+      - sealdice_114514  # 为容器指定新的网络
+    depends_on:
+      - napcat
+
+  napcat:
+    image: mlikiowa/napcat-docker:latest
+    container_name: napcat-114514   # 为容器指定个性化的名称方便管理
+    ports:
+      - "16099:6099"  # 为容器指定新的宿主机端口
+    volumes:
+      - "./napcat/config:/app/napcat/config"
+      - "./napcat/QQ_DATA:/app/.config/QQ"
+      - "./data:/data"
+      - "./backups:/backups"
+    environment:
+      - NAPCAT_UID=${NAPCAT_UID:-1000}
+      - NAPCAT_GID=${NAPCAT_GID:-1000}
+      - MODE=sealdice
+      - ACCOUNT=${ACCOUNT}
+    networks:
+      - sealdice_114514  # 保持和上面容器同一个网络
+    mac_address: "02:42:ac:22:00:01"  # 为容器指定新的 MAC 地址
+
+networks:
+  sealdice_114514:  # 定义新的网络
+    driver: bridge
+```
+
+海豹内「账号设置」中新增账号时的 `{Host}` 无需修改，`docker compose` 会自动处理主机名解析。
 
 :::
 
