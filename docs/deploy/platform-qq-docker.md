@@ -145,6 +145,54 @@ docker compose up -d
 
 当任一镜像有更新时，以上命令会完成容器更新。
 
+## 通过 `docker-compose` 部署海豹与 NapCat
+
+通过此方式部署的海豹与 NapCat 容器共同构成一个服务栈，可以方便地进行集中管理。请先阅读 [QQ](./platform-qq) 一节中，[NapCatQQ](./platform-qq#napcatqq) 部分，大致了解 NapCat 的部署过程。
+
+### 创建 `docker-compose.yml`
+
+首先，在工作目录下创建 `docker-compose.yml` 文件，并填入以下内容：
+
+```yaml
+services:
+  sealdice:
+    image: ghcr.io/sealdice/sealdice:edge
+    container_name: sealdice
+    ports:
+      - "3211:3211"
+    volumes:
+      - "./data:/data"
+      - "./backups:/backups"
+    networks:
+      - sealdice_network
+    depends_on:
+      - napcat
+
+  napcat:
+    image: mlikiowa/napcat-docker:latest
+    container_name: napcat
+    ports:
+      - "6099:6099"
+    volumes:
+      - "./napcat/config:/app/napcat/config"
+      - "./napcat/QQ_DATA:/app/.config/QQ"
+      - "./data:/data"
+      - "./backups:/backups"
+    environment:
+      - NAPCAT_UID=${NAPCAT_UID:-1000}
+      - NAPCAT_GID=${NAPCAT_GID:-1000}
+      - MODE=sealdice
+      - ACCOUNT=${ACCOUNT}
+    networks:
+      - sealdice_network
+    mac_address: "02:42:ac:11:00:02"
+
+networks:
+  sealdice_network:
+    driver: bridge
+```
+其中，
+
 ## 连接到宿主机上的 QQ 后端
 
 ::: warning 注意：此种部署方式可能不能正常发送本地图片。
