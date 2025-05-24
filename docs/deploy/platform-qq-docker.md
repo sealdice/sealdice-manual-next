@@ -204,7 +204,7 @@ networks:
 
 根据示例文件定制完毕后，通过以下命令行来启动容器。（你也可以选择不修改任何内容直接尝试启动）
 
-```
+```bash
 echo 'ACCOUNT=123456' > .env # 请将 ACCOUNT 的数字替换为骰娘的 QQ 号
 NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
@@ -226,7 +226,7 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
 
-关于登录多个QQ号的 `docker-compose.yml` 文件修改方法，请参考上一节 [ 通过-docker-compose-同时部署海豹与-lagrange ](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+关于登录多个QQ号的 `docker-compose.yml` 文件修改方法，请参考上一节 [通过-docker-compose-同时部署海豹与-lagrange](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
 
 :::
 
@@ -284,28 +284,36 @@ networks:
 ### 管理容器
 
 1. 启动所有服务
-```
-docker-compose up -d
-```
+
+  ```bash
+  docker-compose up -d
+  ```
+
 2. 查看容器状态
-```
-docker-compose ps
-```
+
+  ```bash
+  docker-compose ps
+  ```
+
 3. 停止服务
-```
-docker-compose down
-```
+
+  ```bash
+  docker-compose down
+  ```
+
 4. 更新服务
-```
-docker-compose pull
-docker-compose up -d
-```
+
+  ```bash
+  docker-compose pull
+  docker-compose up -d
+  ```
+
 5. 重新创建容器
-```
-docker-compose up -d --force-recreate
-```
 
-
+  ```bash
+  docker-compose up -d --force-recreate
+  ```
+  
 ## 连接到宿主机上的 QQ 后端
 
 ::: warning 注意：此种部署方式可能不能正常发送本地图片。
