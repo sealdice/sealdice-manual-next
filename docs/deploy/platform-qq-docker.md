@@ -192,13 +192,13 @@ networks:
     driver: bridge
 ```
 
-该示例文件中，映射海豹容器的WebUI端口 `3211` 到宿主机的 `3211`，映射 NapCat 容器的WebUI `6099` 端口为 6099。
+该示例文件中，映射海豹容器的 WebUI 端口 `3211` 到宿主机的 `3211`，映射 NapCat 容器的 WebUI `6099` 端口为 6099。
 
 为保证海豹数据的持久化，以及图片语音等资源的正常发送，映射 `./data` 和 `./backups` 目录到宿主机，且映射到 NapCat 容器内的相同位置。
 
 为确保 NapCat 能够持久化配置文件和 QQ 数据，映射 `./napcat/config` 和 `./napcat/QQ_DATA` 目录到宿主机。
 
-`mac_address` 用于指定容器 MAC 地址，用于固化QQ识别的设备信息，推荐自行修改 `mac_address`，注意必须是 `02:42` 开头的 MAC 地址,否则无法正常启动。
+`mac_address` 用于指定容器 MAC 地址，用于固化 QQ 识别的设备信息，推荐自行修改 `mac_address`，注意必须是 `02:42` 开头的 MAC 地址，否则无法正常启动。
 
 ### 首次启动容器
 
@@ -226,7 +226,7 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
 
-关于登录多个QQ号的 `docker-compose.yml` 文件修改方法，请参考上一节 [通过-docker-compose-同时部署海豹与-lagrange](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个QQ号` 部分。
+关于登录多个 QQ 号的 `docker-compose.yml` 文件修改方法，请参考上一节 [通过-docker-compose-同时部署海豹与-lagrange](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个 QQ 号` 部分。
 
 :::
 
