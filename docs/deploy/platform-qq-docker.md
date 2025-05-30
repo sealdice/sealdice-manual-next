@@ -218,7 +218,7 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 随后访问海豹的 WebUI：`http://宿主机IP:3211` 。
 
-在「账号设置」中新增账号，「账号类型」选择 `QQ(onebot11正向WS)`，「连接地址」填写 `ws://{Host}:{Port}`，其中 `{Host}` 填写为 `napcat` 即可。 `{Port}` 则填写 `1234`，这是 `NapCat` 运行在 `MODE=sealdice` 模式下的预置端口，无需再另行设置。 
+在「账号设置」中新增账号，「账号类型」选择 `QQ(onebot11正向WS)`，「连接地址」填写 `ws://{Host}:{Port}`，其中 `{Host}` 填写为 `napcat` 即可。 `{Port}` 则填写 `1234`，这是 `NapCat` 运行在 `MODE=sealdice` 模式下的预置端口，无需再另行设置。
 
 以示例 `docker-compose.yml` 文件的默认设置为例，此处应填写 `ws://napcat:1234`。
 
@@ -283,37 +283,37 @@ networks:
 
 ### 管理容器
 
-1. 启动所有服务
+- 启动所有服务
 
   ```bash
   docker-compose up -d
   ```
 
-2. 查看容器状态
+- 查看容器状态
 
   ```bash
   docker-compose ps
   ```
 
-3. 停止服务
+- 停止服务
 
   ```bash
   docker-compose down
   ```
 
-4. 更新服务
+- 更新服务
 
   ```bash
   docker-compose pull
   docker-compose up -d
   ```
 
-5. 重新创建容器
+- 重新创建容器
 
   ```bash
   docker-compose up -d --force-recreate
   ```
-  
+
 ## 连接到宿主机上的 QQ 后端
 
 ::: warning 注意：此种部署方式可能不能正常发送本地图片。
