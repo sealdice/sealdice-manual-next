@@ -10,6 +10,7 @@ export const deployNav = {
         { text: "海豹的本地文件", link: "/deploy/about_file" },
         { text: "迁移", link: "/deploy/transfer" },
         { text: "数据库检查和修复", link: "/deploy/db-repair" },
+        { text: "其他数据库的连接", link: "/deploy/db-transfer" },
       ],
     },
     {
