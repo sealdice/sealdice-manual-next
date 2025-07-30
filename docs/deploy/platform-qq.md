@@ -357,6 +357,12 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
+::: danger 云服务器部署时可能的网页暴露风险
+
+NapCat 具有自己的网页控制台，请不要将其暴露在公网上，或者按照 [NapCat 官方手册](https://napneko.github.io/guide/start-install) 修改暴露端口并设置强密码。
+
+:::
+
 NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCatQQ](https://napneko.github.io/guide/start-install) 的手册安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
 
 #### 下载 NapCatQQ
