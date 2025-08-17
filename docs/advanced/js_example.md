@@ -233,7 +233,7 @@ if (!ext) {
   ext.cmdMap['seal'] = cmdSeal;
 
   // 无实际意义，用于消除编译报错
-  // 注意: 该语句只适用于TypeScript, 在JavaScript中直接使用会导致 SyntaxError: Unexpected reserved word
+  // 注意 : 该语句只适用于 TypeScript，在 JavaScript 中直接使用会导致 SyntaxError: Unexpected reserved word
   export {}
 
   seal.ext.register(ext);
@@ -270,7 +270,7 @@ if (!ext) {
 // @homepageURL  https://github.com/sealdice/javascript
 // ==/UserScript==
 
-// 本脚本用于演示如何抽取牌堆, 共有两种实现方式
+// 本脚本用于演示如何抽取牌堆，共有两种实现方式
 if (!seal.ext.find('draw-decks-example')) {
   const ext = seal.ext.new('draw-decks-example', 'SzzRain', '1.0.0');
   // 创建一个命令

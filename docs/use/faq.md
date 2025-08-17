@@ -89,7 +89,7 @@ title: 常见问题
 
 2. **服务器端运行工具**
 
-   在海豹骰中集成了 socks 工具，点击图中「辅助工具 -13325 端口」按钮。
+   在海豹骰中集成了 socks5 工具，点击图中「辅助工具 -13325 端口」按钮。
 
    ![登录弹窗](./images/image-20230109202133901.png)
 
@@ -116,7 +116,7 @@ title: 常见问题
 
 3. **手机端连接**
 
-你需要一个代理软件，比如 postern，如果可能的话你可以从 Google Play 下载，你也可以在用户群里找到它。
+你需要一个代理软件，比如 postern，如果可能的话你可以从 [APK Pure](https://apkpure.net/cn/postern/com.tunnelworkshop.postern) 下载，你也可以在用户群里找到它。
 
 然后在你将要扫码的手机上启动它，弹出的窗口都点击**确定**。
 
@@ -225,7 +225,7 @@ sealdice-core --address=0.0.0.0:<端口号> -m
 
 ## 能在手机上搭建吗？
 
-手机海豹已经公测啦！详见 [搭建](../deploy/quick-start.md#启动) 章节。
+手机海豹已经可以使用啦！详见 [搭建](../deploy/quick-start.md#启动) 章节。
 
 ## 我是 Master，怎么帮人取出 Log？
 
@@ -239,4 +239,4 @@ sealdice-core --address=0.0.0.0:<端口号> -m
 
 用文本编辑器打开 `dice/dice.yaml`，删除 `uiPasswordHash` 一行，保存。
 
-重新启动海豹。
+重新启动海豹，记得设置一个自己记得住的密码。
