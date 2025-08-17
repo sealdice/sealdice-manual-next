@@ -233,6 +233,7 @@ if (!ext) {
   ext.cmdMap['seal'] = cmdSeal;
 
   // 无实际意义，用于消除编译报错
+  // 注意: 该语句只适用于TypeScript, 在JavaScript中直接使用会导致 SyntaxError: Unexpected reserved word
   export {}
 
   seal.ext.register(ext);
