@@ -71,7 +71,7 @@ pause
 
 双击 `检查.cmd` 执行，之后同上。
 
-::: info 双击后无法执行?
+::: info 双击后无法执行？
 
 请尝试 [在 Windows10 中启用文件后缀名显示](https://zhuanlan.zhihu.com/p/121811288) 后再次修改文件名。
 
