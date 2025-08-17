@@ -231,7 +231,6 @@ if (!ext) {
 
   // 将命令注册到扩展中
   ext.cmdMap['seal'] = cmdSeal;
-
   seal.ext.register(ext);
 }
 
