@@ -239,4 +239,4 @@ sealdice-core --address=0.0.0.0:<端口号> -m
 
 用文本编辑器打开 `dice/dice.yaml`，删除 `uiPasswordHash` 一行，保存。
 
-重新启动海豹，记得设置一个自己记得住的密码。
+重新启动海豹。
