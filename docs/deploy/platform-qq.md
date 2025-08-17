@@ -363,6 +363,8 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
+::: warning 请使用新版 NapCaQQ
+
  在 Windows 上使用此方案的用户请注意不要使用 NapCatQQ <Badge type="tip" text="v4.9.0"/> 之前的版本
 
 已知这样做会导致频繁下线，冻结甚至导致账号封禁。
