@@ -19,7 +19,7 @@ title: JavaScript 插件
 
 JavaScript（JS）是一门基于原型和头等函数的多范式高级解释型编程语言，它支持面向对象程序设计、指令式编程和函数式编程。它提供方法来操控文本、数组、日期以及正则表达式等。
 
-—— [Wikipedia](https://zh.wikipedia.org/wiki/JavaScript)
+—— [Wiki](https://zh.wikipedia.org/wiki/JavaScript)
 
 :::
 
