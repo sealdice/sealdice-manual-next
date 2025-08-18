@@ -19,7 +19,7 @@ title: JavaScript 插件
 
 JavaScript（JS）是一门基于原型和头等函数的多范式高级解释型编程语言，它支持面向对象程序设计、指令式编程和函数式编程。它提供方法来操控文本、数组、日期以及正则表达式等。
 
-—— [Wikipedia](https://zh.wikipedia.org/wiki/JavaScript)
+—— [Wiki](https://zh.wikipedia.org/wiki/JavaScript)
 
 :::
 
@@ -78,14 +78,6 @@ JavaScript（JS）是一门基于原型和头等函数的多范式高级解释�
 ![JS 插件控制台](./images/jsscrpit-console.png)
 
 在代码框中编写代码，点击「执行代码」即可运行，运行结果将显示在下方。
-
-::: notice 注意：控制台并非安全的测试环境
-
-若控制台中运行的代码存在重大缺陷，有可能影响核心正常运行。
-
-最佳方式是 [启动一个新的海豹核心程序](../use/faq.md#怎么同时运行多个海豹) 进行测试。
-
-:::
 
 ### 插件设置
 

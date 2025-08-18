@@ -116,7 +116,7 @@ title: 常见问题
 
 3. **手机端连接**
 
-你需要一个代理软件，比如 postern，如果可能的话你可以从 [APK Pure](https://apkpure.net/cn/postern/com.tunnelworkshop.postern) 下载，你也可以在用户群里找到它。
+你需要一个代理软件，比如 postern，如果可能的话你可以从 Google Play 下载，你也可以在用户群里找到它。
 
 然后在你将要扫码的手机上启动它，弹出的窗口都点击**确定**。
 
@@ -239,4 +239,4 @@ sealdice-core --address=0.0.0.0:<端口号> -m
 
 用文本编辑器打开 `dice/dice.yaml`，删除 `uiPasswordHash` 一行，保存。
 
-重新启动海豹，记得设置一个自己记得住的密码。
+重新启动海豹。
