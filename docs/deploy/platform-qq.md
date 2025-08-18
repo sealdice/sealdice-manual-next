@@ -172,7 +172,7 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 使用此方法你可能需要对「QQ(onebot11正向WS)」、「QQ(onebot11反向WS)」、「[WIP]Satori」的区别有一定了解。
 
-- 「QQ(onebot11正向WS)」为 onebot11 标准的连接方式之一，由海豹核心主动连接 QQ 登录框架。在 UI 界面添加「连接地址」格式应当为 `ws://{Host}:{Port}` 推荐使用该方式。
+- 「QQ(onebot11正向WS)」为 onebot11 标准的连接方式之一，由海豹核心主动连接 QQ 登录框架。在 UI 界面添加「连接地址」格式应当为 `ws://{Host}:{Port}`。
 - 「QQ(onebot11反向WS)」为 onebot11 标准的连接方式之二，由 QQ 登录框架主动连接海豹核心。在 UI 界面添加「连接地址」格式应当为 `{Host}:{Port}`。
 - 「[WIP]Satori」为 Satori 标准的连接方式，由海豹核心主动连接 QQ 登录框架。WIP 代表该对接方式为实验性的，可能会在未来发生变化。
 
