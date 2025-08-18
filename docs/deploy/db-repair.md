@@ -73,7 +73,7 @@ pause
 
 ::: info 双击后无法执行？
 
-请尝试 [在 Windows10 中启用文件后缀名显示](https://zhuanlan.zhihu.com/p/121811288) 后再次修改文件名。
+可能是未正确修改后缀 `.cmd`，对于 Windows 用户，请确认启用了文件后缀的展示。可以参考 [在 Windows 中启用文件后缀名显示](https://zhuanlan.zhihu.com/p/121811288) 。
 
 如果仍不能执行，请检查系统环境是否存在损坏，或是否有其他软件阻止执行。
 
