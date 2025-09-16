@@ -375,6 +375,55 @@ rc 是规则书检定。而 ra 是房规检定。区别主要在于对大成功/
 
 :::
 
+### 理智损失上限与减半 <Badge type="tip" text="NextVersion"/>
+
+从 <Badge type="tip" text="NextVersion"/> 起，海豹支持指定理智检定的损失上限和/或减半，分别对应「习惯恐怖」规则和「神话淬炼」规则（旧译「精神固化」）。
+
+`.sc <成功时理智损失>/<失败时理智损失> --cap=<损失上限>`
+
+指定在此次理智检定中损失理智的上限。
+
+::: info 示例
+
+<!-- autocorrect-disable -->
+<ChatBox :messages="[
+{content: '.sc 1/1D6 --cap=3', send: true},
+{content: '<木落>的理智检定:\nd100=82/60 失败！\n理智变化: 60 ➯ 57 (扣除1D6=5➯3点)'}
+]"/>
+<!-- autocorrect-enable -->
+
+:::
+
+`.sc <成功时理智损失>/<失败时理智损失> --half`
+
+指定在此次理智检定中所有损失减半（向下取整）。
+
+::: info 示例
+
+<!-- autocorrect-disable -->
+<ChatBox :messages="[
+{content: '.sc 1/1D6 --half', send: true},
+{content: '<木落>的理智检定:\nd100=82/60 失败！\n理智变化: 60 ➯ 58 (扣除1D6=5➯2点)'}
+]"/>
+<!-- autocorrect-enable -->
+
+:::
+
+两个参数可以同时使用，这时，先计算减半，再计算上限截断。
+
+::: info 示例
+
+<!-- autocorrect-disable -->
+<ChatBox :messages="[
+{content: '.sc 1/1D6 --cap=2 --half', send: true},
+{content: '<木落>的理智检定:\nd100=82/60 失败！\n理智变化: 60 ➯ 52 (扣除1D6=6➯2点)'}
+]"/>
+<!-- autocorrect-enable -->
+
+在这个例子中，理智损失先由 6 点减半成为 3 点，再因为上限被截断为 2 点。
+
+:::
+
 ## `.ti`/`.li` 疯狂发作症状
 
 > 在《克苏鲁的呼唤》中，与克苏鲁神话相关的痛苦经历和可怖领悟都会诱发疯狂。
