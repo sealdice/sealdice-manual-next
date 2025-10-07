@@ -883,7 +883,7 @@ function akAdd(ctx, msg, ext, option) {
 
 ## 读取玩家或群组数据
 
-可以查看下文的 [API](#js-扩展-api)。
+可以查看 [API 列表](./js_api_list.md)。
 
 ## 编写暗骰指令
 
