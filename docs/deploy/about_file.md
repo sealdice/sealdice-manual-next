@@ -45,8 +45,6 @@ title: 海豹的本地文件
 
 - `./data/default/serve.yaml` 账号协议配置文件。
 
-- `./data/default/record.log` 运行日志文件，可以查看报错信息。
-
 - `./data/default/data.db` 数据库文件，存有人物卡、群组状态等信息。
 
 - `./data/default/data-logs.db` log 数据库文件，存有 log 日志。  
