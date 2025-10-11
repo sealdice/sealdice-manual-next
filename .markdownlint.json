@@ -1,9 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.34.0/schema/markdownlint-config-schema.json",
+  "MD003": {
+    "style": "atx"
+  },
   "MD010": {
     "code_blocks": false
   },
-  "MD024": false,
+  "MD024": {
+    "siblings_only": true
+  },
   "MD025": false,
   "MD033": {
     "allowed_elements": [
@@ -12,6 +17,10 @@
       "img",
       "br"
     ]
+  },
+  "MD044": false,
+  "MD046": {
+    "style": "fenced"
   },
   "MD051": false,
   "line-length": false
