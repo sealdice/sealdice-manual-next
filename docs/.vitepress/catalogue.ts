@@ -157,6 +157,7 @@ export const useNav = {
         { text: "日志", link: "/use/log" },
         { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
+        { text: "队伍管理", link: "/use/team" },
       ],
     },
     {
@@ -211,6 +212,7 @@ export const useSidebar = {
         { text: "日志", link: "/use/log" },
         { text: "功能", link: "/use/fun" },
         { text: "牌堆和自定义回复", link: "/use/deck_and_reply" },
+        { text: "队伍管理", link: "/use/team" },
       ],
     },
     {
