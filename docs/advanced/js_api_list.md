@@ -210,6 +210,7 @@ ctx.isCurGroupBotOn // bool
 ctx.isPrivate // bool 是否私聊
 ctx.privilegeLevel // int 权限等级：40 邀请者、50 管理、60 群主、70 信任、100 master
 ctx.delegateText // string 代骰附加文本
+ctx.commandHideFlag // string 暗骰标记，填写为群号可将私聊回复记入 log 记录
 // 方法 (太长，懒.)
 chBindCur
 chBindCurGet

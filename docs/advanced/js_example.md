@@ -924,6 +924,8 @@ if (!seal.ext.find('hide')){
           return seal.ext.newCmdExecuteResult(true);
       } else {
           // 这就是暗骰 api 哒！
+          ctx.commandHideFlag = msg.groupId;  // 暗骰回复需要记录到 log 中，所以需要设置这个 flag
+          seal.replyGroup(ctx, msg, `你在群暗骰了一个${x}面骰`);
           seal.replyPerson(ctx, msg, `你在群${msg.groupId}的掷骰结果为：${rd(x)}`);
           return seal.ext.newCmdExecuteResult(true);
       }
@@ -935,6 +937,16 @@ if (!seal.ext.find('hide')){
 ```
 
 可以看到使用`seal.replyPerson`做到暗骰的效果。
+
+::: info log 记录暗骰指令 <Badge type="tip" text="v1.5.0"/>
+
+自 <Badge type="tip" text="v1.5.0"/> 版本起，海豹支持将插件的私聊回复记录到日志中。
+
+若要实现此功能，需将 `ctx.commandHideFlag` 字段设置为来源群号。
+
+同时，要使用相同的 `ctx` 对象，先向来源群发送一条消息，紧接着向目标私聊发送暗骰结果。
+
+:::
 
 ## 编写代骰指令
 
