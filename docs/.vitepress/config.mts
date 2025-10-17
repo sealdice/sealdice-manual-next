@@ -5,6 +5,7 @@ import { withMermaid } from "vitepress-plugin-mermaid"
 import { theme } from "./theme"
 
 const base: any = process.env.BASE_PATH ?? "/sealdice-manual-next/";
+const hostname = process.env.SITE_HOSTNAME ?? "https://sealdice.github.io";
 
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
@@ -17,6 +18,9 @@ export default withMermaid(defineConfig({
   base,
   lastUpdated: true,
   themeConfig: theme,
+  sitemap: {
+    hostname,
+  },
   markdown: {
     container: {
       tipLabel: '提示',
