@@ -42,7 +42,7 @@ title: QQ
 对于需要使用更加灵活的方案的用户，我们推荐如下：
 
 - 需要比较简单的部署流程，希望资源占用低的，见 [Lagrange](#lagrange)；
-- 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot)；
+- 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot-lltwobot)；
 - 通过 docker 部署海豹的，见 [QQ - Docker 中的海豹](./platform-qq-docker)；
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](./platform-qq-official.md)；
 - Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。
@@ -306,15 +306,15 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 成功连接后即可使用。
 
-### LLOneBot <Badge type="tip" text="v1.4.2" />
+### LLOneBot/LLTwoBot <Badge type="tip" text="v1.4.2" />
 
-海豹从 <Badge type="tip" text="v1.4.2"/> 版本开始支持通过 OneBot 协议连接 LLOneBot。
+海豹从 <Badge type="tip" text="v1.4.2"/> 版本开始支持通过 OneBot 协议连接 LLOneBot/LLTwoBot。
 
 ::: info LLOneBot
 
-[LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT)（LiteLoader）是 NTQQ 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能。
+原 [LLOneBot](https://github.com/LLOneBot/LLOneBot) 是 Liteloader 的插件之一，可以实现劫持客户端对外开放 API，可以理解为装在 PC 上的 Shamrock。
 
-[LLOneBot](https://github.com/LLOneBot/LLOneBot) 则是 Liteloader 的插件之一，可以实现劫持客户端对外开放 API，可以理解为装在 PC 上的 Shamrock。
+现 LLOneBot 改名为 LLTwoBot，并改为基于 [PMHQ](https://github.com/linyuchen/PMHQ)。
 
 :::
 
@@ -326,18 +326,18 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 #### 安装 LLOneBot
 
-请参考 [官方文档](https://llonebot.github.io/zh-CN/) 中的说明。
+请参考 [官方文档](https://llonebot.com/guide/getting-started) 中的说明。
 
 #### 配置 LLOneBot
 
-安装完成后重新登录 QQ，在 QQ 设置中 LLOneBot 的设置页：
+运行 LLOneBot，登录 QQ，打开 LLOneBot 的设置页：
 
 ![LLOneBot 设置页](./images/platform-qq-llonebot-2.png)
 
-支持两种方式与海豹对接：
+点击 OneBot 11，此处支持两种方式与海豹对接：
 
-- 正向连接：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11正向WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
-- 反向连接：关闭 LLOneBot 的正向连接开关，打开 LLOneBot 的反向连接开关，在「反向WebSocket监听地址」里点击「添加」，输入 `ws://127.0.0.1:4001/ws`，然后在海豹的新添账号选择「QQ(onebot11反向WS)」，输入账号。
+- WebSocket 正向：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11正向WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
+- WebSocket 反向：关闭 LLOneBot 的正向连接开关，打开 LLOneBot 的反向连接开关，在「反向WebSocket监听地址」里点击「添加」，输入 `ws://127.0.0.1:4001/ws`，然后在海豹的新添账号选择「QQ(onebot11反向WS)」，输入账号。
 
 ::: tip
 
