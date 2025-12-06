@@ -250,6 +250,7 @@ export const advanced = {
         { text: "API 列表", link: "/advanced/js_api_list" },
       ],
     },
+    { text: "切换数据库", link: "/advanced/switch_database" },
   ],
 }
 
