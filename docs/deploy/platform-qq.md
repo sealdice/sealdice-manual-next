@@ -381,6 +381,65 @@ NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需�
 
 成功连接后即可使用。
 
+#### 拓展：在Android Termux或Linux上使用NapCat Tui-Cli一键下载并进行设置
+
+对于上述系统，可使用Napcat Tui-Cli进行配置。
+
+参考官方手册，对于Linux系统，运行：
+
+```shell
+curl -o \
+napcat.sh \
+https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh \
+&& bash napcat.sh
+```
+
+对于Android Termux，运行：
+
+```shell
+curl -o napcat.termux.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.termux.sh && bash napcat.termux.sh
+```
+
+::: warning 对于报错的情况：
+
+目前见到的最多一类报错是由于网络问题。请确保通畅的网络连接，必要时需要准备合适的网络环境。若问题依旧，请在用户群内咨询。
+
+:::
+
+若没有报错，则进入TUI界面如下：
+
+![Napcat-TUI1.png](.\images\Napcat-TUI1.png)
+
+注意这里对于初次启动的设备来说运行状态应当是“未启动”。
+
+::: info 对于失手关闭TUI或想再次进入TUI的情况：
+
+在shell运行`napcat`命令即可进入TUI。
+
+:::
+
+使用下箭头选择“配置Napcat”，回车，同理选择“添加新账号”，回车，输入你要登录海豹的QQ，回车，进入以下界面：
+
+![NapCat-TUI2.png](.\images\NapCat-TUI2.png)
+
+这里可以选择6来启动WebUI来更好的管理，但不是必要步骤，我们暂且略过。
+
+接下来，从3、4中选择一种你喜欢的方案，回车进行配置。按照说明进行即可，最后将“启用”通过回车勾选上即可，请记住自己在此步骤中设定的token和端口。
+
+::: warning
+
+此后更改此处的任意设置都**必须**返回主界面停止napcat后重新启动进行登录流程才可生效。
+
+:::
+
+接下来连续使用esc键返回至图一状态，启动Napcat——选择你要登录的账号——回车——进行QQ登录流程，以下不多赘述。NapCat端的配置到此结束。
+
+回到海豹UI，新建账号——账号类型选择“QQ（OneBot11正/反向WS）”，其中正/反向由你在前文Napcat TUI中选择的服务类型决定，其应与你在NapCat TUI中的选择相同。
+
+注意：和提示一样，若你选择正向WS，则填入`ws://127.0.0.1:xxxx`并在访问令牌中填写上你在NapCat TUI中设置的token。若你选择反向ws，则只需填入`:xxxx`即可，其中`xxxx`为你在NapCat TUI中选择的端口号。最后点击“下一步”，进行连接。
+
+以上，如果你全部正确操作，一只全新的海豹将会等着你——
+
 ### Chronocat <Badge type="tip" text="v1.4.2" />
 
 从 <Badge type="tip" text="v1.4.5"/> 开始适配了与 Chronocat 的 Satori 协议连接。
