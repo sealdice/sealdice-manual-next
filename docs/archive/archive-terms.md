@@ -124,12 +124,6 @@ Linux 是一种基于 UNIX 操作系统设计的开源操作系统。Linux 广�
 
 Linux 的主要优点包括稳定性、安全性、低成本（大部分 Linux 发行版都是免费的）和开源性（用户可以查看和修改源代码）。
 
-### LiteLoader
-
-[LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT)（LiteLoader）是 [NTQQ](#ntqq) 的插件加载器，允许通过插件注入 QQ 实现某些特定的功能。
-
-可以参考 [连接平台 - QQ](../deploy/platform-qq) 中 [有关的部分](../deploy/platform-qq#llonebot) 和 LiteLoader 的官方 [GitHub 页面](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT)。
-
 ### Log
 
 参见 [日志](#日志)。
