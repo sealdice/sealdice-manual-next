@@ -69,17 +69,9 @@ title: 基础设置
 
 ::: warning 注意：对接基于 NTQQ PC 端协议的 QQ 方案时，注意对方是否支持 `戳一戳` 功能
 
-内置客户端/Lagrange、LLOneBot 和 Napcat 等基于 NTQQ PC 的 QQ 方案，在旧版本中由于 NTQQ 旧协议本身不支持的原因，缺失该功能。
+Lagrange.OneBot、Lagrange.Milky、Yogurt、LLBot 和 NapCat 等基于 NTQQ PC 的 QQ 方案，在旧版本中可能缺失该功能。
 
-请使用：
-
-- 海豹版本 <Badge type="tip" text="v1.4.6" /> 之前的内置客户端
-- <Badge type="tip" text="6e350b0" /> 之前的 Lagrange
-- <Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot
-- <Badge type="tip" text="v1.6.7" /> 之前的 Napcat
-- ……
-
-等方案的用户及时更新或**关闭此开关**（位于 `综合设置` - `基本设置`），以免产生不必要的报错信息。
+使用旧协议端且持续出现报错时，请更新协议端，或**关闭此开关**以免产生不必要的报错信息。
 
 :::
 

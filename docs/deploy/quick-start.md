@@ -81,11 +81,11 @@ chmod +x ./sealdice-core
 
 ```zsh
 chmod +x ./sealdice-core && xattr -rd com.apple.quarantine ./sealdice-core
-chmod +x ./lagrange/Lagrange.OneBot && xattr -rd com.apple.quarantine ./lagrange/Lagrange.OneBot
-chmod +x ./lagrange/go-cqhttp && xattr -rd com.apple.quarantine ./lagrange/go-cqhttp
+chmod +x ./milky/lagrangeV2 ./milky/yogurt
+xattr -rd com.apple.quarantine ./milky/lagrangeV2 ./milky/yogurt
 ```
 
-这两条命令移除海豹核心程序和 Lagrange 的 [隔离属性](https://zhuanlan.zhihu.com/p/611471192)，并给予其足够的运行权限。
+这些命令移除海豹核心、Lagrange.Milky 和 Yogurt 的[隔离属性](https://zhuanlan.zhihu.com/p/611471192)，并给予其运行权限。
 
 随后，运行 `./sealdice-core` 来启动海豹。在浏览器中输入 `localhost:3211` 来访问后台（WebUI）。
 
@@ -116,7 +116,7 @@ docker run -d --name sealdice -p 3211:3211 ghcr.io/sealdice/sealdice:edge
 
 ::: warning 注意：容器模式下功能受限
 
-Docker 部署的海豹功能有所限制，如无法使用内置客户端登录、无法在线更新等。
+Docker 部署的海豹功能有所限制，如无法使用内置 Lagrange.Milky 或 Yogurt 登录、无法在线更新等。
 
 :::
 
