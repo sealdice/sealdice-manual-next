@@ -1068,7 +1068,7 @@ function chatWithBot(ctx,msg,message) {
 }
 ```
 
-### WebSocket 客户端 <Badge type="tip" text="LatestVersion"/>
+### WebSocket 客户端 <Badge type="tip" text="v1.6.0"/>
 
 需要持续接收服务端消息时，可以使用全局 `WebSocket` 构造函数：
 
@@ -1203,7 +1203,7 @@ if (!seal.ext.find('xxx')){
 你也可以直接使用 `seal.ext.getConfig()` 函数获取配置项的值，这个函数会返回一个 `ConfigItem` 对象，
 包含了配置项的类型、值、默认值等信息。
 
-`ConfigItem` 对象的类型定义如下，调用时请使用 `jsbind` 中的值作为 `key`。其中 `description` 和 `group` 由 <Badge type="tip" text="LatestVersion"/> 补充：
+`ConfigItem` 对象的类型定义如下，调用时请使用 `jsbind` 中的值作为 `key`。其中 `description` 和 `group` 由 <Badge type="tip" text="v1.6.0"/> 补充：
 
 ```go
 type ConfigItem struct {
@@ -1357,7 +1357,7 @@ seal.ext.registerTask(ext, taskType, value, func, key="", description="", group=
   使用定时任务 API 的用户应该将实际业务逻辑放置在 `func` 内，定时任务 API 仅承担唤醒功能。
 - `key: string`：可选参数。为此定时任务提供唯一索引。当填写了 `key` 时，此定时任务也会出现在 WebUI 的插件配置项中，可以通过 WebUI 修改定时任务表达式。
 - `description: string`：可选参数。为此定时任务提供可读性更高的描述。当同时填写了 `key` 与 `description` 时，WebUI 的插件配置项中将会显示关于此定时任务的描述。
-- `group: string` <Badge type="tip" text="LatestVersion"/>：可选参数。将任务配置放入 WebUI 对应的二级配置页签；应与相关配置项使用相同的分组名。
+- `group: string` <Badge type="tip" text="v1.6.0"/>：可选参数。将任务配置放入 WebUI 对应的二级配置页签；应与相关配置项使用相同的分组名。
 
 ### 使用示例
 
@@ -1387,7 +1387,7 @@ seal.ext.registerTask(ext, "daily", "08:30", (taskCtx) => {
 }, "daily_news", "每天触发「每日新闻」的时间", "推送设置");
 ```
 
-## 获取版本、端点和临时上下文 <Badge type="tip" text="LatestVersion"/>
+## 获取版本、端点和临时上下文 <Badge type="tip" text="v1.6.0"/>
 
 插件可以先用 `seal.getVersion()` 判断运行时信息，并从 `seal.getEndPoints()` 选择发送消息的端点：
 
@@ -1409,7 +1409,7 @@ if (endpoint) {
 
 群消息还需要设置 `message.groupId`。端点列表是浅拷贝，插件不应修改其中的端点对象。临时上下文也不会绕过平台权限、好友关系或群权限限制。
 
-## 读取扩展包配置 <Badge type="tip" text="LatestVersion"/>
+## 读取扩展包配置 <Badge type="tip" text="v1.6.0"/>
 
 当脚本由 `.sealpack` 提供时，可以从扩展对象读取包清单中声明的用户配置：
 

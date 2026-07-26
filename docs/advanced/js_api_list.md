@@ -158,7 +158,7 @@ ext.cmdMap.example = cmd;
 
 ## 配置项
 
-从 <Badge type="tip" text="LatestVersion"/> 起，以下注册函数支持末尾的 `description` 和 `group` 参数。`group` 非空时，WebUI 会把配置项放入对应的二级配置页签。
+从 <Badge type="tip" text="v1.6.0"/> 起，以下注册函数支持末尾的 `description` 和 `group` 参数。`group` 非空时，WebUI 会把配置项放入对应的二级配置页签。
 
 ```javascript
 seal.ext.registerStringConfig(ext, key, defaultValue, description, group);
@@ -197,9 +197,9 @@ seal.ext.registerTask(
 seal.ext.registerTask(ext, taskType, value, callback, key, description, group);
 ```
 
-`taskType` 支持 `cron` 和 `daily`。填写 `key` 后，任务时间可在 WebUI 中配置；从 <Badge type="tip" text="LatestVersion"/> 起，`group` 可用于将任务配置放入二级页签。完整说明见[注册定时任务](./js_example.md#注册定时任务)。
+`taskType` 支持 `cron` 和 `daily`。填写 `key` 后，任务时间可在 WebUI 中配置；从 <Badge type="tip" text="v1.6.0"/> 起，`group` 可用于将任务配置放入二级页签。完整说明见[注册定时任务](./js_example.md#注册定时任务)。
 
-## 版本与端点 <Badge type="tip" text="LatestVersion"/>
+## 版本与端点 <Badge type="tip" text="v1.6.0"/>
 
 ```javascript
 const version = seal.getVersion();
@@ -213,7 +213,7 @@ const endpoints = seal.getEndPoints();
 
 `versionDetail` 包含 `major`、`minor`、`patch`、`prerelease` 和 `buildMetaData`。`getEndPoints()` 返回当前端点列表的浅拷贝；列表中的端点对象仍指向运行时对象，插件不应随意修改。
 
-## 临时消息与上下文 <Badge type="tip" text="LatestVersion"/>
+## 临时消息与上下文 <Badge type="tip" text="v1.6.0"/>
 
 主动发送消息前，可以根据端点构造临时上下文：
 
@@ -241,9 +241,9 @@ const third = seal.getCtxProxyAtPos(ctx, cmdArgs, 2);
 
 位置从 `0` 开始。没有对应的 @ 对象时，应先判断返回值再访问 `player` 等字段。
 
-## 角色卡 `actor` 对象 <Badge type="tip" text="LatestVersion"/>
+## 角色卡 `actor` 对象 <Badge type="tip" text="v1.6.0"/>
 
-从 <Badge type="tip" text="LatestVersion"/> 起，DiceScript/RollVM 会注入 `actor` 角色卡对象。它不是普通 JavaScript 全局对象，JS 插件可以在 `seal.format(ctx, expression)` 等 DiceScript 求值场景中使用它：
+从 <Badge type="tip" text="v1.6.0"/> 起，DiceScript/RollVM 会注入 `actor` 角色卡对象。它不是普通 JavaScript 全局对象，JS 插件可以在 `seal.format(ctx, expression)` 等 DiceScript 求值场景中使用它：
 
 ```javascript
 const dex = seal.format(ctx, '{actor.DEX}');
@@ -264,7 +264,7 @@ seal.gameSystem.newTemplateByYaml(yamlText);
 
 两种接口分别从 JSON 或 YAML 注册规则模板。模板名称与现有模板冲突、内容无效或字段不完整时会返回错误；插件应在加载日志中报告失败，不应继续注册依赖该模板的指令。详见[编写新的 TRPG 规则](./js_gamesystem.md)。
 
-## 扩展包配置 <Badge type="tip" text="LatestVersion"/>
+## 扩展包配置 <Badge type="tip" text="v1.6.0"/>
 
 扩展属于 `.sealpack` 时，可以读取清单中声明并由用户填写的包级配置：
 
@@ -275,7 +275,7 @@ const apiBase = packageConfig.api_base ?? 'https://example.com';
 
 普通单文件插件、未关联扩展包或读取失败时返回空对象。扩展包配置与上述 JS 插件配置项不同：前者来自扩展包清单，后者由脚本调用 `registerXXXConfig` 注册。用户侧说明见[扩展包与商店](../config/package.md)。
 
-## WebSocket 客户端 <Badge type="tip" text="LatestVersion"/>
+## WebSocket 客户端 <Badge type="tip" text="v1.5.1"/>
 
 JS 运行时提供全局 `WebSocket` 构造函数，用于连接 `ws://` 或 `wss://` 服务。它是浏览器 WebSocket API 的客户端子集，不需要从 `seal` 对象调用。
 
