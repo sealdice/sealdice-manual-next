@@ -41,6 +41,8 @@ seal.vars.intGet(ctx, `$XXX`) //返回一个数组，其为 `[int 类型的触�
 seal.vars.intSet(ctx, `$XXX`, valueToSet) //`$XXX` 即 rollvm（初阶豹语）中的变量，其会将 $XXX 的值设定为 int 类型的 valueToSet。
 seal.vars.strGet(ctx, `$XXX`) //返回一个数组，其为 `[str 类型的触发者的该变量的值，bool]`（之所以会有这么奇怪的说法是因为 rollvm 的「个人变量」机制），当 strGet 一个 int 或 intGet 一个 str 时 bool 为 false，如果一切正常则为 true。
 seal.vars.strSet(ctx, `$XXX`, valueToSet) //`$XXX` 即 rollvm（初阶豹语）中的变量，其会将 $XXX 的值设定为 str 类型的 valueToSet。
+seal.vars.computedGet(ctx, `$XXX`) //返回 `[计算公式字符串, bool]`，变量不存在或不是计算公式时 bool 为 false。
+seal.vars.computedSet(ctx, `$XXX`, expression) //将变量设为计算公式，expression 为不带大括号的豹语表达式字符串。
 //seal.vars.varSet(ctx, `$XXX`, valueToSet) //可能是根据数据类型自动推断 int 或 str？
 //seal.vars.varGet(ctx, `$XXX`) //同上
 seal.ext.newCmdItemInfo() //用来定义新的指令；没有参数，个人觉得可以视其为类（class）。
@@ -157,6 +159,25 @@ seal.vars.intGet(ctx, `$m今日打卡次数`) //返回 [8,true]
 seal.vars.strSet(ctx, `$g群友经典语录`, `我要 Git Blame 一下看看是谁写的`) //将群内的该群组变量设置为“我要 Git Blame 一下看看是谁写的”
 seal.vars.strGet(ctx, `$g群友经典语录`) //返回 ["我要 Git Blame 一下看看是谁写的",true]
 ```
+
+### 计算公式变量 <Badge type="tip" text="LatestVersion"/>
+
+计算公式变量保存的是豹语表达式。读取变量值时，海豹会在当前 `ctx` 中重新计算表达式，因此公式依赖的属性或变量改变后，结果也会随之改变。
+
+```javascript
+seal.vars.intSet(ctx, '$m基础负重', 10)
+seal.vars.computedSet(ctx, '$m负重上限', '$m基础负重 * 15')
+
+const [formula, exists] = seal.vars.computedGet(ctx, '$m负重上限')
+// formula 为 '$m基础负重 * 15'，exists 为 true
+
+const result = seal.format(ctx, '{$m负重上限}')
+// result 为公式在当前上下文中的计算结果 '150'
+```
+
+`computedGet` 返回公式原文而不是计算结果；变量不存在或类型不是计算公式时返回 `["", false]`。需要计算结果时，应通过 `seal.format` 等豹语求值入口读取该变量。
+
+`computedSet` 的变量作用域和名称别名处理与 `intSet`、`strSet` 相同。第三个参数只填写表达式本身，不要添加 `{}`；调用时会覆盖同名变量原有的值和类型。
 
 ## `ext`
 
