@@ -1068,6 +1068,43 @@ function chatWithBot(ctx,msg,message) {
 }
 ```
 
+### WebSocket 客户端 <Badge type="tip" text="LatestVersion"/>
+
+需要持续接收服务端消息时，可以使用全局 `WebSocket` 构造函数：
+
+```javascript
+const socket = new WebSocket('wss://example.com/events', ['json']);
+
+socket.onopen = () => {
+  console.log(`WebSocket 已连接，子协议：${socket.protocol}`);
+  socket.send(JSON.stringify({ type: 'subscribe', channel: 'notice' }));
+};
+
+socket.onmessage = (event) => {
+  if (typeof event.data !== 'string') {
+    console.warn('收到二进制 WebSocket 消息');
+    return;
+  }
+
+  try {
+    const payload = JSON.parse(event.data);
+    console.log(`收到 WebSocket 消息：${JSON.stringify(payload)}`);
+  } catch (error) {
+    console.error(`WebSocket 消息不是有效 JSON：${error}`);
+  }
+};
+
+socket.onerror = (event) => {
+  console.error(`WebSocket 错误：${event.error}`);
+};
+
+socket.onclose = (event) => {
+  console.log(`WebSocket 已关闭：${event.code} ${event.reason}`);
+};
+```
+
+只有 `readyState === WebSocket.OPEN` 时才能调用 `send()`。插件不再需要连接时使用 `socket.close(1000, 'normal shutdown')` 主动关闭；插件重载时，核心也会关闭原运行时创建的全部连接。完整成员和事件字段见 [WebSocket 客户端](./js_api_list.md#websocket-客户端)。
+
 ## 自定义 COC 规则
 
 ```javascript

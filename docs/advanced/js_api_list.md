@@ -101,6 +101,7 @@ seal.ext.registerTask(ext, taskType, value, callback, key, description, group); 
 seal.getVersion(); // 返回版本号、版本代码和结构化版本详情。
 seal.getEndPoints(); // 返回当前接入端点列表的浅拷贝。
 ext.getPackageConfig(); // 获取扩展所属 .sealpack 的包级配置；不属于扩展包时返回空对象。
+new WebSocket(url, protocols); // 创建 WebSocket 客户端连接，protocols 可省略。
 ```
 
 ## 消息与回复
@@ -273,6 +274,64 @@ const apiBase = packageConfig.api_base ?? 'https://example.com';
 ```
 
 普通单文件插件、未关联扩展包或读取失败时返回空对象。扩展包配置与上述 JS 插件配置项不同：前者来自扩展包清单，后者由脚本调用 `registerXXXConfig` 注册。用户侧说明见[扩展包与商店](../config/package.md)。
+
+## WebSocket 客户端 <Badge type="tip" text="LatestVersion"/>
+
+JS 运行时提供全局 `WebSocket` 构造函数，用于连接 `ws://` 或 `wss://` 服务。它是浏览器 WebSocket API 的客户端子集，不需要从 `seal` 对象调用。
+
+```javascript
+const socket = new WebSocket(url, protocols);
+```
+
+- `url: string`：WebSocket 服务地址。
+- `protocols?: string | string[]`：可选的子协议，服务端选中的值可在连接成功后从 `socket.protocol` 读取。
+
+### 状态与属性
+
+| 属性或常量 | 类型或值 | 说明 |
+| --- | --- | --- |
+| `socket.url` | `string` | 构造连接时使用的地址，只读 |
+| `socket.protocol` | `string` | 服务端选中的子协议，未选择时为空字符串，只读 |
+| `socket.readyState` | `number` | 当前连接状态，只读 |
+| `WebSocket.CONNECTING` | `0` | 正在连接 |
+| `WebSocket.OPEN` | `1` | 已连接，可以发送消息 |
+| `WebSocket.CLOSING` | `2` | 正在关闭 |
+| `WebSocket.CLOSED` | `3` | 已关闭或连接失败 |
+
+### 方法
+
+```javascript
+socket.send(message);
+socket.close(code, reason);
+socket.addEventListener(type, listener);
+socket.removeEventListener(type, listener);
+```
+
+- `send(message: string)` 发送文本消息。连接不处于 `OPEN` 状态或发送失败时会触发 `error` 事件；当前接口不发送二进制消息。
+- `close(code = 1000, reason = '')` 主动关闭连接并触发 `close` 事件。
+- `addEventListener(type, listener)` 添加事件监听器。同一事件不会重复添加同一个函数。
+- `removeEventListener(type, listener)` 移除先前添加的同一个监听函数。
+
+### 事件
+
+可以设置 `onopen`、`onmessage`、`onerror`、`onclose`，也可以通过 `addEventListener` 监听对应的 `open`、`message`、`error`、`close`。属性处理器先执行，随后按添加顺序执行监听器。
+
+| 事件 | 额外字段 | 说明 |
+| --- | --- | --- |
+| `open` | 无 | 连接建立完成 |
+| `message` | `data` | 文本帧为字符串，二进制帧为字节数据 |
+| `error` | `error: string` | 连接或发送错误；`error` 是错误文本，不是 `Error` 对象 |
+| `close` | `code`、`reason`、`wasClean` | 关闭状态；当前运行时可能将远端断开统一报告为 `1006` 和 `connection lost` |
+
+所有事件都包含 `type`、`target` 和 `currentTarget`，其中后两者均为当前连接对象。连接建立失败时会进入 `CLOSED` 并触发 `error`，插件不应只依赖 `close` 处理失败。
+
+插件重载或 JS 运行时重建时，海豹会关闭此前创建的全部 WebSocket。插件不再使用某个连接时也应主动调用 `close()`。当前接口不提供 WebSocket 服务端、自定义握手请求头、二进制发送、`binaryType`、`bufferedAmount` 或浏览器 WebSocket 的其他完整能力。
+
+::: warning WSS 证书校验
+
+当前运行时会跳过 `wss://` 服务端证书校验。连接仍会加密，但插件无法据此确认服务端身份；不要仅依赖该连接传输敏感凭据。
+
+:::
 
 ## 牌堆、黑名单与规则
 
