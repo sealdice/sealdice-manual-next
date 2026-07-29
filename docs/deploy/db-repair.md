@@ -21,6 +21,19 @@ title: 数据库检查和修复
 
 稍作等待，以确保数据被写入硬盘。
 
+::: danger 拷贝数据库时必须同时处理 WAL 和 SHM 文件
+
+如果要把数据库复制到其他目录或电脑上修复，必须同时处理与数据库同名的 `-wal` 和 `-shm` 文件。例如，复制 `data.db` 时，可能还需要处理 `data.db-wal` 和 `data.db-shm`。
+
+关闭海豹后，请选择以下任一方式：
+
+- 将 `.db`、`.db-wal` 和 `.db-shm` 三个文件一起复制到修复目录；
+- 只复制 `.db` 文件，但在打开它之前，先删除修复目录中同名的旧 `.db-wal` 和 `.db-shm` 文件。
+
+不要将某一份数据库与另一时间点或另一份数据库产生的 WAL、SHM 文件混用，否则可能造成数据丢失或数据库损坏。海豹仍在运行时，不要直接删除原目录中的 WAL、SHM 文件。
+
+:::
+
 随后，使用命令行程序进入海豹的目录，执行以下命令。如果对使用命令行感到困难，后面有一个简化的替代方案。
 
 ::: tabs key:shell
@@ -101,9 +114,9 @@ pause
 
 你可以从其[官网下载页](https://www.sqlite.org/download.html)，找到 Precompiled Binaries for Windows，下载其中的 sqlite-tools。确保你下载的是 3.40 以上版本，通常来说，直接下载最新版即可。
 
-下载完成后，找出 sqlite.exe 放到空目录备用。
+下载完成后，找出 `sqlite3.exe` 放到空目录备用。
 
-将损坏的数据文件（如 data.db）从海豹的 data/default/ 目录中复制出来，放在和 sqlite.exe 同一个目录。
+将损坏的数据文件（如 `data.db`）从海豹的 `data/default/` 目录中复制出来，放在和 `sqlite3.exe` 同一个目录。复制时必须按照前文的警告，同时处理对应的 WAL、SHM 文件。
 
 使用命令行工具打开这个目录，在此目录下，执行下面的指令：
 
@@ -116,11 +129,31 @@ sqlite3.exe data.db
 .exit
 ```
 
-恢复数据到 a.db，并删除无效数据。
+恢复数据到 `a.db`：
 
 ```shell
 sqlite3.exe a.db
 .read 1.sql
+```
+
+接下来需要根据数据库版本检查数据，并删除 `id` 为空的无效记录。下面的 SQL 仅适用于修复 `data.db`；修复 `data-logs.db` 或 `data-censor.db` 时，不要照搬这些清理语句。
+
+### V146 数据库
+
+V146（v1.4.6）的 `data.db` 使用 `attrs_user`、`attrs_group` 和 `attrs_group_user` 等旧表。先执行 `.tables` 查看表名，再抽查各表的 `id`：
+
+```sql
+.tables
+SELECT id FROM attrs_user LIMIT 20;
+SELECT id FROM attrs_group LIMIT 20;
+SELECT id FROM attrs_group_user LIMIT 20;
+SELECT id FROM group_info LIMIT 20;
+SELECT id FROM group_player_info LIMIT 20;
+```
+
+确认查询结果符合预期后，删除恢复过程中产生的无效记录：
+
+```sql
 delete from attrs_group where id is null;
 delete from attrs_user where id is null;
 delete from group_info where id is null;
@@ -130,4 +163,91 @@ delete from group_player_info where id is null;
 .exit
 ```
 
-接下来这个 a.db 就是修好的数据库了，将其复制回海豹的原路径，并改名回 data.db。
+### V150 及以上数据库
+
+V150（v1.5.0）起，人物卡和群组属性等数据由旧的 `attrs_user`、`attrs_group`、`attrs_group_user` 表迁移到统一的 `attrs` 表，不能继续使用 V146 的清理语句。先执行 `.tables`，确认存在 `attrs` 表，再抽查 `id`：
+
+```sql
+.tables
+SELECT id FROM attrs LIMIT 20;
+SELECT id FROM group_info LIMIT 20;
+SELECT id FROM ban_info LIMIT 20;
+SELECT id FROM group_player_info LIMIT 20;
+```
+
+确认查询结果符合预期后，删除恢复过程中产生的无效记录：
+
+```sql
+delete from attrs where id is null;
+delete from group_info where id is null;
+delete from ban_info where id is null;
+delete from group_player_info where id is null;
+.exit
+```
+
+此时 `a.db` 就是修复后的数据库。保持海豹关闭，将原路径中待替换数据库对应的旧 WAL、SHM 文件删除，再把 `a.db` 复制回 `data/default/` 并改回原数据库文件名，例如 `data.db`。启动海豹前，建议再次执行数据库完整性检查。
+
+## 数据库升级记录（高级用户）
+
+::: danger 仅供了解数据库结构的高级用户使用
+
+手动修改升级记录会让海豹跳过本应执行的数据库迁移，或重复执行已经完成的迁移。操作前必须关闭海豹并备份整个 `data/default/` 目录。只有在确认数据库实际结构和数据状态后，才能执行下面的 SQL。
+
+:::
+
+默认使用 SQLite 时，数据库升级记录保存在 `data/default/data.db` 的 `upgrade_records` 表中，不在 `data-logs.db` 或 `data-censor.db` 中。旧的 `upgrade_metadata.json` 已不再作为升级状态来源。
+
+`upgrade_records` 表包含以下字段：
+
+| 字段 | 含义 |
+| --- | --- |
+| `id` | 升级项目的唯一 ID，也是判断是否已执行的依据 |
+| `timestamp` | 执行或写入记录的时间 |
+| `success` | 执行结果，`1` 为成功，`0` 为失败 |
+| `message` | 结果或错误信息 |
+| `logs` | 此升级项目产生的日志，保存为 JSON 数组 |
+
+海豹启动时会按 `id` 顺序检查升级项目。只要 `upgrade_records` 中已经存在对应的 `id`，该项目就会被视为已应用并跳过；当前判断不区分 `success` 是 `0` 还是 `1`。未找到 `id` 时，海豹会执行升级，并在执行结束后写入成功或失败记录。
+
+V150 数据库结构升级对应两个记录：
+
+| ID | 作用 |
+| --- | --- |
+| `006_V150UpgradeAttrsMigration` | 将旧的三个 `attrs_*` 表合并为 `attrs`，并升级相关表结构 |
+| `007_V150FixGroupInfoMigration` | 清理 V146 遗留的异常 `group_info` 数据 |
+
+可以先查看当前记录：
+
+```sql
+SELECT id, timestamp, success, message
+FROM upgrade_records
+ORDER BY id;
+```
+
+### 手动跳过升级
+
+仅当迁移实际上已经完成、数据库中已经存在正确的 V150 表结构，但升级记录丢失时，才可以手动补写记录。以下示例会把两个 V150 升级项目标记为已应用：
+
+```sql
+INSERT OR REPLACE INTO upgrade_records
+    (id, timestamp, success, message, logs)
+VALUES
+    ('006_V150UpgradeAttrsMigration', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'), 1, '手动标记为已应用', '[]'),
+    ('007_V150FixGroupInfoMigration', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'), 1, '手动标记为已应用', '[]');
+```
+
+如果数据库仍是 V146 结构，手动添加这些记录会跳过必要迁移，导致人物卡、群组属性等数据无法正常使用。
+
+### 重置升级
+
+要让海豹在下次启动时重新尝试某个升级项目，应删除对应的记录，而不是删除 `upgrade_records` 表。重置两个 V150 升级项目的示例如下：
+
+```sql
+DELETE FROM upgrade_records
+WHERE id IN (
+    '006_V150UpgradeAttrsMigration',
+    '007_V150FixGroupInfoMigration'
+);
+```
+
+删除后先退出 SQLite，再启动海豹。重新执行迁移可能再次修改表结构或数据，因此只应在确认上次迁移未完成、或需要在备份副本上重新验证迁移时使用。
