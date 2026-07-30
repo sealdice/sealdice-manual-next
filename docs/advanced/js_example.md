@@ -43,8 +43,6 @@ if (!seal.ext.find('test')) {
 
 :::
 
-<!-- TODO: 添加 1.4.1 新增的 插件配置项 相关说明 -->
-
 ## 自定义指令
 
 想要创建一条自定义指令，首先需要创建一个扩展（`seal.ExtInfo`），写好自定义指令的实现逻辑之后，再注册到扩展中。
@@ -1070,6 +1068,43 @@ function chatWithBot(ctx,msg,message) {
 }
 ```
 
+### WebSocket 客户端 <Badge type="tip" text="v1.6.0"/>
+
+需要持续接收服务端消息时，可以使用全局 `WebSocket` 构造函数：
+
+```javascript
+const socket = new WebSocket('wss://example.com/events', ['json']);
+
+socket.onopen = () => {
+  console.log(`WebSocket 已连接，子协议：${socket.protocol}`);
+  socket.send(JSON.stringify({ type: 'subscribe', channel: 'notice' }));
+};
+
+socket.onmessage = (event) => {
+  if (typeof event.data !== 'string') {
+    console.warn('收到二进制 WebSocket 消息');
+    return;
+  }
+
+  try {
+    const payload = JSON.parse(event.data);
+    console.log(`收到 WebSocket 消息：${JSON.stringify(payload)}`);
+  } catch (error) {
+    console.error(`WebSocket 消息不是有效 JSON：${error}`);
+  }
+};
+
+socket.onerror = (event) => {
+  console.error(`WebSocket 错误：${event.error}`);
+};
+
+socket.onclose = (event) => {
+  console.log(`WebSocket 已关闭：${event.code} ${event.reason}`);
+};
+```
+
+只有 `readyState === WebSocket.OPEN` 时才能调用 `send()`。插件不再需要连接时使用 `socket.close(1000, 'normal shutdown')` 主动关闭；插件重载时，核心也会关闭原运行时创建的全部连接。完整成员和事件字段见 [WebSocket 客户端](./js_api_list.md#websocket-客户端)。
+
 ## 自定义 COC 规则
 
 ```javascript
@@ -1168,16 +1203,18 @@ if (!seal.ext.find('xxx')){
 你也可以直接使用 `seal.ext.getConfig()` 函数获取配置项的值，这个函数会返回一个 `ConfigItem` 对象，
 包含了配置项的类型、值、默认值等信息。
 
-`ConfigItem` 对象的类型定义如下，调用时请使用 `jsbind` 中的值作为 `key`
+`ConfigItem` 对象的类型定义如下，调用时请使用 `jsbind` 中的值作为 `key`。其中 `description` 和 `group` 由 <Badge type="tip" text="v1.6.0"/> 补充：
 
 ```go
 type ConfigItem struct {
     Key          string      `json:"key" jsbind:"key"`
     Type         string      `json:"type" jsbind:"type"`
+    Description  string      `json:"description,omitempty" jsbind:"description"` // vA.B.C 新增字段。
     DefaultValue interface{} `json:"defaultValue" jsbind:"defaultValue"`
     Value        interface{} `json:"value,omitempty" jsbind:"value"`
     Option       interface{} `json:"option,omitempty" jsbind:"option"`
     Deprecated   bool        `json:"deprecated,omitempty" jsbind:"deprecated"`
+    Group        string      `json:"group,omitempty" jsbind:"group"` // vA.B.C 新增字段。
 }
 ```
 
@@ -1266,14 +1303,16 @@ if (!seal.ext.find('js-config-example')) {
   seal.ext.register(ext);
 
   // 注册配置项需在 ext 注册后进行
-  // 通常来说，register 函数的参数为 ext, key, defaultValue
-  seal.ext.registerStringConfig(ext, "testkey1", "testvalue");
-  seal.ext.registerIntConfig(ext, "testkey2", 123);
-  seal.ext.registerFloatConfig(ext, "testkey3", 123.456);
-  seal.ext.registerBoolConfig(ext, "testkey4", true);
-  seal.ext.registerTemplateConfig(ext, "testkey5", ["1", "2", "3", "4"]);
-  // 注册单选项函数的参数为 ext, key, defaultValue, options
-  seal.ext.registerOptionConfig(ext, "testkey6", "1", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]);
+  // description、group 为 vA.B.C 新增参数；请在元数据中声明对应的 @sealVersion。
+  // 参数依次为 ext、key、defaultValue、description、group。
+  // group 非空时，WebUI 会生成对应的二级配置页签。
+  seal.ext.registerStringConfig(ext, "testkey1", "testvalue", "字符串示例", "基础设置");
+  seal.ext.registerIntConfig(ext, "testkey2", 123, "整数示例", "基础设置");
+  seal.ext.registerFloatConfig(ext, "testkey3", 123.456, "浮点数示例", "基础设置");
+  seal.ext.registerBoolConfig(ext, "testkey4", true, "开关示例", "基础设置");
+  seal.ext.registerTemplateConfig(ext, "testkey5", ["1", "2", "3", "4"], "文本模板", "文案设置");
+  // option 类型在 defaultValue 后增加 options 参数。
+  seal.ext.registerOptionConfig(ext, "testkey6", "1", ["1", "2", "3"], "单选示例", "基础设置");
 }
 ```
 
@@ -1294,7 +1333,8 @@ if (!seal.ext.find('js-config-example')) {
 ### API 参数
 
 ```javascript
-seal.ext.registerTask(ext, taskType, value, func, key="", description="")
+// group 为 vA.B.C 新增的可选参数；请在元数据中声明对应的 @sealVersion。
+seal.ext.registerTask(ext, taskType, value, func, key="", description="", group="")
 ```
 
 其各个参数的含义如下：
@@ -1306,7 +1346,7 @@ seal.ext.registerTask(ext, taskType, value, func, key="", description="")
 - `func: (taskCtx: JsScriptTaskCtx) => void`：定时任务的实际执行函数。其中 `taskCtx` 的数据类型为：
 
   ```typescript
-  type JsScriptTaskCtx {
+  type JsScriptTaskCtx = {
     now: number;
     key: string;
   }
@@ -1317,6 +1357,7 @@ seal.ext.registerTask(ext, taskType, value, func, key="", description="")
   使用定时任务 API 的用户应该将实际业务逻辑放置在 `func` 内，定时任务 API 仅承担唤醒功能。
 - `key: string`：可选参数。为此定时任务提供唯一索引。当填写了 `key` 时，此定时任务也会出现在 WebUI 的插件配置项中，可以通过 WebUI 修改定时任务表达式。
 - `description: string`：可选参数。为此定时任务提供可读性更高的描述。当同时填写了 `key` 与 `description` 时，WebUI 的插件配置项中将会显示关于此定时任务的描述。
+- `group: string` <Badge type="tip" text="v1.6.0"/>：可选参数。将任务配置放入 WebUI 对应的二级配置页签；应与相关配置项使用相同的分组名。
 
 ### 使用示例
 
@@ -1343,5 +1384,38 @@ seal.ext.registerTask(ext, "daily", "08:30", (taskCtx) => {
   for (const group of groups) {
     sendDailyNews(group);
   }
-}, "daily_news", "每天触发「每日新闻」的时间");
+}, "daily_news", "每天触发「每日新闻」的时间", "推送设置");
 ```
+
+## 获取版本、端点和临时上下文 <Badge type="tip" text="v1.6.0"/>
+
+插件可以先用 `seal.getVersion()` 判断运行时信息，并从 `seal.getEndPoints()` 选择发送消息的端点：
+
+```javascript
+const version = seal.getVersion();
+console.log(`SeaDice ${version.version}`);
+
+const endpoint = seal.getEndPoints().find((item) => item.userId === targetBotId);
+if (endpoint) {
+  const message = seal.newMessage();
+  message.messageType = 'private';
+  message.platform = endpoint.platform;
+  message.sender.userId = targetUserId;
+
+  const tempCtx = seal.createTempCtx(endpoint, message);
+  seal.replyPerson(tempCtx, message, '这是一条主动消息');
+}
+```
+
+群消息还需要设置 `message.groupId`。端点列表是浅拷贝，插件不应修改其中的端点对象。临时上下文也不会绕过平台权限、好友关系或群权限限制。
+
+## 读取扩展包配置 <Badge type="tip" text="v1.6.0"/>
+
+当脚本由 `.sealpack` 提供时，可以从扩展对象读取包清单中声明的用户配置：
+
+```javascript
+const packageConfig = ext.getPackageConfig();
+const apiBase = packageConfig.api_base ?? 'https://example.com';
+```
+
+不属于扩展包、包管理器不可用或读取失败时会返回空对象。包级配置与脚本调用 `registerXXXConfig` 注册的插件配置是两套不同配置；用户侧安装与权限说明见[扩展包与商店](../config/package.md)。

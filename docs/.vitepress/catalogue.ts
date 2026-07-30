@@ -108,6 +108,7 @@ export const config = {
         { text: "自定义回复", link: "/config/reply" },
         { text: "牌堆", link: "/config/deck" },
         { text: "JavaScript 插件", link: "/config/jsscript" },
+        { text: "扩展包与商店", link: "/config/package" },
         { text: "帮助文档", link: "/config/helpdoc" },
         { text: "拦截", link: "/config/censor" },
       ],

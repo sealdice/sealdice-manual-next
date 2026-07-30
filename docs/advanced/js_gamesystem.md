@@ -79,3 +79,19 @@ title: 编写新的 TRPG 规则
 如果你希望直接尝试以上插件的效果，可以从以下链接获取经过编译的 JavaScript 文件：
 
 [摸鱼大赛 TRPG 规则.js](https://github.com/sealdice/javascript/blob/main/examples/013.%E8%87%AA%E5%AE%9A%E4%B9%89TRPG%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99.js)
+
+## 新版本补充 <Badge type="tip" text="v1.6.0"/>
+
+规则模板可以从 JSON 或 YAML 文本注册。插件应检查返回结果，并在模板注册成功后再挂载依赖它的指令：
+
+```javascript
+try {
+  seal.gameSystem.newTemplateByYaml(templateYaml);
+} catch (error) {
+  console.error('规则模板注册失败', error);
+}
+```
+
+同名模板重复注册、格式错误或必填字段缺失都会导致失败。通过扩展包分发时，也可以直接把模板声明为包内的 `template` 内容，无需在脚本中嵌入大段 YAML；详见[扩展包与商店](../config/package.md)。
+
+从 <Badge type="tip" text="v1.6.0"/> 起，DiceScript 上下文提供 `actor` 角色卡对象。规则指令可通过 `seal.format(ctx, '{actor.属性名}')` 读取角色属性；属性别名会按当前规则模板归一化。`actor` 属于 DiceScript/RollVM，不是普通 JavaScript 全局对象，完整说明见 [API 列表](./js_api_list.md#角色卡-actor-对象)。

@@ -27,6 +27,8 @@ JavaScript（JS）是一门基于原型和头等函数的多范式高级解释�
 
 你可以在 [JS 插件仓库](https://github.com/sealdice/javascript) 或官方群的群文件中找到其他骰主分享的 JS 插件。
 
+从 <Badge type="tip" text="v1.6.0" /> 起，插件也可以由[扩展包与商店](./package.md)提供。包内插件应在扩展包页面安装、启用和升级，不要直接修改 `cache/packages/` 中的脚本。
+
 ::: tip 提示：无法访问仓库？
 
 仓库位于 GitHub，访问时请确认你的网络状况。
