@@ -24,8 +24,10 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+      - name: Show pnpm version
+        run: pnpm --version
       - name: Pnpm install
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build VuePress site
         run: pnpm docs:build
       - name: Deploy to GitHub Pages
