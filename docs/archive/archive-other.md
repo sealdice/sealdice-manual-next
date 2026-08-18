@@ -549,3 +549,125 @@ adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.s
 建议使用 **反向 ws** 设置。在海豹中，账号添加中选择「QQ(onebot11反向WS)」，填入骰子 QQ 号和要开放的 ws 端口（例如 `:6544`）。
 
 随后在 Shamrock 中的被动 ws 连接地址中写 `ws://localhost:6544/ws`。
+
+## Lagrange.OneBot <Badge type="tip" text="v1.4.2" />
+
+::: warning 注意：海豹已于 <Badge type="warning" text="v1.6.0"/> 版本放弃维护此方案，以下内容归档于 2026 年 8 月 19 日。
+
+:::
+
+::: warning 注意：Lagrange.OneBot 已在 2025 年 10 月 10 号 作为 Lagrange.Core V1 产物归档在仓库的 v1 分支，并由 LagrangeDev 组织宣布停止积极维护。
+
+:::
+
+海豹从 <Badge type="tip" text="v1.4.2"/> 开始支持通过 `Lagrange.OneBot` 接入 OneBot 11。
+
+### 登录 Lagrange.OneBot
+
+请按照 [Lagrange.OneBot 手册](https://lagrangedev.github.io/Lagrange.Doc/v1/Lagrange.OneBot/Config/)自行部署，并按照手册和自己的需求填写配置文件。
+
+::: warning Config
+
+海豹的反向 ws 连接仅连接 `ws://{HOST}:{PORT}/ws` 地址。
+
+以下的 `appsettings.json` 适合海豹连接。
+
+> **正向** ws 连接
+
+``` json
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",  
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+    },
+  },
+  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
+  "SignProxyUrl": "", 
+  "Account": {
+    "Uin": 0,  
+    "Password": "", 
+    "Protocol": "Linux",  
+    "AutoReconnect": true,
+    "GetOptimumServer": true,
+  },
+  "Message": {
+    "IgnoreSelf": true,  
+    "StringPost": false,
+  },
+  "QrCode": {
+    "ConsoleCompatibilityMode": false,
+  },
+  "Implementations": [ 
+    {
+      "Type": "ForwardWebSocket",
+      "Host": "127.0.0.1",
+      "Port": 8101,
+      "HeartBeatInterval": 5000,
+      "HeartBeatEnable": true,
+      "AccessToken": "",
+    }
+  ],
+}
+
+
+```
+
+按照以下配置登录的 `Lagrange.OneBot`，在海豹的 UI 中新增账号时，「账号类型」选择 `OneBot11 正向 WS`，连接地址填写 `ws://127.0.0.1:8101`。
+
+>**反向** ws 连接
+
+``` json
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",  
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+    },
+  },
+  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
+  "SignProxyUrl": "", 
+  "Account": {
+    "Uin": 0,  
+    "Password": "", 
+    "Protocol": "Linux",  
+    "AutoReconnect": true,
+    "GetOptimumServer": true,
+  },
+  "Message": {
+    "IgnoreSelf": true,  
+    "StringPost": false,
+  },
+  "QrCode": {
+    "ConsoleCompatibilityMode": false,
+  },
+  "Implementations": [ 
+    {
+      "Type": "ReverseWebSocket",
+      "Host": "127.0.0.1",
+      "Port": 8100,
+      "Suffix": "/ws",
+      "ReconnectInterval": 5000,
+      "HeartBeatInterval": 5000,
+      "HeartBeatEnable": true,
+      "AccessToken": "",
+    }
+  ],
+}
+
+
+```
+
+按照以下配置登录的 `Lagrange.OneBot`，在海豹的 UI 中新增账号时，「账号类型」选择 `OneBot11 反向 WS`，连接地址填写 `:8100`。
+
+:::
+
+### 海豹连接 Lagrange.OneBot
+
+进入海豹 WebUI 的「账号设置」新增连接，按照自己的 Lagrange.OneBot 配置选择 OneBot 11 正向或反向 WS，填写 QQ 号和连接地址。
+
+成功连接后即可使用。

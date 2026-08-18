@@ -19,7 +19,7 @@ title: QQ
 
 从目前的表现看来，QQ 官方会对账号行为进行检测，来区分出账号是否是正常用户（如不正常的登录方式，以不合理的速度在多地区登录等等）。我们无法得知具体的检测细节，但已证实的是，当 QQ 账号用作机器人并被检测到时，该 QQ 会视为风险账号，被官方予以警告，封禁，临时甚至 **永久冻结** 的惩罚。
 
-尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 Go-Cqhttp 已经**基本不可用**，而 [Lagrange.OneBot](#lagrange-onebot)、[Lagrange.Milky](#lagrange-milky) 和 [NapCat](#NapCat) 等基于 NTQQ 的方案仍在维护），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
+尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 Go-Cqhttp 已经**基本不可用**，而 [Lagrange.Milky](#lagrange-milky) 和 [NapCat](#NapCat) 等基于 NTQQ 的方案仍在维护），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
 
 因此，*是否在 QQ 平台搭建这样的非官方机器人取决于你的慎重考虑*。同时，第三方方案的可用性也可能会随时间推移而存在变化，海豹官方无法做出任何保证。
 
@@ -42,7 +42,7 @@ title: QQ
 对于需要使用更加灵活的方案的用户，我们推荐如下：
 
 - 需要由海豹管理 QQ 客户端进程的，见[内置客户端](#内置客户端)；
-- 使用 OneBot 11 分离部署的，见 [Lagrange.OneBot](#lagrange-onebot)、[LLBot](#llbot) 或 [NapCat](#NapCat)；
+- 使用 OneBot 11 分离部署的，见 [LLBot](#llbot) 或 [NapCat](#NapCat)；
 - 使用 Milky 分离部署的，见 [Lagrange.Milky](#lagrange-milky) 或 [Yogurt](#yogurt)；
 - 通过 docker 部署海豹的，见 [QQ - Docker 中的海豹](./platform-qq-docker)；
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](./platform-qq-official.md)；
@@ -52,7 +52,7 @@ title: QQ
 
 ::: warning 注意：对接基于 NTQQ PC 端协议的 QQ 方案时，注意对方是否支持 `戳一戳` 功能
 
-Lagrange.OneBot、Lagrange.Milky、Yogurt、LLBot 和 NapCat 等基于 NTQQ PC 的 QQ 方案，在旧版本中可能缺失该功能。
+Lagrange.Milky、Yogurt、LLBot 和 NapCat 等基于 NTQQ PC 的 QQ 方案，在旧版本中可能缺失该功能。
 
 使用旧协议端且持续出现报错时，请先更新对应实现；暂时无法更新的，应**关闭**位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错信息。
 
@@ -116,128 +116,6 @@ Yogurt 是非容器部署时的默认内置选择。二维码过期后需要删�
 
 :::
 
-### Lagrange.OneBot <Badge type="tip" text="v1.4.2" />
-
-海豹从 <Badge type="tip" text="v1.4.2"/> 开始支持通过 `Lagrange.OneBot` 接入 OneBot 11。
-
-::: info Lagrange.OneBot 与 Lagrange.Milky
-
-[Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core) 是旧版 Lagrange 的 OneBot 11 实现。本手册使用完整名称 `Lagrange.OneBot`，以区别基于 Milky 协议的新实现 `Lagrange.Milky`。
-
-Lagrange.OneBot 可以在 Windows、Linux 和 macOS 上部署，海豹核心通过其 OneBot 11 API 提供 QQ 骰子服务。
-
-:::
-
-#### 登录 Lagrange.OneBot
-
-请按照 [Lagrange.OneBot 手册](https://lagrangedev.github.io/Lagrange.Doc/v1/Lagrange.OneBot/Config/)自行部署，并按照手册和自己的需求填写配置文件。
-
-::: warning Config
-
-海豹的反向 ws 连接仅连接 `ws://{HOST}:{PORT}/ws` 地址。
-
-以下的 `appsettings.json` 适合海豹连接。
-
-> **正向** ws 连接
-
-``` json
-
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",  
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information",
-    },
-  },
-  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
-  "SignProxyUrl": "", 
-  "Account": {
-    "Uin": 0,  
-    "Password": "", 
-    "Protocol": "Linux",  
-    "AutoReconnect": true,
-    "GetOptimumServer": true,
-  },
-  "Message": {
-    "IgnoreSelf": true,  
-    "StringPost": false,
-  },
-  "QrCode": {
-    "ConsoleCompatibilityMode": false,
-  },
-  "Implementations": [ 
-    {
-      "Type": "ForwardWebSocket",
-      "Host": "127.0.0.1",
-      "Port": 8101,
-      "HeartBeatInterval": 5000,
-      "HeartBeatEnable": true,
-      "AccessToken": "",
-    }
-  ],
-}
-
-
-```
-
-按照以下配置登录的 `Lagrange.OneBot`，在海豹的 UI 中新增账号时，「账号类型」选择 `OneBot11 正向 WS`，连接地址填写 `ws://127.0.0.1:8101`。
-
->**反向** ws 连接
-
-``` json
-
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",  
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information",
-    },
-  },
-  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
-  "SignProxyUrl": "", 
-  "Account": {
-    "Uin": 0,  
-    "Password": "", 
-    "Protocol": "Linux",  
-    "AutoReconnect": true,
-    "GetOptimumServer": true,
-  },
-  "Message": {
-    "IgnoreSelf": true,  
-    "StringPost": false,
-  },
-  "QrCode": {
-    "ConsoleCompatibilityMode": false,
-  },
-  "Implementations": [ 
-    {
-      "Type": "ReverseWebSocket",
-      "Host": "127.0.0.1",
-      "Port": 8100,
-      "Suffix": "/ws",
-      "ReconnectInterval": 5000,
-      "HeartBeatInterval": 5000,
-      "HeartBeatEnable": true,
-      "AccessToken": "",
-    }
-  ],
-}
-
-
-```
-
-按照以下配置登录的 `Lagrange.OneBot`，在海豹的 UI 中新增账号时，「账号类型」选择 `OneBot11 反向 WS`，连接地址填写 `:8100`。
-
-:::
-
-#### 海豹连接 Lagrange.OneBot
-
-进入海豹 WebUI 的「账号设置」新增连接，按照自己的 Lagrange.OneBot 配置选择 OneBot 11 正向或反向 WS，填写 QQ 号和连接地址。
-
-成功连接后即可使用。
-
 ### Lagrange.Milky <Badge type="tip" text="v1.5.1" />
 
 海豹从 <Badge type="tip" text="v1.5.1"/> 开始支持通过 `Lagrange.Milky` 接入 Milky。
@@ -276,7 +154,7 @@ Lagrange.OneBot 可以在 Windows、Linux 和 macOS 上部署，海豹核心通�
 
 ### LLBot
 
-[LLBot](https://github.com/LLOneBot/LuckyLilliaBot) 是原 LLOneBot 项目当前使用的名称。中出现的 `LLOneBot` 或 `LLTwoBot` 均指这一项目的早期名称，本手册统一使用 `LLBot`。
+[LLBot](https://github.com/LLOneBot/LuckyLilliaBot)是原 LLOneBot、现 LuckyLiliaBot 项目当前使用的官方简称。 `LLOneBot` 或 `LLTwoBot` 均指这一项目的早期名称。为防止误解，本手册统一使用 `LLBot` 对该项目进行代称。
 
 请按照 [LLBot 文档](https://luckylillia.com/)完成安装并启用 OneBot 11 正向或反向 WebSocket。
 随后在海豹 WebUI 的「账号设置」添加对应的 OneBot 11 连接；端口、访问令牌。
