@@ -15,9 +15,9 @@ title: QQ - Docker 中的海豹
 
 :::
 
-## 通过 `docker compose` 同时部署海豹与 Lagrange
+## 通过 `docker compose` 同时部署海豹与 Lagrange.OneBot
 
-通过此方式部署的海豹与 Lagrange 容器共同构成一个服务栈，可以方便地进行集中管理。请首先阅读 [QQ](./platform-qq) 一节中，[Lagrange](./platform-qq#lagrange) 部分，大致了解 Lagrange 的部署过程。
+通过此方式部署的海豹与 Lagrange.OneBot 容器共同构成一个服务栈，可以方便地进行集中管理。请首先阅读 [QQ](./platform-qq) 一节中，[Lagrange.OneBot](./platform-qq#lagrange-onebot) 部分，大致了解 Lagrange.OneBot 的部署过程。
 
 ### 创建 `docker-compose.yml`
 
@@ -44,15 +44,15 @@ services:
     restart: unless-stopped
 ```
 
-此文件参考了[通过 docker 部署海豹](./quick-start.md#启动)与[通过 docker 部署 Lagrange](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
+此文件参考了[通过 docker 部署海豹](./quick-start.md#启动)与[通过 docker 部署 Lagrange.OneBot](https://github.com/LagrangeDev/Lagrange.Core/blob/master/Docker.md?tab=readme-ov-file) 相关内容。
 
 此文件将宿主机 3211 端口映射到海豹容器的 3211 端口，如有需要，请根据实际情况自行调整端口映射。
 
-此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 与 `seal_data` 目录分别挂载到 Lagrange 容器的 `/app/data` 与 `/data` 目录。由于通过 QQ 后端发送本地图片时，海豹会将图片**在容器内**的绝对路径传递给 QQ 后端，所以需要将海豹数据也挂载到 Lagrange 容器以使 Lagrange 得以访问图片。如有需要，请根据实际情况自行调整挂载的目录。
+此文件将工作目录下 `seal_data` 与 `seal_backups` 目录分别挂载到海豹容器的 `/data` 与 `/backups` 目录，并将 `lagrange_data` 与 `seal_data` 目录分别挂载到 Lagrange.OneBot 容器的 `/app/data` 与 `/data` 目录。由于通过 QQ 后端发送本地图片时，海豹会将图片**在容器内**的绝对路径传递给 QQ 后端，所以需要将海豹数据也挂载到 Lagrange.OneBot 容器以使其能够访问图片。如有需要，请根据实际情况自行调整挂载的目录。
 
 ::: warning 注意：在容器内以非 root 用户执行海豹进程可能会导致一些权限问题。
 
-因此，示例文件以 root 用户生成容器进程。后续需要修改 `seal_data`、`seal_backups` 及 `lagrange_data` 目录中的内容（包括 Lagrange 配置文件、海豹数据等）时，需要 root 权限。
+因此，示例文件以 root 用户生成容器进程。后续需要修改 `seal_data`、`seal_backups` 及 `lagrange_data` 目录中的内容（包括 Lagrange.OneBot 配置文件、海豹数据等）时，需要 root 权限。
 
 :::
 
@@ -88,7 +88,7 @@ services:
     restart: unless-stopped
 ```
 
-分别对每个 Lagrange 容器完成下述配置文件修改及扫码登录过程，并在下述海豹连接 Lagrange 填写 WS 地址时，将 `{Host}` 分别填入 `lagrange-1`、`lagrange-2` 即可。
+分别对每个 Lagrange.OneBot 容器完成下述配置文件修改及扫码登录过程，并在下述海豹连接 Lagrange.OneBot 填写 WS 地址时，将 `{Host}` 分别填入 `lagrange-1`、`lagrange-2` 即可。
 
 :::
 
@@ -102,7 +102,7 @@ docker compose up -d
 
 首次启动容器后，`docker compose` 会自动创建 `seal_data`、`seal_backups` 以及 `lagrange_data` 目录。
 
-### Lagrange 容器配置
+### Lagrange.OneBot 容器配置
 
 首先使用以下命令停止容器运行：
 
@@ -110,7 +110,7 @@ docker compose up -d
 docker compose stop
 ```
 
-随后，按照 [QQ](./platform-qq) 一节中[运行 Lagrange](./platform-qq#运行-lagrange) 部分修改 `lagrange_data/appsettings.json` 文件。需要特别注意的是，为了允许海豹容器正常访问 Lagrange 端口，需要将监听地址修改为 `0.0.0.0`：
+随后，按照 [QQ](./platform-qq) 一节中[登录 Lagrange.OneBot](./platform-qq#登录-lagrange-onebot) 部分修改 `lagrange_data/appsettings.json` 文件。需要特别注意的是，为了允许海豹容器正常访问 Lagrange.OneBot 端口，需要将监听地址修改为 `0.0.0.0`：
 
 `appsettings.json`：
 
@@ -128,13 +128,13 @@ docker compose stop
 }
 ```
 
-随后，通过 `docker compose up -d` 重新启动容器。通过 `docker compose logs lagrange` 访问 Lagrange 容器的日志，在日志中即可看到 QQ 登录二维码。同时 `lagrange_data/qr-0.png` 也是登录二维码。选择任一方式，尽快使用手机 QQ 扫码连接。
+随后，通过 `docker compose up -d` 重新启动容器。通过 `docker compose logs lagrange` 访问 Lagrange.OneBot 容器的日志，在日志中即可看到 QQ 登录二维码。同时 `lagrange_data/qr-0.png` 也是登录二维码。选择任一方式，尽快使用手机 QQ 扫码连接。
 
-### 海豹连接 Lagrange
+### 海豹连接 Lagrange.OneBot
 
-请参见 [QQ](./platform-qq) 一节中[海豹连接 Lagrange](./platform-qq#海豹连接-lagrange) 部分。在填写 WS 正向服务地址 `ws://{Host}:{Port}` 时，`{Host}` 填写为 `lagrange` 即可，如果配置了多个 Lagrange 容器，填入对应服务的名称，`docker compose` 会自动处理主机名解析。`{Port}` 正常填写配置文件中设定的监听地址，在上文的例子中为 8081。
+请参见 [QQ](./platform-qq) 一节中[海豹连接 Lagrange.OneBot](./platform-qq#海豹连接-lagrange-onebot) 部分。在填写 WS 正向服务地址 `ws://{Host}:{Port}` 时，`{Host}` 填写为 `lagrange` 即可，如果配置了多个 Lagrange.OneBot 容器，填入对应服务的名称，`docker compose` 会自动处理主机名解析。`{Port}` 正常填写配置文件中设定的监听地址，在上文的例子中为 8081。
 
-### 更新海豹容器或 Lagrange 容器
+### 更新海豹容器或 Lagrange.OneBot 容器
 
 运行以下命令：
 
@@ -226,7 +226,7 @@ NAPCAT_UID=$(id -u) NAPCAT_GID=$(id -g) docker-compose up -d
 
 如果配置了多个 NapCat 容器，则 `{Host}` 填入对应服务的名称，`docker compose` 会自动处理主机名解析。
 
-关于登录多个 QQ 号的 `docker-compose.yml` 文件修改方法，请参考上一节 [通过-docker-compose-同时部署海豹与-lagrange](platform-qq-docker.html#通过-docker-compose-同时部署海豹与-lagrange) 中的 `补充：登录多个 QQ 号` 部分。
+关于登录多个 QQ 号的 `docker-compose.yml` 文件修改方法，请参考上一节 [通过 `docker compose` 同时部署海豹与 Lagrange.OneBot](#通过-docker-compose-同时部署海豹与-lagrange-onebot) 中的 `补充：登录多个 QQ 号` 部分。
 
 :::
 

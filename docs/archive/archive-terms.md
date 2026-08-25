@@ -110,13 +110,13 @@ JSON 是一种 [数据序列化语言](#数据序列化语言)。语法入门可
 
 ## L
 
-### Lagrange
+### Lagrange.OneBot
 
-Lagrange（拉格兰）是一个 [NTQQ](#ntqq) 协议相关的开源项目。其包括目前实现了 [Linux](#linux) NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 API 的 Lagrange.Onebot 两部分。
+Lagrange.OneBot（拉格兰）是一个 [NTQQ](#ntqq) 协议相关的开源项目，由 Lagrange.Core 提供 OneBot 11 API。
 
-Lagrange 可以很方便的在多个平台（Windows、Linux、Mac）部署，海豹核心可以对接其提供的 OneBot-V11 API 来提供 QQ 骰子服务。
+Lagrange.OneBot 可以在多个平台（Windows、Linux、macOS）部署，海豹核心可以对接其提供的 OneBot 11 API 来提供 QQ 骰子服务。请注意不要将其与 Milky 协议实现 [Lagrange.Milky](https://github.com/LagrangeDev/LagrangeV2) 混淆。
 
-可以参考 [连接平台 - QQ](../deploy/platform-qq) 中 [有关的部分](../deploy/platform-qq#Lagrange) 和 Lagrange 的官方 [GitHub 页面](https://github.com/LagrangeDev/Lagrange.Core)。
+可以参考 [连接平台 - QQ](../deploy/platform-qq) 中 [有关的部分](../deploy/platform-qq#lagrange-onebot) 和 Lagrange.OneBot 的官方 [GitHub 页面](https://github.com/LagrangeDev/Lagrange.Core)。
 
 ### Linux
 
@@ -156,11 +156,11 @@ Linux 的主要优点包括稳定性、安全性、低成本（大部分 Linux �
 
 ## N
 
-### NapCatQQ
+### NapCat
 
-NapCatQQ 是基于 PC [NTQQ](#ntqq) 本体实现一套 [无头](#无头) Bot 框架。
+NapCat 是基于 PC [NTQQ](#ntqq) 本体实现一套 [无头](#无头) Bot 框架。
 
-可以参考 [连接平台 - QQ](../deploy/platform-qq) 中 [有关的部分](../deploy/platform-qq#napcatqq) 和 NapCatQQ 的官方 [GitHub 页面](https://github.com/NapNeko/NapCatQQ)。
+可以参考 [连接平台 - QQ](../deploy/platform-qq) 中 [有关的部分](../deploy/platform-qq#NapCat) 和 NapCat 的官方 [GitHub 页面](https://github.com/NapNeko/NapCat)。
 
 ### NTQQ
 
@@ -234,7 +234,7 @@ UI 即「用户界面（User Interface）」，通常指用户与程序发生交
 
 如果你在 Windows「开始菜单」的搜素功能中，输入「终端」后并没有出现如上所示的图标。那么强烈建议你下载并安装 Windows 终端，而不是继续使用 [命令提示符](#命令提示符) 集成的 [控制台](#控制台)。
 
-如果你发现你在启动海豹核心、[Lagrange](#lagrange) 或 [NapCatQQ](#napcatqq) 等程序时，弹出窗口的字体与风格都不属于 Windows 终端，那么强烈建议你在 Windows 终端中手动启动这些程序。
+如果你发现你在启动海豹核心、[Lagrange.OneBot](#lagrange-onebot) 或 [NapCat](#NapCat) 等程序时，弹出窗口的字体与风格都不属于 Windows 终端，那么强烈建议你在 Windows 终端中手动启动这些程序。
 
 ## Y
 

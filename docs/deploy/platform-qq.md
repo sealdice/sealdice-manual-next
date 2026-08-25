@@ -19,11 +19,11 @@ title: QQ
 
 从目前的表现看来，QQ 官方会对账号行为进行检测，来区分出账号是否是正常用户（如不正常的登录方式，以不合理的速度在多地区登录等等）。我们无法得知具体的检测细节，但已证实的是，当 QQ 账号用作机器人并被检测到时，该 QQ 会视为风险账号，被官方予以警告，封禁，临时甚至 **永久冻结** 的惩罚。
 
-尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 Go-Cqhttp 已经**基本不可用**，而 [Lagrange](#lagrange) 和 [NapCatQQ](#NapCatQQ) 等基于 NTQQ 的方案目前比较稳定），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
+尽管不同方案之间的差异很大（比如基于 Android QQ 协议的 Go-Cqhttp 已经**基本不可用**，而 [Lagrange.Milky](#lagrange-milky) 和 [NapCat](#NapCat) 等基于 NTQQ 的方案仍在维护），但需要明白的是，这些方案都由社区第三方软件提供，实质上以 QQ 官方角度等同于「**外挂软件**」，并不受到官方支持（甚至是被打击的目标）。
 
 因此，*是否在 QQ 平台搭建这样的非官方机器人取决于你的慎重考虑*。同时，第三方方案的可用性也可能会随时间推移而存在变化，海豹官方无法做出任何保证。
 
-目前，仅有 [官方机器人服务](./platform-qq-official.md) 是被 QQ 官方认可的机器人方案。该方案可用性由 QQ 官方保证，但目前 **仅对企业用户和部分受邀个人用户开放**，同时在功能上非常受限。
+目前，仅有 [官方机器人服务](./platform-qq-official.md) 是被 QQ 官方认可的机器人方案。其开放范围和具体能力由 QQ 开放平台决定。
 
 如果有可能，建议迁移到其它平台，在 QQ 平台选择何种方式取决于你自己的选择。
 
@@ -37,12 +37,13 @@ title: QQ
 
 所有支持的途径参见目录，本节提供了多种对接途径的引导。
 
-从 <Badge type="tip" text="v1.4.5" /> 开始，我们推荐使用 [内置客户端](#内置客户端) 进行连接，这是面向一般用户提供的简单对接方式，对于*有能力*的骰主，我们*更推荐*其他的分离部署方案。
+使用正式版 <Badge type="tip" text="v1.6.0" /> 时，非容器部署的新用户可从[内置客户端](#内置客户端)开始。需要自行维护协议端、跨主机连接或使用 Docker 时，再选择分离部署。
 
 对于需要使用更加灵活的方案的用户，我们推荐如下：
 
-- 需要比较简单的部署流程，希望资源占用低的，见 [Lagrange](#lagrange)；
-- 需要比较简单的部署流程，不是特别在意资源占用的，见 [LLOneBot](#llonebot-lltwobot)；
+- 需要由海豹管理 QQ 客户端进程的，见[内置客户端](#内置客户端)；
+- 使用 OneBot 11 分离部署的，见 [LLBot](#llbot) 或 [NapCat](#NapCat)；
+- 使用 Milky 分离部署的，见 [Lagrange.Milky](#lagrange-milky) 或 [Yogurt](#yogurt)；
 - 通过 docker 部署海豹的，见 [QQ - Docker 中的海豹](./platform-qq-docker)；
 - 如果你有 QQ 官方机器人权限，见 [官方机器人](./platform-qq-official.md)；
 - Go-cqhttp 与 QSign 方案因可用性原因已被弃用。**我们不建议任何用户再使用此方式部署 QQ 接入，同时强烈建议正在使用该方案的用户迁移**。
@@ -51,17 +52,9 @@ title: QQ
 
 ::: warning 注意：对接基于 NTQQ PC 端协议的 QQ 方案时，注意对方是否支持 `戳一戳` 功能
 
-内置客户端/Lagrange、LLOneBot 和 Napcat 等基于 NTQQ PC 的 QQ 方案，在旧版本中由于 NTQQ 旧协议本身不支持的原因，缺失该功能。
+Lagrange.Milky、Yogurt、LLBot 和 NapCat 等基于 NTQQ PC 的 QQ 方案，在旧版本中可能缺失该功能。
 
-请使用：
-
-- 海豹版本 <Badge type="tip" text="v1.4.6" /> 之前的内置客户端
-- <Badge type="tip" text="6e350b0" /> 之前的 Lagrange
-- <Badge type="tip" text="v3.27.0" /> 之前的 LLOneBot
-- <Badge type="tip" text="v1.6.7" /> 之前的 Napcat
-- ……
-
-等方案的用户及时更新或**关闭**位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错信息。
+使用旧协议端且持续出现报错时，请先更新对应实现；暂时无法更新的，应**关闭**位于 `综合设置` - `基本设置` 的 `启用戳一戳` 开关，以免产生不必要的报错信息。
 
 <img src="./images/platform-qq-turnoff.png" alt="关闭戳一戳开关" width="80%">
 
@@ -69,100 +62,43 @@ title: QQ
 
 ::: warning 注意
 
-内置客户端、Lagrange、LLOneBot 和 Napcat 都占用 PC 端协议。在使用这些连接方式时，不可同时登录 PC 端 QQ，否则将导致挤占下线。
+Lagrange.OneBot、Lagrange.Milky、Yogurt、LLBot 和 NapCat 都占用 PC 端协议。在使用这些连接方式时，不可同时登录 PC 端 QQ，否则将导致挤占下线。
 
-由于官方 QQ 设定，PC 端协议（即以上四种登录方式）每隔 30 天需要重新登录。
-
-:::
-
-## 内置客户端 <Badge type="tip" text="v1.4.5" />
-
-海豹从 <Badge type="tip" text="v1.4.5"/> 开始提供内置客户端的连接方式。
-
-::: warning
-
-需要知道的是，该方案也是前言中提到的非官方机器人，并不受到 QQ 官方认可。
-
-M 系列芯片 Mac 用户与部分无法使用内置客户端的手机用户请考虑更换设备部署。
+由于 QQ 的登录策略，PC 端协议可能需要定期重新登录；实际周期以 QQ 登录状态为准。
 
 :::
 
-::: danger 危险：部分过时系统不支持
+## 内置客户端 <Badge type="tip" text="v1.5.1" />
 
-内置客户端暂不支持 Windows 7，Windows Server 2008，32 位 Windows 也不可用。
+自<Badge type="tip" text="v1.5.1" />起，海豹核心可以直接启动自带的 `Lagrange.Milky` 或 `Yogurt`，并自动生成仅供本机使用的 Milky 连接地址、访问令牌和配置文件。
 
-Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
+::: warning 使用限制
 
-:::
-
-进入海豹 Web UI 的「账号设置」新增连接，选择账号类型「QQ(内置客户端)」，这也是默认选项，填写 QQ 号，其余内容无需修改：
-
-<img src="./images/platform-qq-builtin-1.png" alt="内置客户端" width="80%">
-
-随后使用登录了目标账号的手机 QQ 尽快扫码登录（二维码会在十秒左右出现，请耐心等待）：
-
-<img src="./images/platform-qq-builtin-2.png" alt="内置客户端扫码登录" width="40%">
-
-在手机上确认登录以后，等待状态变为「已连接」即可。
-
-登录的账号由扫码的账号决定，请不要询问 `为什么登录的是我自己的账号` 之类的问题。
-
-::: warning 安卓端海豹扫码
-
-由于 QQ 的安全策略并不支持图片识别或长按扫描二维码登录，你需要两个手机（一个运行海豹，一个扫码）。
+- Docker 等容器模式不能使用这两种内置客户端，请改用分离部署。
+- 登录期间不要在电脑上同时登录同一 QQ，否则可能互相挤下线。
+- 请使用完整的官方发布包。只替换 `sealdice-core` 可执行文件时，可能缺少对应客户端程序。
 
 :::
 
-::: warning 内置客户端版本
+### 内置 Lagrange.Milky
 
-使用此方案应当尽快更新到 <Badge type="tip" text="v1.4.6"/> 及以上版本的海豹，当遇到登录失败、无法回复等情况请先 `尝试删除账号重新添加`、`在「账号设置」界面切换签名服务` 等方法。
+1. 打开海豹 WebUI，进入「账号设置」，点击添加账号。
+2. 平台选择「QQ」，连接方式选择「内置 Lagrange.Milky」。
+3. 填写作为骰子的 QQ 号并继续。
+4. 等待页面显示二维码，用已登录目标账号的手机 QQ 扫码并确认。
+5. 等待账号状态变为「已连接」。
 
-对于 <Badge type="tip" text="v1.4.6"/> 及以上版本的海豹，修改签名时*请勿随意修改签名版本*，除非你知道自己在干什么。
+二维码只在短时间内有效。页面提示二维码过期或账号状态变为「失败」时，删除这条失败的连接后重新添加并扫码。
 
-:::
+### 内置 Yogurt
 
-## 内置 gocq <Badge type="tip" text="v1.5.0" />
+1. 打开海豹 WebUI，进入「账号设置」，点击添加账号。
+2. 平台选择「QQ」，连接方式选择「内置 Yogurt」。
+3. 填写作为骰子的 QQ 号并继续，其余连接参数由海豹自动生成。
+4. 等待二维码出现，用目标账号扫码并确认。
+5. 等待账号状态变为「已连接」。
 
-海豹从 <Badge type="tip" text="v1.5.0"/> 开始提供内置 gocq 的连接方式。
-
-::: danger
-
-目前该方案几乎不可用。
-
-:::
-
-::: warning
-
-需要知道的是，该方案也是前言中提到的非官方机器人，并不受到 QQ 官方认可。
-
-:::
-
-进入海豹 Web UI 的「账号设置」新增连接，选择账号类型「QQ(内置 gocq)」，填写 QQ 号，其余内容无需修改：
-
-<img src="./images/platform-qq-builtin-gocq-1.png" alt="选择内置 gocq" >
-<img src="./images/platform-qq-builtin-gocq-2.png" alt="内置 gocq 配置">
-
-随后使用登录了目标账号的手机 QQ 尽快扫码登录（二维码会在十秒左右出现，请耐心等待）：
-
-<img src="./images/platform-qq-builtin-gocq-3.png" alt="内置 gocq 扫码登录">
-
-在手机上确认登录以后，等待状态变为「已连接」即可。
-
-登录的账号由扫码的账号决定，请不要询问 `为什么登录的是我自己的账号` 之类的问题。
-
-::: warning 安卓端海豹扫码
-
-由于 QQ 的安全策略并不支持图片识别或长按扫描二维码登录，你需要两个手机（一个运行海豹，一个扫码）。
-
-:::
-
-::: warning 注意
-
-使用此方案如遇到登录失败、无法回复等情况请先 `尝试删除账号重新添加`、`在「账号设置」界面切换签名服务` 等方法。
-
-修改签名时*请勿随意修改签名版本*，除非你知道自己在干什么。
-
-:::
+Yogurt 是非容器部署时的默认内置选择。二维码过期后需要删除失败连接并重新添加，不能继续扫描旧二维码。
 
 ## 分离部署
 
@@ -174,190 +110,68 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
-::: tip 提示：不同的对接方式
-
-使用此方法你可能需要对「QQ(onebot11正向WS)」、「QQ(onebot11反向WS)」、「[WIP]Satori」的区别有一定了解。
-
-- 「QQ(onebot11正向WS)」为 onebot11 标准的连接方式之一，由海豹核心主动连接 QQ 登录框架。在 UI 界面添加「连接地址」格式应当为 `ws://{Host}:{Port}`。
-- 「QQ(onebot11反向WS)」为 onebot11 标准的连接方式之二，由 QQ 登录框架主动连接海豹核心。在 UI 界面添加「连接地址」格式应当为 `{Host}:{Port}`。
-- 「[WIP]Satori」为 Satori 标准的连接方式，由海豹核心主动连接 QQ 登录框架。WIP 代表该对接方式为实验性的，可能会在未来发生变化。
-
-:::
-
 ::: danger 公网机器部署时的端口暴露风险
 
 分离部署时，会启用比内置登录更多的网络服务。请在配置防火墙时留意，避免这些服务端口暴露于公网。如确需公网访问，请设置强密码，以保障骰子安全。
 
 :::
 
-### Lagrange <Badge type="tip" text="v1.4.2" />
+### Lagrange.Milky <Badge type="tip" text="v1.5.1" />
 
-海豹从 <Badge type="tip" text="v1.4.2"/> 开始适配了 Lagrange（拉格兰）的连接。
+海豹从 <Badge type="tip" text="v1.5.1"/> 开始支持通过 `Lagrange.Milky` 接入 Milky。
 
-::: info Lagrange
+`Lagrange.Milky` 是基于 Lagrange.Core.V2 的 Milky 协议实现。
 
-[Lagrange](https://github.com/LagrangeDev/Lagrange.Core)（拉格兰）是一个 NTQQ 协议相关的开源项目。其包括目前实现了 Linux NTQQ 协议的 Lagrange.Core，和提供 OneBot-V11 API 的 Lagrange.Onebot 两部分。
+#### 下载 Lagrange.Milky
 
-与 GoCqhttp 类似，Lagrange 可以很方便的在多个平台（Windows、Linux、Mac）部署，海豹核心可以对接其提供的 OneBot-V11 API 来提供 QQ 骰子服务。
+请按照 [Lagrange.Milky](https://github.com/LagrangeDev/Lagrange.core)和 [Lagrange.Milky 文档](https://lagrangedev.github.io/Lagrange.Milky.Document/) 自行完成安装、登录和配置。
 
-:::
+#### 海豹连接
 
-#### 登录 Lagrange
+启动协议端后，在海豹 WebUI 的「账号设置」中，在「账号类型」处选择「QQ」,在「QQ 协议」处选择「Milky 协议 (分离)」添加 Milky 连接，填写 Lagrange.Milky 实际配置文件中提供的 WebSocket、HTTP API 地址 和`Token`。
 
-请按照 [Lagrange 手册](https://lagrangedev.github.io/Lagrange.Doc/v1/Lagrange.OneBot/Config/)自行部署 Lagrange，并按照手册和自己的需求填写配置文件。
+### Yogurt <Badge type="tip" text="v1.5.1"/>
 
-::: warning Config
+海豹从 <Badge type="tip" text="v1.5.1"/> 开始支持通过 `Yogurt` 接入 Milky。
 
-海豹的反向 ws 连接仅连接 `ws://{HOST}:{PORT}/ws` 地址。
+[Yogurt](https://github.com/SaltifyDev/milky)是基于 acidify-core 实现的 Milky 协议端。
 
-以下的 `appsettings.json` 适合海豹连接。
+#### 下载 Yogurt
 
-> **正向** ws 连接
+请参照[Yogurt 手册](https://acidify.ntqqrev.org/docs/yogurt/start) 进行安装、登录以及配置。
 
-``` json
+#### 海豹连接
 
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",  
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information",
-    },
-  },
-  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
-  "SignProxyUrl": "", 
-  "Account": {
-    "Uin": 0,  
-    "Password": "", 
-    "Protocol": "Linux",  
-    "AutoReconnect": true,
-    "GetOptimumServer": true,
-  },
-  "Message": {
-    "IgnoreSelf": true,  
-    "StringPost": false,
-  },
-  "QrCode": {
-    "ConsoleCompatibilityMode": false,
-  },
-  "Implementations": [ 
-    {
-      "Type": "ForwardWebSocket",
-      "Host": "127.0.0.1",
-      "Port": 8101,
-      "HeartBeatInterval": 5000,
-      "HeartBeatEnable": true,
-      "AccessToken": "",
-    }
-  ],
-}
-
-
-```
-
-按照以下配置登陆的 `Lagrange`，在海豹的 UI 中新增账号中，「账号类型」选择 `OneBot11 正向 WS`，连接地址填写 `ws://127.0.0.1:8101`。
-
->**反向** ws 连接
-
-``` json
-
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",  
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information",
-    },
-  },
-  "SignServerUrl": "https://sign.lagrangecore.org/api/sign",
-  "SignProxyUrl": "", 
-  "Account": {
-    "Uin": 0,  
-    "Password": "", 
-    "Protocol": "Linux",  
-    "AutoReconnect": true,
-    "GetOptimumServer": true,
-  },
-  "Message": {
-    "IgnoreSelf": true,  
-    "StringPost": false,
-  },
-  "QrCode": {
-    "ConsoleCompatibilityMode": false,
-  },
-  "Implementations": [ 
-    {
-      "Type": "ReverseWebSocket",
-      "Host": "127.0.0.1",
-      "Port": 8100,
-      "Suffix": "/ws",
-      "ReconnectInterval": 5000,
-      "HeartBeatInterval": 5000,
-      "HeartBeatEnable": true,
-      "AccessToken": "",
-    }
-  ],
-}
-
-
-```
-
-按照以下配置登陆的 `Lagrange`，在海豹的 UI 中新增账号中，「账号类型」选择 `OneBot11 反向 WS`，连接地址填写 `:8100`。
-
-:::
-
-#### 海豹连接 Lagrange
-
-进入海豹 Web UI 的「账号设置」新增链接，按照自己的 Lagrange 配置文件选择 onebot11 账号类型，填写 QQ 号和「连接地址」。
+启动协议端后，在海豹 WebUI 的「账号设置」中，在「账号类型」处选择「QQ」,在「QQ 协议」处选择「Milky 协议 (分离)」添加 Milky 连接，填写 Yogurt 实际配置文件中提供的 WebSocket、HTTP API 地址 和`Token`。
 
 成功连接后即可使用。
 
-### LLOneBot/LLTwoBot <Badge type="tip" text="v1.4.2" />
+::: warning 注意：
 
-海豹从 <Badge type="tip" text="v1.4.2"/> 版本开始支持通过 OneBot 协议连接 LLOneBot/LLTwoBot。
-
-::: info LLOneBot
-
-原 [LLOneBot](https://github.com/LLOneBot/LLOneBot) 是 Liteloader 的插件之一，可以实现劫持客户端对外开放 API，可以理解为装在 PC 上的 Shamrock。
-
-现 LLOneBot 改名为 LLTwoBot，并改为基于 [PMHQ](https://github.com/linyuchen/PMHQ)。
+`Yogurt` 与 `Lagrange.Milky` 需要自行申请 Signer Token 并配置到配置文件中，否则，可能无法正常启动。获取 Signer Token 参见 [文档](https://github.com/LagrangeDev/SignApiGuide)，此处不做赘述。
 
 :::
 
-::: warning 使用此方案的用户请注意不要随意*更新* QQ 客户端。
+### LLBot
 
-由于 QQ 客户端检测机制的变化，更新 QQ 客户端后可能导致方案不可用，并且更新后需要重新安装登录框架，所以不建议用户随意更新 QQ 客户端。
+[LLBot](https://github.com/LLOneBot/LuckyLilliaBot)是原 LLOneBot、现 LuckyLiliaBot 项目当前使用的官方简称。 `LLOneBot` 或 `LLTwoBot` 均指这一项目的早期名称。为防止误解，本手册统一使用 `LLBot` 对该项目进行代称。
 
-:::
+请按照 [LLBot 文档](https://luckylillia.com/)完成安装并启用 OneBot 11 正向或反向 WebSocket。
+随后在海豹 WebUI 的「账号设置」添加对应的 OneBot 11 连接；端口、访问令牌。
 
-#### 安装 LLOneBot
+成功连接后即可使用。
 
-请参考 [官方文档](https://llonebot.com/guide/getting-started) 中的说明。
+::: warning 注意：
 
-#### 配置 LLOneBot
-
-运行 LLOneBot，登录 QQ，打开 LLOneBot 的设置页：
-
-![LLOneBot 设置页](./images/platform-qq-llonebot-2.png)
-
-点击 OneBot 11，此处支持两种方式与海豹对接：
-
-- WebSocket 正向：默认开放的正向 ws 端口为 3001，在海豹的新添账号选择「QQ(onebot11正向WS)」，账号处随便填写，连接地址填 `ws://localhost:3001`。
-- WebSocket 反向：关闭 LLOneBot 的正向连接开关，打开 LLOneBot 的反向连接开关，在「反向WebSocket监听地址」里点击「添加」，输入 `ws://127.0.0.1:4001/ws`，然后在海豹的新添账号选择「QQ(onebot11反向WS)」，输入账号。
-
-::: tip
-
-- 如若想修改端口请在 LLOneBot 的设置 UI 自行修改。
-- 请注意设置中的正向连接和反向连接请 **不要同时打开**，否则会发不出消息。
-- **如果你是在服务器上部署，可能需要使用 [Mem Reduct](https://memreduct.org/mem-reduct-download/) 之类的工具定时清理过高的内存占用。**
+在 `v8.0.9` 以及之后版本的 LLBOT，可能需要向 LLBOT 开发组申请 AUTH TOKEN，详细申请流程请自行加入 LLBOT 用户群完成，不在此进行赘述。
 
 :::
 
-### NapCatQQ
+### NapCat
 
-::: info NapCatQQ
+::: info NapCat
 
-[NapCatQQ](https://github.com/NapNeko/NapCatQQ) 是在后台低占用运行的无头（没有界面）的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
+[NapCat](https://github.com/NapNeko/NapCat) 是在后台低占用运行的无头（没有界面）的 NTQQ，具体占用会因人而异，QQ 群、好友越多占用越高。
 
 [NapCat 官方文档](https://napneko.github.io)
 
@@ -369,9 +183,9 @@ Windows Server 2012 可能会缺少部分运行库，需要自行下载安装。
 
 :::
 
-NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCatQQ](https://napneko.github.io/guide/start-install) 的手册安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
+NapCat 是基于官方 NTQQ 实现的 Bot 框架，因此在开始前，你需要根据 [NapCat](https://napneko.github.io/guide/start-install) 的手册安装官方 QQ，若 QQ 版本过低会导致程序无法正常启动。
 
-#### 下载 NapCatQQ
+#### 下载 NapCat
 
 请按照 [NapCat 官方手册](https://napneko.github.io/guide/start-install) 下载安装，然后按照 [基础配置](https://napneko.github.io/config/basic) 和自己的需求修改配置文件。
 

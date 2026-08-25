@@ -25,14 +25,15 @@ title: 海豹的本地文件
 |  |  |  ├─dnd5e
 |  |  |  └─reply             // 比如你的自定义回复文件
 |  |  ├─extra                // 放置你使用的 QQ 客户端配置文件
-|  |  |  └─lagrange-qq123456 // 此处 123456 代指你骰子的 QQ，是内置客户端的配置文件夹。
+|  |  |  └─milky-[连接ID]     // 内置 Lagrange.Milky 或 Yogurt 的配置和登录文件
 |  |  ├─log-exports          // log end 后导出的 log 文件
 |  |  └─scripts              // 插件脚本
 |  ├─helpdoc                 // 查询文档放置位置
 |  ├─images                  // 放置图片资源的文件夹，海豹为了安全不允许调用非海豹文件夹内的图片
 |  └─names                   // 姓名文件 . name 指令无法使用可以看看
 ├─_help_cache                // 全文搜索索引缓存
-└─lagrange                   // 内置客户端/内置 gocq 的二进制文件
+├─lagrange                   // 旧版内置 Lagrange.OneBot 文件
+└─milky                      // 内置 Lagrange.Milky 和 Yogurt 的二进制文件
 ```
 
 ## 常用文件
@@ -53,7 +54,7 @@ title: 海豹的本地文件
 
 - `./data/default/configs/text-temple.yaml` 自定义文案的本体。
 
-- `./data/default/extra/lagrange-qq[骰子QQ]` 内置客户端的配置文件夹。
+- `./data/default/extra/milky-[连接ID]` 内置 Lagrange.Milky 或 Yogurt 的配置和登录文件夹。
 
 ## 安卓端文件路径
 
