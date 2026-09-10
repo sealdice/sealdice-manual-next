@@ -28,80 +28,69 @@ cmd.solve = (ctx, msg, cmdArgs) => {
 以下保留原 API 列表中逐项写在代码旁的注释，并补入 <Badge type="tip" text="LatestVersion"/> 接口。详细限制仍以后续各节和类型声明为准。
 
 ```javascript
-// 以下两个旧接口在原文中即为注释状态；新插件应使用 seal.vars 下的类型化接口。
-// seal.setVarInt(ctx, '$XXX', valueToSet); // 将变量设为 int 类型。
-// seal.setVarStr(ctx, '$XXX', valueToSet); // 将变量设为 string 类型。
+//被注释掉的 API 是可以提供的，但是在源码中被注释。
+//seal.setVarInt(ctx, `$XXX`, valueToSet) //`$XXX`即 rollvm（初阶豹语）中的变量，其会将$XXX 的值设定为 int 类型的 valueToSet。
+//seal.setVarStr(ctx, `$XXX`, valueToSet) //同上，区别是设定的为 str 类型的 valueToSet。
+seal.replyGroup(ctx, msg, something) //向收到指令的群中发送 something。
+seal.replyPerson(ctx, msg, something) //顾名思义，类似暗骰，向指令触发者（若为好友）私信 something。
+seal.replyToSender(ctx, msg, something) //同上，区别是群内收到就群内发送，私聊收到就私聊发送。
+seal.memberBan(ctx, groupID, userID, dur) //将指定群的指定用户封禁指定时间 (似乎只实现了 walleq 协议？)
+seal.memberKick(ctx, groupID, userID)  //将指定群的指定用户踢出 (似乎也只实现了 walleq 协议？)
+seal.format(ctx, something) //将 something 经过一层 rollvm 转译并返回，注意需要配合 replyToSender 才能发送给触发者！
+seal.formatTmpl(ctx, something) //调用自定义文案 something
+seal.getCtxProxyFirst(ctx, cmdArgs)  //获取被 at 的第一个人，等价于 getCtxProxyAtPos(ctx, cmdArgs, 0)
+seal.vars.intGet(ctx, `$XXX`) //返回一个数组，其为 `[int 类型的触发者的该变量的值，bool]` 当 strGet 一个 int 或 intGet 一个 str 时 bool 为 false，若一切正常则为 true。（之所以会有这么奇怪的说法是因为 rollvm 的「个人变量」机制）。
+seal.vars.intSet(ctx, `$XXX`, valueToSet) //`$XXX` 即 rollvm（初阶豹语）中的变量，其会将 $XXX 的值设定为 int 类型的 valueToSet。
+seal.vars.strGet(ctx, `$XXX`) //返回一个数组，其为 `[str 类型的触发者的该变量的值，bool]`（之所以会有这么奇怪的说法是因为 rollvm 的「个人变量」机制），当 strGet 一个 int 或 intGet 一个 str 时 bool 为 false，如果一切正常则为 true。
+seal.vars.strSet(ctx, `$XXX`, valueToSet) //`$XXX` 即 rollvm（初阶豹语）中的变量，其会将 $XXX 的值设定为 str 类型的 valueToSet。
+seal.vars.computedGet(ctx, `$XXX`) //返回 `[计算公式字符串, bool]`，变量不存在或不是计算公式时 bool 为 false。
+seal.vars.computedSet(ctx, `$XXX`, expression) //将变量设为计算公式，expression 为不带大括号的豹语表达式字符串。
+//seal.vars.varSet(ctx, `$XXX`, valueToSet) //可能是根据数据类型自动推断 int 或 str？
+//seal.vars.varGet(ctx, `$XXX`) //同上
+seal.ext.newCmdItemInfo() //用来定义新的指令；没有参数，个人觉得可以视其为类（class）。
+seal.ext.newCmdExecuteResult(bool) //用于判断指令执行结果，true 为成功，false 为失败。
+seal.ext.new(extName, extAuthor, Version) //用于建立一个名为 extName，作者为 extAuthor，版本为 Version 的扩展。注意，extName，extAuthor 和 Version 均为字符串。
+seal.ext.find(extName) //用于查找名为 extname 的扩展，若存在则返回 true，否则返回 false。
+seal.ext.register(newExt) //将扩展 newExt 注册到系统中。注意 newExt 是 seal.ext.new 的返回值，将 register 视为 seal.ext.new() 是错误的。
+seal.coc.newRule() //用来创建自定义 coc 规则，github.com/sealdice/javascript/examples 中已有详细例子，不多赘述。
+seal.coc.newRuleCheckResult() //同上，不多赘述。
+seal.coc.registerRule(rule) //同上，不多赘述。
+seal.deck.draw(ctx, deckname, isShuffle) //他会返回一个抽取牌堆的结果。这里有些复杂：deckname 为需要抽取的牌堆名，而 isShuffle 则是一个布尔值，它决定是否放回抽取；false 为放回，true 为不放回。
+seal.deck.reload() //重新加载牌堆。
+//下面是 1.2 新增 api
+seal.newMessage() //返回一个空白的 Message 对象，结构与收到消息的 msg 相同
+seal.createTempCtx(endpoint, msg) // 制作一个 ctx, 需要 msg.MessageType 和 msg.Sender.UserId
+seal.applyPlayerGroupCardByTemplate(ctx, tmpl) // 设定当前 ctx 玩家的自动名片格式
+seal.gameSystem.newTemplate(string) //从 json 解析新的游戏规则。
+seal.gameSystem.newTemplateByYaml(string) //从 yaml 解析新的游戏规则。
+seal.getCtxProxyAtPos(ctx, cmdArgs, pos) //获取第 pos 个被 at 的人，pos 从 0 开始计数
+atob(base64String) //返回被解码的 base64 编码
+btoa(string) //将 string 编码为 base64 并返回
 
-seal.replyGroup(ctx, msg, something); // 向收到指令的群中发送 something，私聊中不会发送。
-seal.replyPerson(ctx, msg, something); // 向指令触发者私聊发送 something。
-seal.replyToSender(ctx, msg, something); // 群聊中回复群聊，私聊中回复私聊。
-seal.memberBan(ctx, groupID, userID, dur); // 将指定群的指定用户禁言 dur 秒，是否可用取决于平台实现和权限。
-seal.memberKick(ctx, groupID, userID); // 将指定群的指定用户移出群，是否可用取决于平台实现和权限。
-seal.format(ctx, something); // 经 DiceScript/RollVM 求值后返回文本，不会自动发送。
-seal.formatTmpl(ctx, something); // 调用并格式化键名为 something 的自定义文案。
-seal.getCtxProxyFirst(ctx, cmdArgs); // 获取第一个被 @ 的人的上下文，等价于 getCtxProxyAtPos(..., 0)。
-seal.getCtxProxyAtPos(ctx, cmdArgs, pos); // 获取第 pos 个被 @ 的人的上下文，pos 从 0 开始。
+//下面是 1.4.1 新增 api
+seal.ext.newConfigItem() //用于创建一个新的配置项，返回一个 ConfigItem 对象
+seal.ext.registerConfig(configItem) //用于注册一个配置项，参数为 ConfigItem 对象
+seal.ext.getConfig(ext, "key") //用于获取一个配置项的值，参数为扩展对象和配置项的 key
+seal.ext.registerStringConfig(ext, "key", "defaultValue") //用于注册一个 string 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerIntConfig(ext, "key", 123) //用于注册一个 int 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerFloatConfig(ext, "key", 123.456) //用于注册一个 float 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerBoolConfig(ext, "key", true) //用于注册一个 bool 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerTemplateConfig(ext, "key", ["1", "2", "3", "4"]) //用于注册一个 template 类型的配置项，参数为扩展对象、配置项的 key 和默认值
+seal.ext.registerOptionConfig(ext, "key", "1", ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) //用于注册一个 option 类型的配置项，参数为扩展对象、配置项的 key、默认值和可选项
+seal.ext.getStringConfig(ext, "key") //用于获取一个 string 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getIntConfig(ext, "key") //用于获取一个 int 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getFloatConfig(ext, "key") //用于获取一个 float 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getBoolConfig(ext, "key") //用于获取一个 bool 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getTemplateConfig(ext, "key") //用于获取一个 template 类型配置项的值，参数为扩展对象和配置项的 key
+seal.ext.getOptionConfig(ext, "key") //用于获取一个 option 类型配置项的值，参数为扩展对象和配置项的 key
 
-seal.vars.intGet(ctx, '$XXX'); // 返回 [int 值，是否存在且类型匹配]。
-seal.vars.intSet(ctx, '$XXX', valueToSet); // 将变量设为 int 类型的 valueToSet。
-seal.vars.strGet(ctx, '$XXX'); // 返回 [string 值，是否存在且类型匹配]。
-seal.vars.strSet(ctx, '$XXX', valueToSet); // 将变量设为 string 类型的 valueToSet。
-// seal.vars.varSet(ctx, '$XXX', valueToSet); // 原文保留接口，使用前请以 seal.d.ts 和运行时为准。
-// seal.vars.varGet(ctx, '$XXX'); // 原文保留接口，使用前请以 seal.d.ts 和运行时为准。
-
-seal.ext.newCmdItemInfo(); // 创建新的指令定义对象。
-seal.ext.newCmdExecuteResult(true); // 创建指令执行结果，true 表示成功处理。
-seal.ext.new(extName, extAuthor, version); // 创建扩展，三个参数均为字符串。
-seal.ext.find(extName); // 查找指定名称的扩展，未找到时返回空值。
-seal.ext.register(newExt); // 注册 seal.ext.new() 返回的扩展对象。
-
-seal.coc.newRule(); // 创建自定义 CoC 规则。
-seal.coc.newRuleCheckResult(); // 创建自定义 CoC 规则检定结果。
-seal.coc.registerRule(rule); // 注册自定义 CoC 规则。
-
-seal.deck.draw(ctx, deckName, isShuffle); // 抽取牌堆并返回包含 exists、result、err 的结果对象。
-seal.deck.reload(); // 重新加载牌堆。
-
-// v1.2 起提供的接口。
-seal.newMessage(); // 返回一个空白 Message 对象，结构与收到消息的 msg 相同。
-seal.createTempCtx(endpoint, msg); // 创建临时 ctx，至少需要正确设置消息类型和发送者 ID。
-seal.applyPlayerGroupCardByTemplate(ctx, tmpl); // 设置当前玩家的自动群名片格式。
-seal.gameSystem.newTemplate(jsonText); // 从 JSON 解析并注册新的游戏规则模板。
-seal.gameSystem.newTemplateByYaml(yamlText); // 从 YAML 解析并注册新的游戏规则模板。
-atob(base64String); // 解码 Base64 字符串并返回结果。
-btoa(string); // 将字符串编码为 Base64 并返回结果。
-
-// v1.4.1 起提供的插件配置接口。
-seal.ext.newConfigItem(ext, key, defaultValue, description); // 创建复杂配置项对象。
-seal.ext.registerConfig(ext, ...items); // 注册一个或多个复杂配置项。
-seal.ext.getConfig(ext, key); // 获取完整配置项。
-seal.ext.registerStringConfig(ext, key, defaultValue, description, group); // 注册 string 配置项。
-seal.ext.registerIntConfig(ext, key, defaultValue, description, group); // 注册 int 配置项。
-seal.ext.registerFloatConfig(ext, key, defaultValue, description, group); // 注册 float 配置项。
-seal.ext.registerBoolConfig(ext, key, defaultValue, description, group); // 注册 bool 配置项。
-seal.ext.registerTemplateConfig(ext, key, defaultValue, description, group); // 注册 template 配置项。
-seal.ext.registerOptionConfig(ext, key, defaultValue, options, description, group); // 注册 option 配置项。
-seal.ext.getStringConfig(ext, key); // 获取 string 配置项的值。
-seal.ext.getIntConfig(ext, key); // 获取 int 配置项的值。
-seal.ext.getFloatConfig(ext, key); // 获取 float 配置项的值。
-seal.ext.getBoolConfig(ext, key); // 获取 bool 配置项的值。
-seal.ext.getTemplateConfig(ext, key); // 获取 template 配置项的值。
-seal.ext.getOptionConfig(ext, key); // 获取 option 配置项的值。
-
-// v1.4.4 起提供的接口。
-seal.setPlayerGroupCard(ctx, tmpl); // 立即设置当前玩家的群名片。
-seal.ban.addBan(ctx, id, place, reason); // 将目标加入黑名单。
-seal.ban.addTrust(ctx, id, place, reason); // 将目标加入信任名单。
-seal.ban.remove(ctx, id); // 从黑名单或信任名单中移除目标。
-seal.ban.getList(); // 获取名单条目列表。
-seal.ban.getUser(id); // 获取指定目标的名单信息。
-
-// vA.B.C 核验和补充的接口；实际版本见本节 LatestVersion 标记。
-seal.ext.registerTask(ext, taskType, value, callback, key, description, group); // 注册 cron 或 daily 定时任务。
-seal.getVersion(); // 返回版本号、版本代码和结构化版本详情。
-seal.getEndPoints(); // 返回当前接入端点列表的浅拷贝。
-ext.getPackageConfig(); // 获取扩展所属 .sealpack 的包级配置；不属于扩展包时返回空对象。
-new WebSocket(url, protocols); // 创建 WebSocket 客户端连接，protocols 可省略。
+//下面是 1.4.4 新增 api
+seal.setPlayerGroupCard(ctx, tmpl) //设置当前 ctx 玩家的名片
+seal.ban.addBan(ctx, id, place, reason)
+seal.ban.addTrust(ctx, id, place, reason)
+seal.ban.remove(ctx, id)
+seal.ban.getList()
+seal.ban.getUser(id)
 ```
 
 ## 消息与回复
@@ -249,13 +238,26 @@ const third = seal.getCtxProxyAtPos(ctx, cmdArgs, 2);
 const dex = seal.format(ctx, '{actor.DEX}');
 ```
 
-在 DiceScript 表达式中也可以写入属性，例如 `actor.DEX = 60`，随后读取 `actor.敏捷` 会得到按规则模板归一化后的值。
+### 计算公式变量 <Badge type="tip" text="LatestVersion"/>
 
-属性名会经过当前规则模板的别名转换，例如 CoC 中的 `DEX` 会解析为 `敏捷`。对象支持属性和索引读写，以及 `keys()`、`values()`、`items()`、`len()`、`has()`、`get()`、`getRaw()`。`get()` 会计算计算型属性，`getRaw()` 保留原始计算值。
+计算公式变量保存的是豹语表达式。读取变量值时，海豹会在当前 `ctx` 中重新计算表达式，因此公式依赖的属性或变量改变后，结果也会随之改变。
 
-只提供 `actor`；旧名称 `player` 和 `character` 不会注入 DiceScript。直接访问确实不存在的属性会得到 `0`，需要区分“不存在”时应使用 `has()` 或 `get()`。
+```javascript
+seal.vars.intSet(ctx, '$m基础负重', 10)
+seal.vars.computedSet(ctx, '$m负重上限', '$m基础负重 * 15')
 
-## 游戏系统模板
+const [formula, exists] = seal.vars.computedGet(ctx, '$m负重上限')
+// formula 为 '$m基础负重 * 15'，exists 为 true
+
+const result = seal.format(ctx, '{$m负重上限}')
+// result 为公式在当前上下文中的计算结果 '150'
+```
+
+`computedGet` 返回公式原文而不是计算结果；变量不存在或类型不是计算公式时返回 `["", false]`。需要计算结果时，应通过 `seal.format` 等豹语求值入口读取该变量。
+
+`computedSet` 的变量作用域和名称别名处理与 `intSet`、`strSet` 相同。第三个参数只填写表达式本身，不要添加 `{}`；调用时会覆盖同名变量原有的值和类型。
+
+## `ext`
 
 ```javascript
 seal.gameSystem.newTemplate(jsonText);
